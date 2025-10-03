@@ -15,6 +15,8 @@ use App\Http\Controllers\ServiceController;
 
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/company/create', [HomeController::class, 'create']);
+Route::post('/company/store', [HomeController::class, 'store']);
 
 Route::get('/about', [AboutController::class, 'index']);
 

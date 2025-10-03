@@ -8,6 +8,7 @@ class AboutController extends Controller
 {
     public function index()
     {
-        return view('about');
+        $data['title'] = 'About';
+        return view('about', $data);
     }
 }

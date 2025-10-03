@@ -4,7 +4,7 @@
 <!-- Hero Section -->
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
     <div class="col-md-6 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 fw-bold">Welcome to Our Company</h1>
+        <h1 class="display-4 fw-bold">Welcome To {{$company->name}}</h1>
         <h3 class="fw-normal text-muted mb-4">Innovative Solutions for Your Business</h3>
         <div class="d-flex gap-3 justify-content-center">
             <a href="/about" class="btn btn-primary btn-lg px-4">Learn More</a>
