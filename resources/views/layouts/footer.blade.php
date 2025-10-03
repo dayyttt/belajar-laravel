@@ -1,81 +1,71 @@
-<footer class="bg-dark text-white pt-5 pb-4">
-    <div class="container">
-        <div class="row g-4">
-            <!-- Company Info -->
-            <div class="col-lg-4 col-md-6">
-                <h5 class="text-uppercase mb-4">About Us</h5>
-                <p>We are a dedicated team committed to delivering exceptional products and services to our customers. Our mission is to provide innovative solutions that help businesses grow and succeed.</p>
-                <div class="mt-3">
-                    <a href="#" class="text-white me-2"><i class="bi bi-facebook fs-5"></i></a>
-                    <a href="#" class="text-white me-2"><i class="bi bi-twitter fs-5"></i></a>
-                    <a href="#" class="text-white me-2"><i class="bi bi-instagram fs-5"></i></a>
-                    <a href="#" class="text-white me-2"><i class="bi bi-linkedin fs-5"></i></a>
+<footer>
+      <!-- Footer Area Start -->
+      <section class="footer-Content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+              <img src="img/logo.png" alt="">
+              <div class="textwidget">
+                <p>Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive.</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+              <div class="widget">
+                <h3 class="block-title">Create a Free Account</h3>
+                <ul class="menu">
+                  <li><a href="#">Sign In</a></li>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Pricing</a></li>
+                  <li><a href="#">Jobs</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+              <div class="widget">
+                <h3 class="block-title">Resource</h3>
+                <ul class="menu">
+                  <li><a href="#">Comunnity</a></li>
+                  <li><a href="#">Become a Partner</a></li>
+                  <li><a href="#">Our Technology</a></li>
+                  <li><a href="#">Documentation</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+              <div class="widget">
+                <h3 class="block-title">Support</h3>
+                <ul class="menu">
+                  <li><a href="#">Terms & Condition</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">Help</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Copyright Start  -->
+        <div class="copyright">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="site-info float-left">
+                  <p>&copy; 2020 - Designed by <a href="http://uideck.com" rel="nofollow">UIdeck</a></p>
+                </div>              
+                <div class="float-right">  
+                  <ul class="footer-social">
+                    <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
+                    <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+                  </ul> 
                 </div>
+              </div>
             </div>
-
-            <!-- Quick Links -->
-            <div class="col-lg-2 col-md-6">
-                <h5 class="text-uppercase mb-4">Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="/" class="text-white text-decoration-none">Home</a></li>
-                    <li class="mb-2"><a href="/about" class="text-white text-decoration-none">About Us</a></li>
-                    <li class="mb-2"><a href="/product" class="text-white text-decoration-none">Products</a></li>
-                    <li class="mb-2"><a href="/service" class="text-white text-decoration-none">Services</a></li>
-                    <li class="mb-2"><a href="/contact" class="text-white text-decoration-none">Contact</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-uppercase mb-4">Contact Us</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2">
-                        <i class="bi bi-geo-alt me-2"></i> 123 Business Street, Suite 100
-                    </li>
-                    <li class="mb-2">
-                        <i class="bi bi-envelope me-2"></i> info@example.com
-                    </li>
-                    <li class="mb-2">
-                        <i class="bi bi-telephone me-2"></i> +1 (123) 456-7890
-                    </li>
-                    <li class="mb-2">
-                        <i class="bi bi-clock me-2"></i> Mon-Fri: 9:00 AM - 6:00 PM
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Newsletter -->
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-uppercase mb-4">Newsletter</h5>
-                <p>Subscribe to our newsletter for the latest updates and offers.</p>
-                <form class="mb-3">
-                    <div class="input-group">
-                        <input type="email" class="form-control" placeholder="Your Email" aria-label="Your Email">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="bi bi-send"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
+          </div>
         </div>
-        <hr class="mt-4 mb-3">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0">&copy; {{ date('Y') }} Your Company. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <span class="mx-2">|</span>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" class="text-white text-decoration-none">Terms of Service</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
+      <!-- Copyright End -->
+      </section>
+      <!-- Footer area End -->
+      
+    </footer>
