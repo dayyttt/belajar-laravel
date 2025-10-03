@@ -18,6 +18,32 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/company/create', [HomeController::class, 'create']);
 Route::post('/company/store', [HomeController::class, 'store']);
 
+Route::get('/features', function () {
+    return view ('landing.features.index');
+})->name('features.index');
+
+Route::get('/screenshots', function () {
+    return view ('landing.features.screenshots');
+})->name('screenshots.index');
+
+Route::get('/testimoni', function () {
+    return view ('landing.features.testimoni');
+})->name('testimoni.index');
+
+Route::get('/plans', function () {
+    return view ('landing.features.plans');
+})->name('plans.index');
+
+Route::get('/downloads', function () {
+    return view ('landing.features.downloads');
+})->name('downloads.index');
+
+Route::get('/contacts', function () {
+    return view ('landing.features.contacts');
+})->name('contacts.index');
+
+
+
 Route::get('/about', [AboutController::class, 'index']);
 
 Route::get('/product', [ProductController::class, 'index']);
