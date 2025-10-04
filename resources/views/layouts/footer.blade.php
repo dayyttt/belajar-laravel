@@ -1,4 +1,4 @@
-<footer>
+    <footer class="py-4 border-top border-secondary bg-dark">
       <!-- Footer Area Start -->
       <section class="footer-Content">
         <div class="container">
@@ -13,10 +13,10 @@
               <div class="widget">
                 <h3 class="block-title">Create a Free Account</h3>
                 <ul class="menu">
-                  <li><a href="#">Sign In</a></li>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Pricing</a></li>
-                  <li><a href="#">Jobs</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Sign In</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">About Us</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Pricing</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Jobs</a></li>
                 </ul>
               </div>
             </div>
@@ -24,10 +24,10 @@
               <div class="widget">
                 <h3 class="block-title">Resource</h3>
                 <ul class="menu">
-                  <li><a href="#">Comunnity</a></li>
-                  <li><a href="#">Become a Partner</a></li>
-                  <li><a href="#">Our Technology</a></li>
-                  <li><a href="#">Documentation</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Comunnity</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Become a Partner</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Our Technology</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Documentation</a></li>
                 </ul>
               </div>
             </div>
@@ -35,10 +35,10 @@
               <div class="widget">
                 <h3 class="block-title">Support</h3>
                 <ul class="menu">
-                  <li><a href="#">Terms & Condition</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-                  <li><a href="#">Help</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Terms & Condition</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Contact Us</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Privacy Policy</a></li>
+                  <li><a href="#" class="text-secondary hover-primary">Help</a></li>
                 </ul>
               </div>
             </div>
@@ -54,10 +54,10 @@
                 </div>              
                 <div class="float-right">  
                   <ul class="footer-social">
-                    <li><a class="facebook" href="#"><i class="lni-facebook-filled"></i></a></li>
-                    <li><a class="twitter" href="#"><i class="lni-twitter-filled"></i></a></li>
-                    <li><a class="linkedin" href="#"><i class="lni-linkedin-fill"></i></a></li>
-                    <li><a class="google-plus" href="#"><i class="lni-google-plus"></i></a></li>
+                    <li><a class="facebook" href="#" class="text-secondary hover-primary"><i class="lni-facebook-filled"></i></a></li>
+                    <li><a class="twitter" href="#" class="text-secondary hover-primary"><i class="lni-twitter-filled"></i></a></li>
+                    <li><a class="linkedin" href="#" class="text-secondary hover-primary"><i class="lni-linkedin-fill"></i></a></li>
+                    <li><a class="google-plus" href="#" class="text-secondary hover-primary"><i class="lni-google-plus"></i></a></li>
                   </ul> 
                 </div>
               </div>
