@@ -1,4 +1,4 @@
-<footer class="py-4 border-top border-secondary bg-dark **text-white**">
+<footer class="py-4 border-top border-secondary" style="background: linear-gradient(to right,rgb(88, 146, 245),rgb(64, 248, 254)); color: white;">
   <section class="footer-Content">
     <div class="container">
       <div class="row">
@@ -87,4 +87,4 @@
       </div>
     </div>
     </section>
-  </footer>
+</footer>
