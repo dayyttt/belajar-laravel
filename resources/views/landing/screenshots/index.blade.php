@@ -3,7 +3,7 @@
     <div class="container py-5">
                 <div class="row justify-content-center text-center mb-5">
                     <div class="col-lg-8">
-                        <h2 class="display-5 fw-bold text-light mb-3">Antarmuka yang Indah & Intuitif</h2>
+                        <h2 class="display-5 fw-bold text-primary mb-3">Antarmuka yang Indah & Intuitif</h2>
                         <p class="lead text-secondary">Lihat sekilas bagaimana AppName menggabungkan fungsionalitas yang kuat dengan desain yang elegan.</p>
                     </div>
                 </div>

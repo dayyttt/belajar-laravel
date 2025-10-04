@@ -4,11 +4,11 @@
             <div class="container py-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
-                        <h2 class="display-5 fw-bold text-white mb-4">Unduh AppName Sekarang!</h2>
-                        <p class="lead text-light opacity-75 mb-5">Tersedia untuk Android, iOS, dan Desktop. Mulai tingkatkan produktivitas Anda dalam beberapa klik.</p>
+                        <h2 class="display-5 fw-bold text-primary mb-4">Unduh AppName Sekarang!</h2>
+                        <p class="lead text-dark opacity-75 mb-5">Tersedia untuk Android, iOS, dan Desktop. Mulai tingkatkan produktivitas Anda dalam beberapa klik.</p>
                         
                         <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                            <a href="#" class="btn btn-light btn-lg text-dark shadow-sm">
+                            <a href="#" class="btn btn-dark btn-lg text-light shadow-sm">
                                 <i class="fab fa-apple me-2"></i> App Store
                             </a>
                             <a href="#" class="btn btn-dark btn-lg border border-light">
