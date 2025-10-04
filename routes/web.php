@@ -23,23 +23,23 @@ Route::get('/features', function () {
 })->name('features.index');
 
 Route::get('/screenshots', function () {
-    return view ('landing.features.screenshots');
+    return view ('landing.screenshots.index');
 })->name('screenshots.index');
 
 Route::get('/testimoni', function () {
-    return view ('landing.features.testimoni');
+    return view ('landing.testimoni.index');
 })->name('testimoni.index');
 
 Route::get('/plans', function () {
-    return view ('landing.features.plans');
+    return view ('landing.plans.index');
 })->name('plans.index');
 
 Route::get('/downloads', function () {
-    return view ('landing.features.downloads');
+    return view ('landing.downloads.index');
 })->name('downloads.index');
 
 Route::get('/contacts', function () {
-    return view ('landing.features.contacts');
+    return view ('landing.contacts.index');
 })->name('contacts.index');
 
 

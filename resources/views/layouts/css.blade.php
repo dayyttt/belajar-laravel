@@ -7,3 +7,4 @@
     <link rel="stylesheet" href="{{asset('assets/css/nivo-lightbox.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">    
     <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
+

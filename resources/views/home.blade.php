@@ -2,679 +2,277 @@
 
 @section('content')
 @yield('content')
-<!-- Hero Section -->
-<div id="app-features" class="section">
-      <div class="container">
-        <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">features</p>       
-          <h2 class="section-title wow fadeIn" data-wow-delay="0.2s">Amazing Features</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-12 col-xs-12">
-            <div class="content-left text-right">
-              <div class="box-item left">
-                <span class="icon">
-                  <i class="lni-leaf"></i>
-                </span>
-                <div class="text">
-                  <h4>User Friendly</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
-                </div>
-              </div>
-              <div class="box-item left">
-                <span class="icon">
-                  <i class="lni-dashboard"></i>
-                </span>
-                <div class="text">
-                  <h4>Super Fast Speed</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
-                </div>
-              </div>
-              <div class="box-item left">
-                <span class="icon">
-                  <i class="lni-headphone-alt"></i>
-                </span>
-                <div class="text">
-                  <h4>24/7 Support</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-12 col-xs-12">
-            <div class="show-box">
-            <img src="{{asset('assets/img/features/app.png')}}" alt="">
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-12 col-xs-12">
-            <div class="content-right text-left">
-              <div class="box-item right">
-                <span class="icon">
-                  <i class="lni-shield"></i>
-                </span>
-                <div class="text">
-                  <h4>Secure</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
-                </div>
-              </div>
-              <div class="box-item right">
-                <span class="icon">
-                  <i class="lni-star-filled"></i>
-                </span>
-                <div class="text">
-                  <h4>Awesome Rating</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
-                </div>
-              </div>
-              <div class="box-item right">
-                <span class="icon">
-                  <i class="lni-cup"></i>
-                </span>
-                <div class="text">
-                  <h4>Award Winning</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing typesting industry text.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- features Section End -->
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
+    <main>
+        
+        <!-- 1. HOME Section (Hero) -->
+        <section id="home" class="py-5 text-center d-flex align-items-center" style="min-height: 100vh;">
+            <div class="container pt-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <span class="badge text-uppercase mb-3 px-3 py-2 border border-primary text-primary-color">Inovasi Masa Depan</span>
+                        <h1 class="display-3 hero-title text-light mb-4">
+                            Ubah Cara Kerja Anda dengan <span class="gradient-text">Aplikasi Cerdas</span> Kami.
+                        </h1>
+                        <p class="lead text-secondary mb-5">
+                            AppName adalah solusi all-in-one yang memanfaatkan teknologi terbaru untuk mengoptimalkan produktivitas Anda. Lebih cepat, lebih pintar, lebih efisien.
+                        </p>
+                        <a href="#download" class="btn btn-gradient btn-lg me-3 shadow-lg">
+                            Mulai Gratis Sekarang <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#features" class="btn btn-outline-light btn-lg">
+                            Lihat Fitur <i class="fas fa-cogs ms-2"></i>
+                        </a>
 
-    <!-- Start Video promo Section -->
-    <section class="video-promo section">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
-              <div class="video-promo-content text-center">
-                <a href="https://www.youtube.com/watch?v=yP6kdOZHids" class="video-popup"><i class="lni-film-play"></i></a>
-                <h2 class="mt-3 wow zoomIn" data-wow-duration="1000ms" data-wow-delay="100ms">Watch Video</h2>
-              </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- End Video Promo Section -->
-
-    <!-- Features Section Start -->
-    <div id="features-two" class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="img-thumb wow fadeInLeft" data-wow-delay="0.3s">
-              <img class="img-fluid" src="{{asset('assets/img/features/img1.png')}}" alt="">
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="text-wrapper wow fadeInRight" data-wow-delay="0.6s">
-              <div>
-                <p class="btn btn-subtitle">How It Works?</p>  
-                <h3>Our App Is Amazing!</h3>
-                <p>Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive e-tailers after sustainable total linkage.</p>
-                <a class="btn btn-rm" href="#">Read More <i class="lni-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt">
-          <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="text-wrapper wow fadeInRight" data-wow-delay="0.9s">
-              <div>
-                <p class="btn btn-subtitle">Update</p>  
-                <h3>Free Updates!</h3>
-                <p>Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive e-tailers after sustainable total linkage.</p>
-                <a class="btn btn-rm" href="#">Read More <i class="lni-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-           <div class="col-lg-6 col-md-12 col-sm-12">
-            <div class="img-thumb wow fadeInLeft" data-wow-delay="1.2s">
-              <img class="img-fluid" src="{{asset('assets/img/features/img2.png')}}" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Features Section End -->   
-
-    <!-- Awesome Screens Section Start -->
-    <section id="screenshots" class="screens-shot section">
-      <div class="container">
-        <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Screenshots</p>       
-          <h2 class="section-title">App Screens</h2>
-        </div>
-        <div class="row">
-          <div class="touch-slider owl-carousel">
-            <div class="item">
-              <div class="screenshot-thumb">
-                <img class="img-fluid" src="{{asset('assets/img/screenshot/img-1.png')}}" alt="">
-              </div>
-            </div>
-            <div class="item">
-              <div class="screenshot-thumb">
-                <img class="img-fluid" src="{{asset('assets/img/screenshot/img-2.png')}}" alt="">
-              </div>
-            </div>
-            <div class="item">
-              <div class="screenshot-thumb">
-                <img class="img-fluid" src="{{asset('assets/img/screenshot/img-3.png')}}" alt="">
-              </div>
-            </div>
-            <div class="item">
-              <div class="screenshot-thumb">
-                <img class="img-fluid" src="{{asset('assets/img/screenshot/img-4.png')}}" alt="">
-              </div>
-            </div>
-            <div class="item">
-              <div class="screenshot-thumb">
-                <img class="img-fluid" src="{{asset('assets/img/screenshot/img-5.png')}}" alt="">
-              </div>
-            </div>
-            <div class="item">
-              <div class="screenshot-thumb">
-                <img class="img-fluid" src="{{asset('assets/img/screenshot/img-6.png')}}" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Awesome Screens Section End -->  
-
-    <!-- Team section Start -->
-    <section id="team" class="section">
-      <div class="container">
-        <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Team</p>       
-          <h2 class="section-title">Our Expert Team</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team wow fadeInUp" data-wow-delay="0.2s">
-              <div class="team-thumb">
-                <img src="{{asset('assets/img/team/team1.jpg')}}" alt="">
-                <ul class="social-list">
-                  <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                  <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                  <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
-                  <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
-                </ul>
-              </div>
-              <div class="team-details">
-                <div class="team-inner">
-                  <h4 class="team-title">Mark Parker</h4>
-                  <p>UX Consultant</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team wow fadeInUp" data-wow-delay="0.3s">
-              <div class="team-thumb">
-                <img src="img/team/team2.jpg" alt="">
-                <ul class="social-list">
-                  <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                  <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                  <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
-                  <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
-                </ul>
-              </div>
-              <div class="team-details">
-                <div class="team-inner">
-                  <h4 class="team-title">Jhon Deo</h4>
-                  <p>Web Developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team wow fadeInUp" data-wow-delay="0.4s">
-              <div class="team-thumb">
-                <img src="{{asset('assets/img/team/team3.jpg')}}" alt="">
-                <ul class="social-list">
-                  <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                  <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                  <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
-                  <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
-                </ul>
-              </div>
-              <div class="team-details">
-                <div class="team-inner">                  
-                  <h4 class="team-title">Jhon Smith</h4>
-                  <p>UI/UX Designer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team wow fadeInUp" data-wow-delay="0.5s">
-              <div class="team-thumb">
-                <img src="{{asset('assets/img/team/team4.jpg')}}" alt="">
-                <ul class="social-list">
-                  <li class="facebook"><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                  <li class="twitter"><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                  <li class="google-plus"><a href="#"><i class="lni-google-plus"></i></a></li>
-                  <li class="linkedin"><a href="#"><i class="lni-linkedin-fill"></i></a></li>
-                </ul>
-              </div>
-              <div class="team-details">
-                <div class="team-inner">
-                  <h4 class="team-title">Elina Dcruz</h4>
-                  <p>Digital Marketer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Team section End -->
-
-    <!-- Testimonial Section Start -->
-    <section id="testimonial" class="section">
-      <div class="container">
-        <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Reviews</p>       
-          <h2 class="section-title">Clients Who Loved Us</h2>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-            <div id="testimonials" class="touch-slider owl-carousel">
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="author">
-                    <div class="img-thumb">
-                      <img src="{{asset('assets/img/testimonial/img1.png')}}" alt="">
-                    </div>
-                  </div>
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive. Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthu.</p>
-                    <div class="author-info">
-                      <h2><a href="#">Mark Parker</a></h2>
-                      <span>UIdeck</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="author">
-                    <div class="img-thumb">
-                      <img src="{{asset('assets/img/testimonial/img2.png')}}" alt="">
-                    </div>
-                  </div>
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive. Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthu.</p>
-                    <div class="author-info">
-                      <h2><a href="#">Mark Parker</a></h2>
-                      <span>Tesla Motors</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="author">
-                    <div class="img-thumb">
-                      <img src="{{asset('assets/img/testimonial/img3.png')}}" alt="">
-                    </div>
-                  </div>
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive. Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthu.</p>
-                    <div class="author-info">
-                      <h2><a href="#">Mark Parker</a></h2>
-                      <span>Envato Customer</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="author">
-                    <div class="img-thumb">
-                      <img src="{{asset('assets/img/testimonial/img2.png')}}" alt="">
-                    </div>
-                  </div>
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive. Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthu.</p>
-                    <div class="author-info">
-                      <h2><a href="#">Mark Parker</a></h2>
-                      <span>GrayGris Inc.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="author">
-                    <div class="img-thumb">
-                      <img src="{{asset('assets/img/testimonial/img1.png')}}" alt="">
-                    </div>
-                  </div>
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive. Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthu.</p>
-                    <div class="author-info">
-                      <h2><a href="#">- Alex Dattilo</a></h2>
-                      <span>CEO Optima Inc</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Testimonial Section End -->  
-
-    <!-- Clients Section -->
-    <div id="clients" class="section">
-      <!-- Container Ends -->
-      <div class="container">
-        <!-- Row and Scroller Wrapper Starts -->
-        <div class="row" id="clients-scroller">
-          <div class="client-item-wrapper">
-            <img src="img/clients/img1.png" alt="">
-          </div>
-          <div class="client-item-wrapper">
-            <img src="{{asset('assets/img/clients/img2.png')}}" alt="">
-          </div>
-          <div class="client-item-wrapper">
-            <img src="{{asset('assets/img/clients/img3.png')}}" alt="">
-          </div>
-          <div class="client-item-wrapper">
-            <img src="{{asset('assets/img/clients/img4.png')}}" alt="">
-          </div>
-          <div class="client-item-wrapper">
-            <img src="{{asset('assets/img/clients/img5.png')}}" alt=""> 
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Client Section End --> 
-
-    <!-- Subcribe Section Start -->
-    <div id="subscribe" class="section">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-7 col-md-12 col-xs-12">
-            <div class="subscribe-form">
-              <div class="form-wrapper">
-                <div class="sub-title text-center">
-                  <h3>Subscribe For More Features</h3>
-                  <p>Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive.</p>
-                </div>
-                <form>
-                  <div class="row">
-                    <div class="col-12 form-line">
-                      <div class="form-group form-search">
-                        <input type="email" class="form-control" name="email" placeholder="Enter Your Email">
-                        <button type="submit" class="btn btn-common btn-search">Subscribe</button>
-                      </div> 
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Subcribe Section End -->
-
-    <!-- Start Pricing Table Section -->
-    <div id="pricing" class="section pricing-section">
-      <div class="container">
-        <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Pricing</p>       
-          <h2 class="section-title">Our Pricing Plan</h2>
-        </div>
-
-        <div class="row pricing-tables">
-          <div class="col-lg-4 col-md-4 col-xs-12">
-            <div class="pricing-table wow fadeInLeft" data-wow-delay="0.2s">
-              <div class="pricing-details">
-                <div class="icon">
-                  <i class="lni-rocket"></i>
-                </div>
-                <h2>Free</h2>
-                <ul>
-                  <li>Free Installation</li>
-                  <li>2 GB Storage</li>
-                  <li>Single User</li>
-                  <li>Sales Dashboard</li>
-                  <li>Minimal Features</li>
-                  <li>1000 Logs</li>
-                </ul>
-                <div class="price">$0<span>/mo</span></div>
-              </div>
-              <div class="plan-button">
-                <a href="#" class="btn btn-border">Get Started</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-4 col-xs-12">
-            <div class="pricing-table pricing-active">
-              <div class="pricing-details">
-                <div class="icon">
-                  <i class="lni-drop"></i>
-                </div>
-                <h2>Standard</h2>
-                <ul>
-                  <li>Free Installation</li>
-                  <li>10 GB Hosting</li>
-                  <li>5 Users</li>
-                  <li>Sales Dashboard</li>
-                  <li>Premium Features</li>
-                  <li>50,000 Logs</li>
-                </ul>
-                <div class="price">$99 <span>/mo</span></div>
-              </div>
-              <div class="plan-button">
-                <a href="#" class="btn btn-border">Get Started</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-4 col-xs-12">
-            <div class="pricing-table">
-              <div class="pricing-details">
-                <div class="icon">
-                  <i class="lni-briefcase"></i>
-                </div>
-                <h2>Business</h2>
-                <ul>
-                  <li>Free Installation</li>
-                  <li>50 GB Hosting</li>
-                  <li>Unlimited Users</li>
-                  <li>Sales and Marketing Dashbaord</li>
-                  <li>Premium Features</li>
-                  <li>Unlimited Logs</li>
-                </ul>
-                <div class="price">$199 <span>/mo</span></div>
-              </div>
-              <div class="plan-button">
-                <a href="#" class="btn btn-border">Get Started</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <!-- End Pricing Table Section -->
-
-    <!-- download Section Start -->
-    <section id="download">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-xs-12">            
-            <div class="download-thumb wow fadeInLeft" data-wow-delay="0.2s">
-              <img class="img-fluid" src="{{asset('assets/img/mac.png')}}" alt="">
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-xs-12">
-            <div class="download-wrapper wow fadeInRight" data-wow-delay="0.2s">
-              <div>
-                <div class="download-text">
-                  <h4>Download Our App From Store</h4>
-                  <p>Appropriately implement one-to-one catalysts for change vis-a-vis wireless catalysts for change. Enthusiastically architect adaptive.</p>
-                </div>
-                <a href="#" class="btn btn-common btn-effect"><i class="lni-android"></i> From PlayStore<br></a>
-                <a href="#" class="btn btn-apple"><i class="lni-apple"></i> From AppStore<br></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- download Section Start -->
-
-    <!-- Blog Section -->
-    <section id="blog" class="section">
-      <!-- Container Starts -->
-      <div class="container">
-         <div class="section-header">   
-          <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Blog</p>       
-          <h2 class="section-title">Recent News</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <!-- Blog Item Starts -->
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="single-post.html">
-                  <img src="{{asset('assets/img/blog/img1.jpg')}}" alt="">
-                </a>   
-                <div class="author-img">
-                  <img src="{{asset('assets/img/blog/author.png')}}" alt="">       
-                </div>             
-              </div>
-              <div class="blog-item-text"> 
-                <h3><a href="single-post.html">How Proton Will Transform Your Business</a></h3>
-                <div class="author">
-                  <span class="name"><a href="#">Posted by Admin</a></span>
-                  <span class="date float-right">10 April, 2020</span>
-                </div>
-              </div>
-            </div>
-            <!-- Blog Item Wrapper Ends-->
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <!-- Blog Item Starts -->
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="single-post.html">
-                  <img src="{{asset('assets/img/blog/img2.jpg')}}" alt="">
-                </a>   
-                <div class="author-img">
-                  <img src="{{asset('assets/img/blog/author.png')}}" alt="">  
-                </div>             
-              </div>
-              <div class="blog-item-text"> 
-                <h3><a href="single-post.html">20 Growth Hacking Tips from Experts</a></h3>
-                <div class="author">
-                  <span class="name"><a href="#">Posted by Admin</a></span>
-                  <span class="date float-right">10 April, 2020</span>
-                </div>
-              </div>
-            </div>
-            <!-- Blog Item Wrapper Ends-->
-          </div>
-
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <!-- Blog Item Starts -->
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="single-post.html">
-                  <img src="{{asset('assets/img/blog/img3.jpg')}}" alt="">
-                </a>   
-                <div class="author-img">
-                  <img src="{{asset('assets/img/blog/author.png')}}" alt="">
-                </div>             
-              </div>
-              <div class="blog-item-text"> 
-                <h3><a href="single-post.html">Proton Has Been Launched, Get Started!</a></h3>
-                <div class="author">
-                  <span class="name"><a href="#">Posted by Admin</a></span>
-                  <span class="date float-right">10 April, 2020</span>
-                </div>
-              </div>
-            </div>
-            <!-- Blog Item Wrapper Ends-->
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- blog Section End -->
-
-    <!-- Map Section Start -->
-    <section id="map-area">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12 padding-0">
-            <object style="border:0; height: 450px; width: 100%;" data="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d34015.943594576835!2d-106.43242624069771!3d31.677719472407432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86e75d90e99d597b%3A0x6cd3eb9a9fcd23f1!2sCourtyard+by+Marriott+Ciudad+Juarez!5e0!3m2!1sen!2sbd!4v1533791187584"></object>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Map Section End -->
-
-    <!-- Contact Section Start -->
-    <section id="contact">      
-      <div class="contact-form">
-        <div class="container">
-          <div class="row justify-content-center"> 
-            <div class="offset-top">
-              <div class="col-lg-12 col-md-12 col-xs-12">
-                <div class="contact-block wow fadeInUp" data-wow-delay="0.2s">
-                  <div class="section-header">   
-                    <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">Contact</p>       
-                    <h2 class="section-title">Love to Hear From You</h2>
-                  </div>
-                  <form id="contactForm">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name">
-                          <div class="help-block with-errors"></div>
-                        </div>                                 
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="text" placeholder="Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
-                          <div class="help-block with-errors"></div>
-                        </div> 
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <input type="text" placeholder="Subject" id="msg_subject" class="form-control" required="" data-error="Please enter your subject">
-                          <div class="help-block with-errors"></div>
+                        <!-- Mock App Screenshot (Placeholder) -->
+                        <div class="mt-5 p-4 custom-card shadow-lg border-primary" style="border-width: 2px;">
+                            <img src="https://placehold.co/1200x650/1e1e1e/6a11cb?text=DASHBOARD+APLIKASI+MODERN" class="img-fluid rounded-lg" alt="Mockup Dashboard Aplikasi">
                         </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group"> 
-                          <textarea class="form-control" id="message" placeholder="Message" rows="7" data-error="Write your message" required></textarea>
-                          <div class="help-block with-errors"></div>
-                        </div>
-                        <div class="submit-button">
-                          <button class="btn btn-common btn-effect" id="submit" type="submit">Submit</button>
-                          <div id="msgSubmit" class="h3 hidden"></div> 
-                          <div class="clearfix"></div> 
-                        </div>
-                      </div>
-                    </div>            
-                  </form>
+                    </div>
                 </div>
-              </div>
-            </div> 
-          </div>
-        </div>
-      </div>        
-    </section>
+            </div>
+        </section>
+
+        <!-- 2. FEATURES Section -->
+        <section id="features" class="py-5 py-md-5 bg-dark">
+            <div class="container py-5">
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold text-light mb-3">Mengapa AppName?</h2>
+                        <p class="lead text-secondary">Kami menawarkan alat yang dirancang untuk pertumbuhan. Berikut adalah fitur-fitur unggulan kami:</p>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <!-- Feature 1 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card p-4 text-center">
+                            <i class="fas fa-robot fa-3x text-primary-color mb-3"></i>
+                            <h5 class="fw-bold text-light">Otomatisasi Penuh</h5>
+                            <p class="text-secondary small">Hilangkan tugas repetitif. Biarkan AI kami bekerja 24/7 untuk Anda.</p>
+                        </div>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card p-4 text-center">
+                            <i class="fas fa-lock fa-3x text-info mb-3"></i>
+                            <h5 class="fw-bold text-light">Keamanan Data</h5>
+                            <p class="text-secondary small">Enkripsi end-to-end memastikan data sensitif Anda selalu aman dan terlindungi.</p>
+                        </div>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card p-4 text-center">
+                            <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
+                            <h5 class="fw-bold text-light">Analisis Real-Time</h5>
+                            <p class="text-secondary small">Akses laporan dan wawasan bisnis yang mudah dicerna, kapan saja Anda membutuhkannya.</p>
+                        </div>
+                    </div>
+                    <!-- Feature 4 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="custom-card p-4 text-center">
+                            <i class="fas fa-users-cog fa-3x text-warning mb-3"></i>
+                            <h5 class="fw-bold text-light">Kolaborasi Tim</h5>
+                            <p class="text-secondary small">Hubungkan tim Anda di satu platform untuk komunikasi dan koordinasi proyek yang mulus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SCREENSHOTS Section -->
+        <section id="screenshots" class="py-5 py-md-5">
+            <div class="container py-5">
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold text-light mb-3">Antarmuka yang Indah & Intuitif</h2>
+                        <p class="lead text-secondary">Lihat sekilas bagaimana AppName menggabungkan fungsionalitas yang kuat dengan desain yang elegan.</p>
+                    </div>
+                </div>
+
+                <!-- Simple Screenshot Grid -->
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card p-3 shadow-lg">
+                            <img src="https://placehold.co/600x400/2a2a2a/f8f9fa?text=SCREENSHOT+1%0APengaturan" class="img-fluid rounded-lg" alt="Screenshot 1">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card p-3 shadow-lg">
+                            <img src="https://placehold.co/600x400/2a2a2a/f8f9fa?text=SCREENSHOT+2%0ADasbor" class="img-fluid rounded-lg" alt="Screenshot 2">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card p-3 shadow-lg">
+                            <img src="https://placehold.co/600x400/2a2a2a/f8f9fa?text=SCREENSHOT+3%0APekerjaan+Tim" class="img-fluid rounded-lg" alt="Screenshot 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. TESTIMONIAL Section -->
+        <section id="testimonial" class="py-5 py-md-5 gradient-bg text-center">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bold text-white mb-5">Apa Kata Klien Kami?</h2>
+                        
+                        <!-- Testimonial Card -->
+                        <div class="custom-card bg-light text-dark p-5 shadow-lg">
+                            <i class="fas fa-quote-left fa-3x text-primary-color mb-3"></i>
+                            <blockquote class="blockquote mb-4">
+                                <p class="mb-0 fs-5 fw-normal">"AppName benar-benar mengubah permainan untuk operasi harian kami. Fitur otomatisasi menghemat waktu berharga tim kami, memungkinkan kami fokus pada strategi. Sangat direkomendasikan!"</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer mt-3 mb-0">
+                                John Doe, <cite title="Source Title">CEO Teknologi Inovasi</cite>
+                            </figcaption>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PLANS Section (Pricing) -->
+        <section id="plans" class="py-5 py-md-5 bg-dark">
+            <div class="container py-5">
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold text-light mb-3">Rencana Harga yang Fleksibel</h2>
+                        <p class="lead text-secondary">Pilih paket yang paling sesuai dengan kebutuhan dan skala bisnis Anda.</p>
+                    </div>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <!-- Plan 1: Starter -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card p-4 h-100 d-flex flex-column">
+                            <h3 class="fw-bold text-light">Starter</h3>
+                            <p class="text-secondary mb-4">Untuk pengguna individu.</p>
+                            <div class="d-flex align-items-center mb-4">
+                                <span class="display-4 fw-bold text-light me-2">$0</span>
+                                <span class="text-secondary">/ selamanya</span>
+                            </div>
+                            <ul class="list-unstyled mb-4 flex-grow-1">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 1 Pengguna</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> 100 Tugas Otomatis</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Penyimpanan 1GB</li>
+                                <li class="mb-2 text-secondary"><i class="fas fa-times-circle text-danger me-2"></i> Dukungan Premium</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary mt-auto">Mulai Gratis</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Plan 2: Pro (Highlighted) -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card p-5 h-100 d-flex flex-column border-primary shadow-lg" style="border-width: 3px !important; transform: scale(1.05);">
+                            <span class="badge bg-primary text-light mb-3 p-2 fw-bold position-absolute top-0 start-50 translate-middle rounded-pill">PILIHAN TERBAIK</span>
+                            <h3 class="fw-bold text-light">Pro</h3>
+                            <p class="text-secondary mb-4">Untuk tim yang sedang berkembang.</p>
+                            <div class="d-flex align-items-center mb-4">
+                                <span class="display-4 fw-bold text-light me-2">$49</span>
+                                <span class="text-secondary">/ bulan</span>
+                            </div>
+                            <ul class="list-unstyled mb-4 flex-grow-1">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Hingga 10 Pengguna</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Otomatisasi Tanpa Batas</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Penyimpanan 500GB</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Dukungan Prioritas 24/7</li>
+                            </ul>
+                            <a href="#" class="btn btn-gradient mt-auto shadow-sm">Upgrade ke Pro</a>
+                        </div>
+                    </div>
+
+                    <!-- Plan 3: Enterprise -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="custom-card p-4 h-100 d-flex flex-column">
+                            <h3 class="fw-bold text-light">Enterprise</h3>
+                            <p class="text-secondary mb-4">Untuk kebutuhan korporasi besar.</p>
+                            <div class="d-flex align-items-center mb-4">
+                                <span class="display-4 fw-bold text-light me-2">Kustom</span>
+                            </div>
+                            <ul class="list-unstyled mb-4 flex-grow-1">
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Pengguna Tak Terbatas</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Kepatuhan Keamanan Khusus</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Solusi Kustomisasi</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Manajer Akun Khusus</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline-info mt-auto">Hubungi Penjualan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DOWNLOAD Section (CTA) -->
+        <section id="download" class="py-5 py-md-5 gradient-bg text-center">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <h2 class="display-5 fw-bold text-white mb-4">Unduh AppName Sekarang!</h2>
+                        <p class="lead text-light opacity-75 mb-5">Tersedia untuk Android, iOS, dan Desktop. Mulai tingkatkan produktivitas Anda dalam beberapa klik.</p>
+                        
+                        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                            <a href="#" class="btn btn-light btn-lg text-dark shadow-sm">
+                                <i class="fab fa-apple me-2"></i> App Store
+                            </a>
+                            <a href="#" class="btn btn-dark btn-lg border border-light">
+                                <i class="fab fa-google-play me-2 text-success"></i> Google Play
+                            </a>
+                            <a href="#" class="btn btn-dark btn-lg border border-light">
+                                <i class="fas fa-desktop me-2 text-info"></i> Desktop App
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CONTACT Section -->
+        <section id="contact" class="py-5 py-md-5 bg-dark">
+            <div class="container py-5">
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold text-light mb-3">Hubungi Kami</h2>
+                        <p class="lead text-secondary">Kami senang mendengar masukan, pertanyaan, atau ide kolaborasi Anda.</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="custom-card p-4 p-md-5 shadow-lg">
+                            <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label text-light">Nama</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Nama Anda" required>
+                                        <div class="invalid-feedback">Harap masukkan nama Anda.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label text-light">Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="email@contoh.com" required>
+                                        <div class="invalid-feedback">Harap masukkan email yang valid.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label text-light">Subjek</label>
+                                        <input type="text" class="form-control" id="subject" placeholder="Subjek pesan" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="message" class="form-label text-light">Pesan</label>
+                                        <textarea class="form-control" id="message" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                                    </div>
+                                    <div class="col-12 text-center mt-4">
+                                        <button type="submit" id="submitBtn" class="btn btn-gradient btn-lg w-100 w-md-auto shadow-md">
+                                            Kirim Pesan
+                                        </button>
+                                        <div id="msgSubmit" class="mt-3 fs-5 fw-bold"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
 @endsection
