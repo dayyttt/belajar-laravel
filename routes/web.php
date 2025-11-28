@@ -14,6 +14,11 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\SiteSettingController;
+use App\Http\Controllers\ServiceHighlightController;
 
 
 
@@ -68,11 +73,22 @@ Route::middleware('auth')->group(function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     
-    Route::get('/dashboard', function () {
-        return view('admin.pages.dashboard.index');
-    })->name('dashboard.index');
-
-    //majemen
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::prefix('admin/content')->name('admin.content.')->group(function () {
+        // Banners
+        Route::resource('banners', BannerController::class);
+        
+        // Static Pages
+        Route::resource('pages', StaticPageController::class);
+        
+        // Service Highlights
+        Route::resource('highlights', ServiceHighlightController::class);
+        
+        // Site Settings
+        Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
+        Route::put('settings', [SiteSettingController::class, 'update'])->name('settings.update');
+    });
+    //majemen   
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('admin.pages.manajemen.artikel.index');
     Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('admin.pages.manajemen.artikel.create');
     Route::post('/artikel/store', [ArtikelController::class, 'store'])->name('admin.pages.manajemen.artikel.store');
