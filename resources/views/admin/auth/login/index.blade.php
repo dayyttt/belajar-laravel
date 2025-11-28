@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Startup Penyedia Jasa</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@extends('admin.auth.login.login-layout')
 
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 via-white to-blue-100">
+@section('title', 'Login | Startup Penyedia Jasa')
 
+@section('content')
     <!-- 🔹 Container Utama -->
     <div class="flex flex-col md:flex-row bg-white shadow-2xl rounded-2xl overflow-hidden max-w-4xl w-full">
-        
         <!-- 🔹 Bagian Kiri (Ilustrasi & Branding) -->
         <div class="md:w-1/2 bg-gradient-to-br from-green-500 to-green-700 text-white flex flex-col justify-center items-center p-10 relative">
             <h2 class="text-3xl font-bold mb-3">Selamat Datang 👋</h2>
@@ -26,19 +19,13 @@
         <div class="md:w-1/2 p-10 flex flex-col justify-center">
             <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Masuk ke Dashboard</h2>
 
-            <!-- Alert Dummy -->
-            <div class="bg-red-50 text-red-600 p-3 rounded-lg mb-4 hidden" id="alertBox">
-                ⚠️ Username atau password salah.
-            </div>
-
-            <form action="{{ route('dashboard.index') }}" method="GET" class="space-y-4">
+            <form action="{{ route('login') }}" method="POST" class="space-y-4">
                 @csrf
-
                 <div>
                     <label for="email" class="text-sm font-medium text-gray-600">Email</label>
                     <input type="email" name="email" id="email"
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                           placeholder="contoh@email.com" required>
+                           placeholder="contoh@email.com" value="{{ old('email') }}" required>
                 </div>
 
                 <div>
@@ -56,7 +43,7 @@
 
                 <div class="flex justify-between items-center">
                     <label class="flex items-center text-sm text-gray-600">
-                        <input type="checkbox" class="mr-2"> Ingat saya
+                        <input type="checkbox" name="remember" class="mr-2"> Ingat saya
                     </label>
                     <a href="#" class="text-sm text-green-600 hover:underline">Lupa password?</a>
                 </div>
@@ -74,7 +61,7 @@
         </div>
     </div>
 
-    <!-- 🔹 Script Animasi -->
+    @push('scripts')
     <script>
         // Toggle show/hide password
         function togglePassword() {
@@ -82,5 +69,5 @@
             input.type = input.type === 'password' ? 'text' : 'password';
         }
     </script>
-</body>
-</html>
+    @endpush
+@endsection

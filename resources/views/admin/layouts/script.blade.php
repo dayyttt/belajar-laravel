@@ -1,7 +1,37 @@
 <script src="{{ asset('assets/admin/js/lib/jquery/jquery.min.js') }}"></script>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('assets/admin/js/lib/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    
+    @if(session('success'))
+    <script>
+        $(document).ready(function() {
+            toastr.success('{{ session('success') }}', 'Berhasil', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-top-right',
+                timeOut: 5000
+            });
+        });
+    </script>
+    @endif
+
+    @if($errors->any())
+    <script>
+        $(document).ready(function() {
+            @foreach($errors->all() as $error)
+                toastr.error('{{ $error }}', 'Error', {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: 'toast-top-right',
+                    timeOut: 5000
+                });
+            @endforeach
+        });
+    </script>
+    @endif
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{ asset('assets/admin/js/jquery.slimscroll.js') }}"></script>
     <!--Menu sidebar -->

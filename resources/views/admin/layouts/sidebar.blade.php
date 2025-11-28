@@ -48,6 +48,17 @@
                         <li><a href="/performa">Performa</a></li>                        
                     </ul>
                 </li>
+
+                <!-- Logout -->
+                <li class="nav-label">Akun</li>
+                <li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-danger">
+                        <i class="fa fa-sign-out"></i> <span class="hide-menu">Keluar</span>
+                    </a>
+                </li>
                 
             </ul>
         </nav>
