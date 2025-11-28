@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Layanan;
-use App\Models\KategoriLayanan;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -14,10 +14,11 @@ class LayananController extends Controller
     public function index()
     {
         $layanan = Layanan::with('kategori')
+            ->where('is_active', true)
             ->latest()
             ->paginate(10);
             
-        $kategori = KategoriLayanan::where('is_active', true)->get();
+        $kategori = Kategori::where('is_active', true)->get();
             
         return view('admin.pages.produk.layanan.index', compact('layanan', 'kategori'));
     }
@@ -29,7 +30,7 @@ class LayananController extends Controller
             'deskripsi' => 'required|string',
             'harga' => 'required|numeric|min:0',
             'durasi' => 'required|integer|min:1',
-            'kategori_id' => 'required|exists:kategori_layanan,id',
+            'kategori_id' => 'required|exists:kategori,id',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'is_active' => 'boolean',
             'fitur' => 'nullable|array',
@@ -57,7 +58,7 @@ class LayananController extends Controller
             'deskripsi' => 'required|string',
             'harga' => 'required|numeric|min:0',
             'durasi' => 'required|integer|min:1',
-            'kategori_id' => 'required|exists:kategori_layanan,id',
+            'kategori_id' => 'required|exists:kategori,id',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'is_active' => 'boolean',
             'fitur' => 'nullable|array',

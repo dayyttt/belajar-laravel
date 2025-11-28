@@ -21,7 +21,6 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="/layanan">Layanan</a></li>
                         <li><a href="/kategori">Kategori</a></li>
-                        <li><a href="/paket">Paket</a></li>
                     </ul>
                 </li>
 
