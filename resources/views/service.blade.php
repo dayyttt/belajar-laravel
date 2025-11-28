@@ -97,9 +97,9 @@
     <div class="row mt-5">
         <div class="col-12">
             <div class="bg-primary text-white rounded-3 p-5 text-center">
-                <h2 class="mb-4">Ready to get started?</h2>
-                <p class="lead mb-4">Let's discuss how we can help your business grow</p>
-                <a href="/contact" class="btn btn-light btn-lg px-4">Get in Touch</a>
+                <h2 class="mb-4">Siap untuk Memulai??</h2>
+                <p class="lead mb-4">Bergabunglah dengan ribuan pelanggan puas dan transformasikan bisnis Anda hari ini.</p>
+                <a href="/#services" class="btn btn-light btn-lg px-4">mulai sekarang</a>
             </div>
         </div>
     </div>

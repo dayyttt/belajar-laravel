@@ -6,10 +6,13 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
-
-
-
-
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\HalamanController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\KategoriController;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -17,6 +20,8 @@ use App\Http\Controllers\ServiceController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/company/create', [HomeController::class, 'create']);
 Route::post('/company/store', [HomeController::class, 'store']);
+
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
 Route::get('/features', function () {
     return view ('landing.features.index');
@@ -39,15 +44,66 @@ Route::get('/downloads', function () {
 })->name('downloads.index');
 
 Route::get('/contacts', function () {
-    return view ('landing.contacts.index');
+    return view ('contact');
 })->name('contacts.index');
 
 
-
-Route::get('/about', [AboutController::class, 'index']);
+// Language Switch Routes
+Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 Route::get('/product', [ProductController::class, 'index']);
-
-
 Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/service', [ServiceController::class, 'index']);
+
+
+Route::get('/dashboard', function () {
+    return view ('admin.pages.dashboard.index');
+})->name('dashboard.index');
+
+//majemen
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('admin.pages.manajemen.artikel.index');
+Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('admin.pages.manajemen.artikel.create');
+Route::get('/artikel/store', [ArtikelController::class, 'store'])->name('admin.pages.manajemen.artikel.store');
+Route::get('/artikel/update', [ArtikelController::class, 'update'])->name('admin.pages.manajemen.artikel.update');
+Route::get('/artikel/destroy', [ArtikelController::class, 'destroy'])->name('admin.pages.manajemen.artikel.destroy');
+Route::get('/artikel/bulk-destroy', [ArtikelController::class, 'bulkDestroy'])->name('admin.pages.manajemen.artikel.bulk-destroy');
+Route::get('/halaman', [HalamanController::class, 'index'])->name('admin.pages.manajemen.halaman.index');
+Route::get('/halaman/create', [HalamanController::class, 'create'])->name('admin.pages.manajemen.halaman.create');
+Route::get('/halaman/store', [HalamanController::class, 'store'])->name('admin.pages.manajemen.halaman.store');
+Route::get('/halaman/update', [HalamanController::class, 'update'])->name('admin.pages.manajemen.halaman.update');
+Route::get('/halaman/destroy', [HalamanController::class, 'destroy'])->name('admin.pages.manajemen.halaman.destroy');
+Route::get('/media', [MediaController::class, 'index'])->name('admin.pages.manajemen.media.index');
+Route::get('/media/create', [MediaController::class, 'create'])->name('admin.pages.manajemen.media.create');
+Route::get('/media/store', [MediaController::class, 'store'])->name('admin.pages.manajemen.media.store');
+Route::get('/media/update', [MediaController::class, 'update'])->name('admin.pages.manajemen.media.update');
+Route::get('/media/destroy', [MediaController::class, 'destroy'])->name('admin.pages.manajemen.media.destroy');
+Route::get('/media/bulk-destroy', [MediaController::class, 'bulkDestroy'])->name('admin.pages.manajemen.media.bulk-destroy');
+
+//produk
+Route::resource('layanan', LayananController::class)->names([
+    'index' => 'admin.pages.produk.layanan.index',
+    'create' => 'admin.pages.produk.layanan.create',
+    'store' => 'admin.pages.produk.layanan.store',
+    'show' => 'admin.pages.produk.layanan.show',
+    'edit' => 'admin.pages.produk.layanan.edit',
+    'update' => 'admin.pages.produk.layanan.update',
+    'destroy' => 'admin.pages.produk.layanan.destroy',
+]);
+Route::resource('kategori', KategoriController::class)->names([
+    'index' => 'admin.pages.produk.kategori.index',
+    'create' => 'admin.pages.produk.kategori.create',
+    'store' => 'admin.pages.produk.kategori.store',
+    'show' => 'admin.pages.produk.kategori.show',
+    'edit' => 'admin.pages.produk.kategori.edit',
+    'update' => 'admin.pages.produk.kategori.update',
+    'destroy' => 'admin.pages.produk.kategori.destroy',
+]);
+//form auth
+Route::get('/login', function () {
+    return view ('admin.auth.login.index');
+})->name('login.index');
+
+Route::get('/logout', function () {
+    return view ('admin.auth.logout.index');
+})->name('logout.index');
+
