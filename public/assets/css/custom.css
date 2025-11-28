@@ -1,0 +1,101 @@
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333333;
+        }
+        .gradient-text {
+            background-image: linear-gradient(to right, #84cc16, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .gradient-button {
+            background-image: linear-gradient(to right, #84cc16, #10b981);
+            box-shadow: 0 10px 15px -3px rgba(132, 204, 22, 0.5), 0 4px 6px -2px rgba(132, 204, 22, 0.05);
+            transition: all 0.3s ease;
+        }
+        .gradient-button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            stroke-width: 2;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .icon-menu:after { content: '☰'; }
+        .icon-x:after { content: '✕'; }
+        .icon-arrow-right:after { content: '→'; }
+
+        .bg-olive-soft {
+        background-color: #a3c585 !important;
+        }       
+        
+        .bg-olive-soft h2,
+        .bg-olive-soft h5 {
+            color: #333333 !important; 
+        }
+
+        .bg-olive-soft .lead {
+            color: #444444 !important;
+        }
+    
+        .bg-olive-soft .text-primary-color {
+            color: #557c55 !important;
+        }
+        
+        .bg-olive-soft .custom-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #7c9868;
+        }
+        
+        
+        .bg-light-gray {
+            background-color: #fff8e7;
+        }
+        
+        /* .screenshot-thumb {
+            overflow: hidden;
+            display: block;
+            cursor: grab;
+        }
+        .screenshot-thumb img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem; 
+        }
+        
+        .animated-hover-scale {
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        .animated-hover-scale:hover {
+            transform: scale(1.05); 
+        }
+        
+        .screenshots-carousel .owl-nav {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        .screenshots-carousel .owl-nav button {
+            background: none;
+            border: none;
+            color: #3f51b5; 
+            font-size: 2rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }           
+
+        .screenshots-carousel .owl-nav button:hover {
+            color: #2c387e; 
+        } */
+
