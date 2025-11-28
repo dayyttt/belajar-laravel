@@ -37,7 +37,7 @@ class BannerController extends Controller
 
         Banner::create($validated);
 
-        return redirect()->route('admin.banners.index')
+        return redirect()->route('admin.content.banners.index')
             ->with('success', 'Banner created successfully');
     }
 
