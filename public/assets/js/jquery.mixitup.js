@@ -1,5 +1,6 @@
 /**!
- * MixItUp v2.1.11
+
+* MixItUp v2.1.11
  *
  * @copyright Copyright 2015 KunkaLabs Limited.
  * @author    KunkaLabs Limited.
