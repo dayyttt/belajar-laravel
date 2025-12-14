@@ -226,3 +226,48 @@ Route::prefix('admin/pages/ketersediaan')->name('admin.pages.ketersediaan.')->mi
     // Route::post('schedules/{schedule}/generate-slots', [ScheduleController::class, 'generateSlots'])
     //     ->name('schedules.generate-slots');
 });
+
+// Invoice Routes 
+Route::prefix('admin/pages/transaksi')->name('admin.pages.transaksi.')->middleware(['auth', 'admin'])->group(function () {
+    // Invoices
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+    Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+    Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show');
+    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update');
+    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+    Route::post('/invoices/{invoice}/send', [InvoiceController::class, 'sendInvoice'])->name('invoices.send');
+
+    // Payments
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments/create', [PaymentController::class, 'create'])->name('payments.create');
+    Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+    Route::get('/payments/{payment}/edit', [PaymentController::class, 'edit'])->name('payments.edit');
+    Route::put('/payments/{payment}', [PaymentController::class, 'update'])->name('payments.update');
+    Route::delete('/payments/{payment}', [PaymentController::class, 'destroy'])->name('payments.destroy');
+    Route::post('/payments/{payment}/verify', [PaymentController::class, 'verify'])->name('payments.verify');
+    Route::post('/payments/{payment}/reject', [PaymentController::class, 'reject'])->name('payments.reject');
+});
+
+// Reports
+Route::prefix('admin/pages/laporan')->name('admin.pages.laporan.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/owner-revenue', [ReportController::class, 'ownerRevenue'])->name('owner-revenue');
+    Route::get('/payment-summary', [ReportController::class, 'paymentSummary'])->name('payment-summary');
+});
+
+// Booking Manual
+Route::prefix('admin/pages/booking')->name('admin.pages.booking.')->group(function () {
+    Route::get('/', [BookingController::class, 'index'])->name('index');
+    Route::get('/create', [BookingController::class, 'create'])->name('create');
+    Route::post('/', [BookingController::class, 'store'])->name('store');
+    Route::get('/{booking}', [BookingController::class, 'show'])->name('show');
+    Route::get('/{booking}/edit', [BookingController::class, 'edit'])->name('edit');
+    Route::put('/{booking}', [BookingController::class, 'update'])->name('update');
+    Route::post('/{booking}/status', [BookingController::class, 'updateStatus'])->name('update.status');
+    Route::delete('/{booking}', [BookingController::class, 'destroy'])->name('destroy');
+    
+    // API endpoints
+    Route::get('/api/slots', [BookingController::class, 'getAvailableSlots'])->name('api.slots');
+    Route::get('/api/services/{ownerId}', [BookingController::class, 'getServicesByOwner'])->name('api.services');
+});
