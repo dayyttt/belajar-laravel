@@ -4,8 +4,7 @@
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ asset('assets/admin/js/lib/bootstrap/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-    
-    @if(session('success'))
+
     <script>
         $(document).ready(function() {
             toastr.success('{{ session('success') }}', 'Berhasil', {
@@ -16,9 +15,6 @@
             });
         });
     </script>
-    @endif
-
-    @if($errors->any())
     <script>
         $(document).ready(function() {
             @foreach($errors->all() as $error)
@@ -31,7 +27,6 @@
             @endforeach
         });
     </script>
-    @endif
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{ asset('assets/admin/js/jquery.slimscroll.js') }}"></script>
     <!--Menu sidebar -->
@@ -95,5 +90,149 @@ $(document).ready(function() {
 function generateSlots(scheduleId) {
     $('#generateSlotsForm').attr('action', '{{ route('admin.pages.ketersediaan.schedules.generate-slots', '') }}/' + scheduleId);
     $('#generateSlotsModal').modal('show');
+}
+</script>
+
+
+    <!-- Chart.js for Payment Summary -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Billing & Payment Scripts -->
+<script>
+// Payment Verification Function
+
+function verifyPayment(paymentId) {
+    if (confirm('Apakah Anda yakin ingin memverifikasi pembayaran ini?')) {
+        fetch(`/admin/pages/transaksi/payments/${paymentId}/verify`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Gagal memverifikasi pembayaran');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan');
+        });
+    }
+}
+
+// Invoice Functions
+$(document).ready(function() {
+    // Calculate total invoice amount
+    function calculateTotal() {
+        var subtotal = parseFloat($('#subtotal').val()) || 0;
+        var additionalFee = parseFloat($('#additionalFee').val()) || 0;
+        var discount = parseFloat($('#discount').val()) || 0;
+        var tax = parseFloat($('#tax').val()) || 0;
+        
+        var total = subtotal + additionalFee - discount + tax;
+        $('#totalAmount').val('Rp ' + total.toLocaleString('id-ID'));
+    }
+
+    // Auto-fill from booking selection
+    $('#bookingSelect').on('change', function() {
+        var selected = $(this).find(':selected');
+        if (selected.val()) {
+            $('#customerName').val(selected.data('customer'));
+            $('#customerEmail').val(selected.data('email'));
+            $('#customerPhone').val(selected.data('phone'));
+            $('#subtotal').val(selected.data('amount'));
+            calculateTotal();
+        }
+    });
+
+    // Auto-fill from customer selection
+    $('#customerSelect').on('change', function() {
+        var selected = $(this).find(':selected');
+        if (selected.val()) {
+            $('#customerName').val(selected.data('name'));
+            $('#customerEmail').val(selected.data('email'));
+            $('#customerPhone').val(selected.data('phone'));
+        }
+    });
+
+    // Bind calculation events
+    $('#subtotal, #additionalFee, #discount, #tax').on('input', calculateTotal);
+});
+
+// Payment Functions
+$(document).ready(function() {
+    // Update remaining amount display
+    function updateRemainingAmount() {
+        var selected = $('#invoiceSelect').find(':selected');
+        var remaining = selected.data('remaining') || 0;
+        $('#remainingAmount').text('Rp ' + remaining.toLocaleString('id-ID'));
+        
+        // Set max amount for payment input
+        $('#amount').attr('max', remaining);
+    }
+
+    $('#invoiceSelect').on('change', updateRemainingAmount);
+    
+    // Initialize on page load
+    updateRemainingAmount();
+
+    // Show/hide payment method detail field
+    $('#paymentMethod').on('change', function() {
+        if ($(this).val() === 'other') {
+            $('#methodDetailGroup').show();
+            $('input[name="payment_method_detail"]').prop('required', true);
+        } else {
+            $('#methodDetailGroup').hide();
+            $('input[name="payment_method_detail"]').prop('required', false);
+        }
+    }).trigger('change');
+});
+
+// Payment Summary Chart
+$(document).ready(function() {
+    if (typeof paymentSummaryData !== 'undefined' && $('#paymentMethodChart').length) {
+        var ctx = document.getElementById('paymentMethodChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tunai', 'Transfer', 'QRIS', 'Lainnya'],
+                datasets: [{
+                    data: [
+                        paymentSummaryData.cash_total,
+                        paymentSummaryData.transfer_total,
+                        paymentSummaryData.qris_total,
+                        paymentSummaryData.other_total
+                    ],
+                    backgroundColor: [
+                        '#17a2b8',
+                        '#ffc107',
+                        '#007bff',
+                        '#6c757d'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+});
+
+// Owner Revenue Detail Function
+function showDetail(ownerId) {
+    // TODO: Implement modal or redirect to detail page
+    alert('Detail untuk owner ID: ' + ownerId + ' - akan diimplementasikan');
 }
 </script>
