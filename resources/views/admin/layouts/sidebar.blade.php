@@ -49,6 +49,18 @@
                     </ul>
                 </li>
 
+                <li> 
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <i class="fa fa-area-chart"></i>
+                        <span class="hide-menu">Manajemen Ketersediaan</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ route('admin.pages.ketersediaan.availability.index') }}">Availability</a></li>
+                        <li><a href="{{ route('admin.pages.ketersediaan.schedules.index') }}">Schedule</a></li>
+                        <li><a href="{{ route('admin.pages.ketersediaan.time-slots.index') }}">Time Slot</a></li>                       
+                    </ul>
+                </li>
+
                 <!-- Logout -->
                 <li class="nav-label">Akun</li>
                 <li>

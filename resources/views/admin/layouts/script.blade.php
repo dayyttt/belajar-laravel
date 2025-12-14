@@ -56,3 +56,44 @@
     <script src="{{ asset('assets/admin/js/lib/chartist/chartist-init.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('assets/admin/js/custom.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#schedulesTable').DataTable({
+        responsive: true,
+        pageLength: 25,
+        order: [[4, 'desc']] // Sort by date
+    });
+});
+
+function generateSlots(scheduleId) {
+    $('#generateSlotsForm').attr('action', '{{ route('admin.pages.ketersediaan.schedules.generate-slots', '') }}/' + scheduleId);
+    $('#generateSlotsModal').modal('show');
+}
+</script>
+
+<script>
+$(document).ready(function() {
+    // Auto calculate duration when time changes
+    $('#start_time, #end_time').on('change', function() {
+        var startTime = $('#start_time').val();
+        var endTime = $('#end_time').val();
+        
+        if(startTime && endTime) {
+            var start = new Date('2000-01-01 ' + startTime);
+            var end = new Date('2000-01-01 ' + endTime);
+            var diff = (end - start) / 1000 / 60; // Convert to minutes
+            
+            if(diff > 0) {
+                $('#duration_minutes').val(diff);
+            }
+        }
+    });
+});
+
+function generateSlots(scheduleId) {
+    $('#generateSlotsForm').attr('action', '{{ route('admin.pages.ketersediaan.schedules.generate-slots', '') }}/' + scheduleId);
+    $('#generateSlotsModal').modal('show');
+}
+</script>

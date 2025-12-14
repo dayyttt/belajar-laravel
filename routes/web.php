@@ -5,20 +5,27 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\MediaController;
-use App\Http\Controllers\LayananController;
-use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\ServiceHighlightController;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\ServiceCategoryController;
+use App\Http\Controllers\Admin\ServicePackageController;
+use App\Http\Controllers\Admin\ServiceOwnerController;
+use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\TimeSlotController;
+use App\Http\Controllers\Admin\AvailabilityController;
+
 
 
 
@@ -56,7 +63,7 @@ Route::get('/contacts', function () {
 
 // Language Switch Routes
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
-
+Route::get('/layanan', [LayananController::class, 'index']);
 Route::get('/product', [ProductController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/service', [ServiceController::class, 'index']);
@@ -88,6 +95,44 @@ Route::middleware('auth')->group(function () {
         Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
         Route::put('settings', [SiteSettingController::class, 'update'])->name('settings.update');
     });
+
+    // Customer Management
+    Route::resource('customers', \App\Http\Controllers\CustomerController::class)->except('show');
+    Route::get('customers/{customer}', [\App\Http\Controllers\CustomerController::class, 'show'])->name('customers.show');
+
+    // Service Management
+    
+    // Service Categories
+    Route::prefix('admin/service-categories')->name('admin.service-categories.')->middleware(['auth'])->group(function () {
+        Route::get('/', [ServiceCategoryController::class, 'index'])->name('index');
+        Route::get('/create', [ServiceCategoryController::class, 'create'])->name('create');
+        Route::post('/', [ServiceCategoryController::class, 'store'])->name('store');
+        Route::get('/{serviceCategory}/edit', [ServiceCategoryController::class, 'edit'])->name('edit');
+        Route::put('/{serviceCategory}', [ServiceCategoryController::class, 'update'])->name('update');
+        Route::delete('/{serviceCategory}', [ServiceCategoryController::class, 'destroy'])->name('destroy');
+        Route::post('reorder', [ServiceCategoryController::class, 'reorder'])->name('reorder');
+    });
+
+    Route::prefix('admin/services')->name('admin.services.')->middleware(['auth'])->group(function () {
+    // Services
+    Route::resource('services', AdminServiceController::class)->except(['show']);
+    Route::get('services/get/{service}', [ServicePackageController::class, 'getService'])
+        ->name('services.get');
+
+    // Service Packages
+    Route::prefix('admin/pages/services/packages')->name('admin.pages.services.packages.')->group(function () {
+        Route::get('/', [ServicePackageController::class, 'index'])->name('index');
+        Route::get('/create', [ServicePackageController::class, 'create'])->name('create');
+        Route::post('/', [ServicePackageController::class, 'store'])->name('store');
+        Route::get('/{servicePackage}', [ServicePackageController::class, 'show'])->name('show');
+        Route::get('/{servicePackage}/edit', [ServicePackageController::class, 'edit'])->name('edit');
+        Route::put('/{servicePackage}', [ServicePackageController::class, 'update'])->name('update');
+        Route::delete('/{servicePackage}', [ServicePackageController::class, 'destroy'])->name('destroy');
+    });
+    });
+
+
+
     //majemen   
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('admin.pages.manajemen.artikel.index');
     Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('admin.pages.manajemen.artikel.create');
@@ -131,3 +176,53 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
+//jasa owner manajemen
+Route::prefix('admin/service-owners')->name('admin.service-owners.')->middleware(['auth'])->group(function () {
+    Route::get('/', [ServiceOwnerController::class, 'index'])->name('index');
+    Route::get('/create', [ServiceOwnerController::class, 'create'])->name('create');
+    Route::post('/', [ServiceOwnerController::class, 'store'])->name('store');
+    Route::get('/{serviceOwner}/edit', [ServiceOwnerController::class, 'edit'])->name('edit');
+    Route::put('/{serviceOwner}', [ServiceOwnerController::class, 'update'])->name('update');
+    Route::delete('/{serviceOwner}', [ServiceOwnerController::class, 'destroy'])->name('destroy');
+});
+
+//manajemen ketersediaan
+
+Route::prefix('admin/pages/ketersediaan')->name('admin.pages.ketersediaan.')->middleware(['auth'])->group(function () {
+    // Availability
+    Route::resource('availability', AvailabilityController::class)->names([
+        'index' => 'availability.index',
+        'create' => 'availability.create',
+        'store' => 'availability.store',
+        'edit' => 'availability.edit',
+        'update' => 'availability.update',
+        'destroy' => 'availability.destroy',
+    ]);
+    // Schedules
+    Route::resource('schedules', ScheduleController::class)->names([
+        'index' => 'schedules.index',
+        'create' => 'schedules.create',
+        'store' => 'schedules.store',
+        'edit' => 'schedules.edit',
+        'update' => 'schedules.update',
+        'destroy' => 'schedules.destroy',
+    ]);
+    // Time Slots
+    Route::resource('time-slots', TimeSlotController::class)->names([
+        'index' => 'time-slots.index',
+        'create' => 'time-slots.create',
+        'store' => 'time-slots.store',
+        'edit' => 'time-slots.edit',
+        'update' => 'time-slots.update',
+        'destroy' => 'time-slots.destroy',
+    ]);
+    // Other routes...
+    Route::get('/calendar', [ScheduleController::class, 'calendar'])->name('admin.pages.ketersediaan.calendar');
+    Route::get('schedules/{schedule}/generate-slots', [ScheduleController::class, 'generateSlots'])
+        ->name('admin.pages.ketersediaan.schedules.generate-slots.get');
+    
+    Route::post('schedules/{schedule}/generate-slots', [ScheduleController::class, 'generateSlots'])
+        ->name('admin.pages.ketersediaan.schedules.generate-slots');
+    // Route::post('schedules/{schedule}/generate-slots', [ScheduleController::class, 'generateSlots'])
+    //     ->name('schedules.generate-slots');
+});
