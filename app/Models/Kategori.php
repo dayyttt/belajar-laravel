@@ -11,17 +11,38 @@ class Kategori extends Model
     protected $table = 'kategori';
     protected $fillable = [
         'name',
-        'position',
-        'office',
-        'age',
-        'start_date',
-        'salary',
+        'description',
+        'icon',
         'is_active',
     ];
 
     // Konversi tipe data
     protected $casts = [
-        'start_date' => 'date',
         'is_active' => 'boolean',
     ];
+
+    // Relations
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'category_id');
+    }
+
+    // Scopes
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    // Accessors
+    public function getServicesCountAttribute()
+    {
+        return $this->services()->count();
+    }
+
+    public function getBookingsCountAttribute()
+    {
+        return $this->services()->with('bookings')->get()->sum(function($service) {
+            return $service->bookings->count();
+        });
+    }
 }

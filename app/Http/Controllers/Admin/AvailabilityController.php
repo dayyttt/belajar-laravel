@@ -12,11 +12,10 @@ class AvailabilityController extends Controller
 {
     public function index()
     {
-        $settings = AvailabilitySetting::with(['serviceOwner', 'service'])
-            ->orderBy('day_of_week')
-            ->get();
-        
-        return view('admin.pages.ketersediaan.availability.index', compact('settings'));
+        return view('admin.components.generic-page', [
+            'pageTitle' => 'Ketersediaan',
+            'pageDescription' => 'Kelola pengaturan ketersediaan layanan dan jadwal'
+        ]);
     }
 
     public function create()

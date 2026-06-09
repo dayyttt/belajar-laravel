@@ -9,7 +9,7 @@
             <h4>Pengaturan Ketersediaan</h4>
         </div>
         <div class="col-md-6 text-right">
-            <a href="{{ route('admin.page.ketersediaan.availability.create') }}" class="btn btn-primary">
+            <a href="{{ route('admin.pages.ketersediaan.availability.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah Pengaturan
             </a>
             <a href="{{ route('admin.pages.ketersediaan.availability.calendar') }}" class="btn btn-info">

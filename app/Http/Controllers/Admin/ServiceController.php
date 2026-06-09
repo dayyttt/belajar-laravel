@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
-use App\Models\ServiceCategory;
-use App\Models\User;
+use App\Models\Kategori;
+use App\Models\ServiceOwner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,37 +13,36 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::with(['category', 'owner'])->latest()->get();
-        return view('admin.pages.services.services.index', compact('services'));
+        $services = Service::with(['category', 'owner', 'bookings'])->latest()->get();
+        $categories = Kategori::all();
+        $owners = ServiceOwner::all();
+        
+        return view('admin.pages.services.services.index', compact('services', 'categories', 'owners'));
     }
 
     public function create()
     {
-        $categories = ServiceCategory::where('is_active', true)->get();
-        $owners = User::role('service_owner')->get();
-        $priceUnits = Service::PRICE_UNITS;
+        $categories = Kategori::where('is_active', true)->get();
+        $owners = ServiceOwner::where('is_active', true)->get();
         
-        return view('admin.pages.services.services.create', compact('categories', 'owners', 'priceUnits'));
+        return view('admin.pages.services.services.create', compact('categories', 'owners'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:service_categories,id',
-            'description' => 'nullable|string',
-            'duration' => 'required|integer|min:1',
+            'category_id' => 'required|exists:kategori,id',
+            'description' => 'required|string',
+            'duration' => 'required|string|max:100',
             'base_price' => 'required|numeric|min:0',
-            'price_unit' => 'required|in:session,hour,day',
-            'is_active' => 'boolean',
-            'display_order' => 'integer|min:0',
-            'owner_id' => 'required|exists:users,id',
-            'image' => 'nullable|image|max:2048'
+            'price_unit' => 'required|string|max:50',
+            'owner_id' => 'required|exists:service_owners,id',
+            'is_active' => 'boolean'
         ]);
 
-        if ($request->hasFile('image')) {
-            $validated['image_path'] = $request->file('image')->store('services', 'public');
-        }
+        $validated['rating'] = 0;
+        $validated['bookings_count'] = 0;
 
         Service::create($validated);
 
@@ -53,36 +52,25 @@ class ServiceController extends Controller
 
     public function edit(Service $service)
     {
-        $categories = ServiceCategory::where('is_active', true)->get();
-        $owners = User::role('service_owner')->get();
-        $priceUnits = Service::PRICE_UNITS;
+        $categories = Kategori::where('is_active', true)->get();
+        $owners = ServiceOwner::where('is_active', true)->get();
         
         return view('admin.pages.services.services.edit', 
-            compact('service', 'categories', 'owners', 'priceUnits'));
+            compact('service', 'categories', 'owners'));
     }
 
     public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:service_categories,id',
-            'description' => 'nullable|string',
-            'duration' => 'required|integer|min:1',
+            'category_id' => 'required|exists:kategori,id',
+            'description' => 'required|string',
+            'duration' => 'required|string|max:100',
             'base_price' => 'required|numeric|min:0',
-            'price_unit' => 'required|in:session,hour,day',
-            'is_active' => 'boolean',
-            'display_order' => 'integer|min:0',
-            'owner_id' => 'required|exists:users,id',
-            'image' => 'nullable|image|max:2048'
+            'price_unit' => 'required|string|max:50',
+            'owner_id' => 'required|exists:service_owners,id',
+            'is_active' => 'boolean'
         ]);
-
-        if ($request->hasFile('image')) {
-            // Delete old image if exists
-            if ($service->image_path) {
-                Storage::disk('public')->delete($service->image_path);
-            }
-            $validated['image_path'] = $request->file('image')->store('services', 'public');
-        }
 
         $service->update($validated);
 
@@ -92,8 +80,9 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        if ($service->image_path) {
-            Storage::disk('public')->delete($service->image_path);
+        // Check if service has bookings
+        if ($service->bookings()->count() > 0) {
+            return back()->with('error', 'Layanan tidak dapat dihapus karena masih memiliki booking');
         }
         
         $service->delete();

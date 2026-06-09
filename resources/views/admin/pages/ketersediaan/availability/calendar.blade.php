@@ -73,7 +73,7 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     @if($slot->status == 'booked')
-                                        <form action="{{ route('admin.pages.ketersediaa.time-slots.confirm', $slot->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.pages.ketersediaan.time-slots.confirm', $slot->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             <button type="submit" class="btn btn-outline-success">
                                                 <i class="fas fa-check"></i>

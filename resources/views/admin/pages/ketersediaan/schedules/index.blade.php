@@ -10,7 +10,7 @@
             <i class="fas fa-calendar-alt mr-2"></i>Manajemen Jadwal
         </h1>
         <div>
-            <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('admin.pages.ketersediaan.schedules.create') }}" class="btn btn-primary btn-sm">
                 <i class="fas fa-plus mr-1"></i> Tambah Jadwal
             </a>
         </div>
@@ -133,7 +133,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('admin.schedules.edit', $schedule->id) }}" 
+                                        <a href="{{ route('admin.pages.ketersediaan.schedules.edit', $schedule->id) }}" 
                                            class="btn btn-outline-warning" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
@@ -141,7 +141,7 @@
                                                 onclick="generateSlots({{ $schedule->id }})" title="Generate Slots">
                                             <i class="fas fa-clock"></i>
                                         </button>
-                                        <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" 
+                                        <form action="{{ route('admin.pages.ketersediaan.schedules.destroy', $schedule->id) }}" 
                                               method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
@@ -162,7 +162,7 @@
                     <i class="fas fa-calendar-times fa-3x text-gray-300 mb-3"></i>
                     <h5 class="text-gray-400">Belum ada data jadwal</h5>
                     <p class="text-gray-400">Tambahkan jadwal baru untuk memulai</p>
-                    <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.pages.ketersediaan.schedules.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus mr-2"></i> Tambah Jadwal
                     </a>
                 </div>

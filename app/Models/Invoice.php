@@ -183,6 +183,21 @@ class Invoice extends Model
         return 'Rp ' . number_format($this->total_amount, 0, ',', '.');
     }
 
+    public function getFormattedAmountAttribute()
+    {
+        return 'Rp ' . number_format($this->subtotal, 0, ',', '.');
+    }
+
+    public function getFormattedTaxAttribute()
+    {
+        return 'Rp ' . number_format($this->tax, 0, ',', '.');
+    }
+
+    public function getFormattedTotalAttribute()
+    {
+        return 'Rp ' . number_format($this->total_amount, 0, ',', '.');
+    }
+
     public function getFormattedPaidAmountAttribute()
     {
         return 'Rp ' . number_format($this->paid_amount, 0, ',', '.');

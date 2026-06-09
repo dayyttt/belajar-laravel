@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Booking;
 use App\Models\Customer;
@@ -16,7 +15,7 @@ class InvoiceController extends Controller
     public function index(Request $request)
     {
         $invoices = Invoice::with(['booking', 'customer', 'creator'])
-                          ->when($request->status, function($q) use ($request) {
+                          ->when($request->status && $request->status != 'all', function($q) use ($request) {
                               return $q->where('status', $request->status);
                           })
                           ->when($request->payment_status, function($q) use ($request) {
@@ -29,7 +28,26 @@ class InvoiceController extends Controller
                           ->orderBy('created_at', 'desc')
                           ->paginate(20);
 
-        return view('admin.invoices.index', compact('invoices'));
+        // Calculate stats
+        $allInvoices = Invoice::all();
+        $totalRevenue = $allInvoices->where('status', 'paid')->sum('total_amount');
+        $paidInvoicesCount = $allInvoices->where('status', 'paid')->count();
+        $pendingAmount = $allInvoices->where('status', 'pending')->sum('total_amount');
+        $pendingInvoicesCount = $allInvoices->where('status', 'pending')->count();
+        $overdueAmount = $allInvoices->where('status', 'overdue')->sum('total_amount');
+        $overdueInvoicesCount = $allInvoices->where('status', 'overdue')->count();
+        $totalInvoicesCount = $allInvoices->count();
+
+        return view('admin.pages.transaksi.invoices.index', compact(
+            'invoices', 
+            'totalRevenue', 
+            'paidInvoicesCount',
+            'pendingAmount',
+            'pendingInvoicesCount', 
+            'overdueAmount',
+            'overdueInvoicesCount',
+            'totalInvoicesCount'
+        ));
     }
 
     public function create()

@@ -56,6 +56,7 @@ class CustomerController extends Controller
 
     public function edit(Customer $customer)
     {
+        $customer->loadCount('bookings');
         return view('admin.pages.customers.edit', compact('customer'));
     }
 

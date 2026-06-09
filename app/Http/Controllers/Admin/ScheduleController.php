@@ -24,6 +24,14 @@ class ScheduleController extends Controller
         return view('admin.pages.ketersediaan.schedules.create');
     }
 
+    public function calendar()
+    {
+        return view('admin.components.generic-page', [
+            'pageTitle' => 'Kalender',
+            'pageDescription' => 'Kelola kalender jadwal dan ketersediaan'
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

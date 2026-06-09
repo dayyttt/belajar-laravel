@@ -11,12 +11,12 @@ return new class extends Migration
         Schema::table('bookings', function (Blueprint $table) {
             // Add customer relation
             if (!Schema::hasColumn('bookings', 'customer_id')) {
-                $table->foreignId('customer_id')->nullable()->constrained()->onDelete('cascade');
+                $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('cascade');
             }
             
             // Add service relation
             if (!Schema::hasColumn('bookings', 'service_id')) {
-                $table->foreignId('service_id')->nullable()->constrained()->onDelete('cascade');
+                $table->foreignId('service_id')->nullable()->constrained('services')->onDelete('cascade');
             }
             
             // Add service owner relation
@@ -24,9 +24,9 @@ return new class extends Migration
                 $table->foreignId('service_owner_id')->nullable()->constrained('users')->onDelete('set null');
             }
             
-            // Add slot relation
-            if (!Schema::hasColumn('bookings', 'slot_id')) {
-                $table->foreignId('slot_id')->nullable()->constrained()->onDelete('cascade');
+            // Add time_slot relation (instead of slot)
+            if (!Schema::hasColumn('bookings', 'time_slot_id')) {
+                $table->foreignId('time_slot_id')->nullable()->constrained('time_slots')->onDelete('set null');
             }
             
             // Add booking source
@@ -63,7 +63,7 @@ return new class extends Migration
             $table->dropForeign(['customer_id']);
             $table->dropForeign(['service_id']);
             $table->dropForeign(['service_owner_id']);
-            $table->dropForeign(['slot_id']);
+            $table->dropForeign(['time_slot_id']);
             $table->dropForeign(['created_by']);
             
             // Drop columns
@@ -71,7 +71,7 @@ return new class extends Migration
                 'customer_id',
                 'service_id', 
                 'service_owner_id',
-                'slot_id',
+                'time_slot_id',
                 'source',
                 'created_by',
                 'customer_notes',

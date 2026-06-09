@@ -25,16 +25,35 @@ use App\Http\Controllers\Admin\ServiceOwnerController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\TimeSlotController;
 use App\Http\Controllers\Admin\AvailabilityController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BookingController;
 
 
 
 
 
-Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/company/create', [HomeController::class, 'create']);
 Route::post('/company/store', [HomeController::class, 'store']);
 
-Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+// Product Pages
+Route::get('/topos', function () {
+    return view('topos');
+})->name('topos');
+
+Route::get('/topan', function () {
+    return view('topan-blog');
+})->name('topan');
+
+Route::get('/jasa-layanan', function () {
+    return view('jasa-layanan');
+})->name('jasa-layanan');
 
 Route::get('/features', function () {
     return view ('landing.features.index');
@@ -60,13 +79,19 @@ Route::get('/contacts', function () {
     return view ('contact');
 })->name('contacts.index');
 
+// ── Layanan Info — halaman detail/blog per kategori ──────────────────────────
+Route::get('/layanan-info', [\App\Http\Controllers\LayananInfoController::class, 'index'])
+    ->name('layanan-info.index');
+Route::get('/layanan-info/{slug}', [\App\Http\Controllers\LayananInfoController::class, 'show'])
+    ->name('layanan-info.show');
+
 
 // Language Switch Routes
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
-Route::get('/layanan', [LayananController::class, 'index']);
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/contact', [ContactController::class, 'index']);
-Route::get('/service', [ServiceController::class, 'index']);
+Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
+Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/service', [ServiceController::class, 'index'])->name('service');
 
 
 // Authentication Routes
@@ -118,9 +143,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('services', AdminServiceController::class)->except(['show']);
     Route::get('services/get/{service}', [ServicePackageController::class, 'getService'])
         ->name('services.get');
+    });
 
-    // Service Packages
-    Route::prefix('admin/pages/services/packages')->name('admin.pages.services.packages.')->group(function () {
+    // Service Packages - dipindahkan keluar dari admin/services
+    Route::prefix('admin/pages/services/packages')->name('admin.pages.services.packages.')->middleware(['auth'])->group(function () {
         Route::get('/', [ServicePackageController::class, 'index'])->name('index');
         Route::get('/create', [ServicePackageController::class, 'create'])->name('create');
         Route::post('/', [ServicePackageController::class, 'store'])->name('store');
@@ -128,7 +154,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/{servicePackage}/edit', [ServicePackageController::class, 'edit'])->name('edit');
         Route::put('/{servicePackage}', [ServicePackageController::class, 'update'])->name('update');
         Route::delete('/{servicePackage}', [ServicePackageController::class, 'destroy'])->name('destroy');
-    });
     });
 
 
@@ -146,6 +171,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/halaman/store', [HalamanController::class, 'store'])->name('admin.pages.manajemen.halaman.store');
     Route::put('/halaman/update', [HalamanController::class, 'update'])->name('admin.pages.manajemen.halaman.update');
     Route::delete('/halaman/destroy', [HalamanController::class, 'destroy'])->name('admin.pages.manajemen.halaman.destroy');
+
+    // Route aliases untuk kompatibilitas dengan view halaman
+    Route::post('/halaman/store', [HalamanController::class, 'store'])->name('admin.manajemen.halaman.store');
+    Route::post('/halaman/toggle-status', [HalamanController::class, 'toggleStatus'])->name('admin.manajemen.halaman.toggle-status');
+    Route::delete('/halaman/destroy', [HalamanController::class, 'destroy'])->name('admin.manajemen.halaman.destroy');
     
     Route::get('/media', [MediaController::class, 'index'])->name('admin.pages.manajemen.media.index');
     Route::get('/media/create', [MediaController::class, 'create'])->name('admin.pages.manajemen.media.create');
@@ -154,26 +184,47 @@ Route::middleware('auth')->group(function () {
     Route::delete('/media/destroy', [MediaController::class, 'destroy'])->name('admin.pages.manajemen.media.destroy');
     Route::post('/media/bulk-destroy', [MediaController::class, 'bulkDestroy'])->name('admin.pages.manajemen.media.bulk-destroy');
 
+    // Route aliases untuk kompatibilitas dengan view yang menggunakan nama pendek
+    Route::post('/media/store', [MediaController::class, 'store'])->name('admin.manajemen.media.store');
+    Route::delete('/media/destroy', [MediaController::class, 'destroy'])->name('admin.manajemen.media.destroy');
+    Route::post('/media/bulk-destroy', [MediaController::class, 'bulkDestroy'])->name('admin.manajemen.media.bulk-destroy');
+
+    // Penugasan Management
+    Route::prefix('admin/pages/penugasan')->name('admin.pages.penugasan.')->group(function () {
+        Route::get('/jadwal', function () {
+            return view('admin.pages.penugasan.jadwal.index');
+        })->name('jadwal.index');
+        
+        Route::get('/kalender', function () {
+            return view('admin.pages.penugasan.kalender.index');
+        })->name('kalender.index');
+        
+        Route::get('/assignment', function () {
+            return view('admin.pages.penugasan.assignment.index');
+        })->name('assignment.index');
+    });
+
     //produk
-    Route::resource('layanan', LayananController::class)->names([
-        'index' => 'admin.pages.produk.layanan.index',
-        'create' => 'admin.pages.produk.layanan.create',
-        'store' => 'admin.pages.produk.layanan.store',
-        'show' => 'admin.pages.produk.layanan.show',
-        'edit' => 'admin.pages.produk.layanan.edit',
-        'update' => 'admin.pages.produk.layanan.update',
-        'destroy' => 'admin.pages.produk.layanan.destroy',
-    ]);
-    
-    Route::resource('kategori', KategoriController::class)->names([
-        'index' => 'admin.pages.produk.kategori.index',
-        'create' => 'admin.pages.produk.kategori.create',
-        'store' => 'admin.pages.produk.kategori.store',
-        'show' => 'admin.pages.produk.kategori.show',
-        'edit' => 'admin.pages.produk.kategori.edit',
-        'update' => 'admin.pages.produk.kategori.update',
-        'destroy' => 'admin.pages.produk.kategori.destroy',
-    ]);
+    Route::prefix('admin/pages/produk')->name('admin.pages.produk.')->group(function () {
+        // Layanan (existing)
+        Route::resource('layanan', LayananController::class)->names([
+            'index' => 'layanan.index',
+            'create' => 'layanan.create',
+            'store' => 'layanan.store',
+            'show' => 'layanan.show',
+            'edit' => 'layanan.edit',
+            'update' => 'layanan.update',
+            'destroy' => 'layanan.destroy',
+        ]);
+        
+        // Kategori Produk
+        Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+        Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
+        Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+        Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+        Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+        Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+    });
 });
 
 //jasa owner manajemen
@@ -215,9 +266,11 @@ Route::prefix('admin/pages/ketersediaan')->name('admin.pages.ketersediaan.')->mi
         'edit' => 'time-slots.edit',
         'update' => 'time-slots.update',
         'destroy' => 'time-slots.destroy',
+        'confirm' => 'time-slots.confirm',
+        'cancel' => 'time-slots.cancel',
     ]);
     // Other routes...
-    Route::get('/calendar', [ScheduleController::class, 'calendar'])->name('admin.pages.ketersediaan.calendar');
+    Route::get('/availability/calendar', [ScheduleController::class, 'calendar'])->name('availability.calendar');
     Route::get('schedules/{schedule}/generate-slots', [ScheduleController::class, 'generateSlots'])
         ->name('admin.pages.ketersediaan.schedules.generate-slots.get');
     
@@ -252,12 +305,13 @@ Route::prefix('admin/pages/transaksi')->name('admin.pages.transaksi.')->middlewa
 
 // Reports
 Route::prefix('admin/pages/laporan')->name('admin.pages.laporan.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [ReportController::class, 'index'])->name('index');
     Route::get('/owner-revenue', [ReportController::class, 'ownerRevenue'])->name('owner-revenue');
     Route::get('/payment-summary', [ReportController::class, 'paymentSummary'])->name('payment-summary');
 });
 
 // Booking Manual
-Route::prefix('admin/pages/booking')->name('admin.pages.booking.')->group(function () {
+Route::prefix('admin/pages/booking')->name('admin.pages.booking.')->middleware('auth')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('index');
     Route::get('/create', [BookingController::class, 'create'])->name('create');
     Route::post('/', [BookingController::class, 'store'])->name('store');

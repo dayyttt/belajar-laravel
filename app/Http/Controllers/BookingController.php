@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\BookingActivity;
 use App\Models\Customer;
 use App\Models\Service;
-use App\Models\Slot;
+use App\Models\ServiceOwner;
+use App\Models\Timeslot;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,20 +15,46 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // Middleware auth sudah diterapkan di route level
 
     public function index(Request $request)
     {
-        $query = Booking::with(['customer', 'service', 'serviceOwner', 'slot', 'createdBy'])
+        $query = Booking::with(['customer', 'service', 'serviceOwner', 'timeSlot', 'createdBy'])
             ->orderBy('booking_date', 'desc')
             ->orderBy('start_time', 'desc');
+
+        // Filter by search term
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('booking_number', 'like', "%{$search}%")
+                  ->orWhere('customer_name', 'like', "%{$search}%")
+                  ->orWhereHas('service', function($sq) use ($search) {
+                      $sq->where('name', 'like', "%{$search}%");
+                  });
+            });
+        }
 
         // Filter by status
         if ($request->filled('status')) {
             $query->byStatus($request->status);
+        }
+
+        // Filter by payment status
+        if ($request->filled('payment_status')) {
+            if ($request->payment_status === 'paid') {
+                $query->whereHas('payment', function($q) {
+                    $q->where('status', 'completed');
+                });
+            } elseif ($request->payment_status === 'unpaid') {
+                $query->whereDoesntHave('payment')->orWhereHas('payment', function($q) {
+                    $q->where('status', '!=', 'completed');
+                });
+            } elseif ($request->payment_status === 'refunded') {
+                $query->whereHas('payment', function($q) {
+                    $q->where('status', 'refunded');
+                });
+            }
         }
 
         // Filter by source
@@ -51,7 +77,7 @@ class BookingController extends Controller
         }
 
         $bookings = $query->paginate(25);
-        $serviceOwners = User::where('role', 'service_owner')->get();
+        $serviceOwners = ServiceOwner::active()->get();
 
         return view('admin.pages.booking.index', compact('bookings', 'serviceOwners'));
     }
@@ -60,7 +86,7 @@ class BookingController extends Controller
     {
         $customers = Customer::orderBy('name')->get();
         $services = Service::with('owner')->orderBy('name')->get();
-        $serviceOwners = User::where('role', 'service_owner')->get();
+        $serviceOwners = ServiceOwner::active()->get();
 
         return view('admin.pages.booking.create', compact('customers', 'services', 'serviceOwners'));
     }
@@ -74,7 +100,7 @@ class BookingController extends Controller
             'customer_phone' => 'required|string|max:20',
             'service_id' => 'nullable|exists:services,id',
             'service_owner_id' => 'nullable|exists:users,id',
-            'slot_id' => 'nullable|exists:slots,id',
+            'time_slot_id' => 'nullable|exists:time_slots,id',
             'booking_date' => 'required|date|after_or_equal:today',
             'start_time' => 'required',
             'end_time' => 'required|after:start_time',
@@ -94,7 +120,7 @@ class BookingController extends Controller
                 'customer_phone' => $validated['customer_phone'],
                 'service_id' => $validated['service_id'],
                 'service_owner_id' => $validated['service_owner_id'],
-                'slot_id' => $validated['slot_id'],
+                'time_slot_id' => $validated['time_slot_id'],
                 'booking_date' => $validated['booking_date'],
                 'start_time' => $validated['start_time'],
                 'end_time' => $validated['end_time'],
@@ -139,7 +165,7 @@ class BookingController extends Controller
     {
         $customers = Customer::orderBy('name')->get();
         $services = Service::with('owner')->orderBy('name')->get();
-        $serviceOwners = User::where('role', 'service_owner')->get();
+        $serviceOwners = ServiceOwner::active()->get();
 
         return view('admin.pages.booking.edit', compact('booking', 'customers', 'services', 'serviceOwners'));
     }
@@ -153,7 +179,7 @@ class BookingController extends Controller
             'customer_phone' => 'required|string|max:20',
             'service_id' => 'nullable|exists:services,id',
             'service_owner_id' => 'nullable|exists:users,id',
-            'slot_id' => 'nullable|exists:slots,id',
+            'time_slot_id' => 'nullable|exists:time_slots,id',
             'booking_date' => 'required|date|after_or_equal:today',
             'start_time' => 'required',
             'end_time' => 'required|after:start_time',
@@ -254,19 +280,19 @@ class BookingController extends Controller
     }
 
     // API methods for dynamic loading
-    public function getAvailableSlots(Request $request)
+    public function getAvailableTimeSlots(Request $request)
     {
         $date = $request->date;
         $serviceId = $request->service_id;
 
-        $slots = Slot::whereDate('date', $date)
+        $timeslots = TimeSlot::whereDate('date', $date)
             ->where('service_id', $serviceId)
             ->where('is_available', true)
             ->where('booked_by', null)
             ->orderBy('start_time')
             ->get();
 
-        return response()->json($slots);
+        return response()->json($timeslots);
     }
 
     public function getServicesByOwner($ownerId)

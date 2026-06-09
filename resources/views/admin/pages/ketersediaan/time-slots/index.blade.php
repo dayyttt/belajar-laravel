@@ -193,7 +193,7 @@
                     <i class="fas fa-clock fa-3x text-gray-300 mb-3"></i>
                     <h5 class="text-gray-400">Belum ada data time slots</h5>
                     <p class="text-gray-400">Generate time slots dari jadwal untuk memulai</p>
-                    <a href="{{ route('admin.schedules.index') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.pages.ketersediaan.schedules.index') }}" class="btn btn-primary">
                         <i class="fas fa-calendar-alt mr-2"></i> Lihat Jadwal
                     </a>
                 </div>

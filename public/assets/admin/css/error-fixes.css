@@ -1,0 +1,76 @@
+/* Error Fixes CSS - Untuk menyembunyikan elemen yang menyebabkan JS error */
+
+/* Hide chart containers that don't have data */
+.ct-chart:empty,
+.ct-pie-chart:empty,
+.ct-svg-chart:empty,
+.ct-bar-chart:empty {
+    display: none !important;
+}
+
+/* Hide weather widget if API fails */
+#weather-one:empty::after {
+    content: "Weather service unavailable";
+    display: block;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+    padding: 1rem;
+}
+
+/* Hide datamap container if library fails */
+#world-datamap:empty::after {
+    content: "World map unavailable";
+    display: block;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+    padding: 2rem;
+    border: 1px dashed #dee2e6;
+    border-radius: 0.375rem;
+}
+
+/* Loading states */
+.chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: #6c757d;
+}
+
+.chart-loading::before {
+    content: "Loading chart...";
+    font-size: 0.875rem;
+}
+
+/* Error states */
+.chart-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: #dc3545;
+    background-color: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 0.375rem;
+}
+
+.chart-error::before {
+    content: "Chart unavailable";
+    font-size: 0.875rem;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .ct-chart,
+    .ct-pie-chart,
+    .ct-svg-chart,
+    .ct-bar-chart {
+        min-height: 150px;
+    }
+    
+    #world-datamap {
+        min-height: 200px;
+    }
+}

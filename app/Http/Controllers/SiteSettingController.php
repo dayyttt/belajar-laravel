@@ -10,7 +10,11 @@ class SiteSettingController extends Controller
 {
     public function edit()
     {
-        $settings = SiteSetting::firstOrCreate([]);
+        $settings = SiteSetting::firstOrCreate([], [
+            'site_name' => 'TokiToki',
+            'primary_color' => '#10b981',
+            'secondary_color' => '#6b7280'
+        ]);
         return view('admin.pages.content.settings.edit', compact('settings'));
     }
 
@@ -32,7 +36,11 @@ class SiteSettingController extends Controller
             'youtube' => 'nullable|url|max:255',
         ]);
 
-        $settings = SiteSetting::firstOrNew([]);
+        $settings = SiteSetting::firstOrNew([], [
+            'site_name' => 'TokiToki',
+            'primary_color' => '#10b981',
+            'secondary_color' => '#6b7280'
+        ]);
 
         // Handle logo upload
         if ($request->hasFile('logo')) {

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\ServiceOwner;
@@ -11,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
+    public function index(Request $request)
+    {
+        return view('admin.components.generic-page', [
+            'pageTitle' => 'Laporan',
+            'pageDescription' => 'Kelola laporan dan analitik TokiToki'
+        ]);
+    }
+
     public function ownerRevenue(Request $request)
     {
         $query = ServiceOwner::with(['services.bookings.invoice'])

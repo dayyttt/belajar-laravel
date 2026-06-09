@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('site_name');
+            $table->string('site_name')->default('TokiToki');
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
-            $table->string('primary_color')->default('#3490dc');
-            $table->string('secondary_color')->default('#6c757d');
+            $table->string('primary_color')->default('#10b981');
+            $table->string('secondary_color')->default('#6b7280');
             $table->string('phone')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('email')->nullable();

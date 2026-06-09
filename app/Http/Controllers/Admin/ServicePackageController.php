@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\ServiceOwner;
 use App\Models\ServicePackage;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ServicePackageController extends Controller
     public function create()
     {
         $services = Service::where('is_active', true)->get();
-        $owners = User::role('service_owner')->get();
+        $owners = ServiceOwner::active()->get();
         
         return view('admin.pages.services.packages.create', compact('services', 'owners'));
     }
@@ -62,7 +63,7 @@ class ServicePackageController extends Controller
             }
         });
 
-        return redirect()->route('admin.services.service-packages.index')
+        return redirect()->route('admin.pages.services.packages.index')
             ->with('success', 'Paket layanan berhasil ditambahkan');
     }
 
@@ -70,7 +71,7 @@ class ServicePackageController extends Controller
     {
         $servicePackage->load('services');
         $services = Service::where('is_active', true)->get();
-        $owners = User::role('service_owner')->get();
+        $owners = ServiceOwner::active()->get();
         
         return view('admin.pages.services.packages.edit', compact('servicePackage', 'services', 'owners'));
     }
@@ -113,7 +114,7 @@ class ServicePackageController extends Controller
             }
         });
 
-        return redirect()->route('admin.services.service-packages.index')
+        return redirect()->route('admin.pages.services.packages.index')
             ->with('success', 'Paket layanan berhasil diperbarui');
     }
 
@@ -122,7 +123,7 @@ class ServicePackageController extends Controller
         $servicePackage->services()->detach();
         $servicePackage->delete();
         
-        return redirect()->route('admin.services.service-packages.index')
+        return redirect()->route('admin.pages.services.packages.index')
             ->with('success', 'Paket layanan berhasil dihapus');
     }
 

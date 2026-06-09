@@ -15,14 +15,17 @@ class Booking extends Model
         'customer_phone',
         'service_id',
         'service_owner_id',
-        'slot_id',
+        'time_slot_id',
+        'booking_number',
         'booking_date',
         'start_time',
         'end_time',
+        'duration',
         'notes',
         'customer_notes',
         'internal_notes',
         'status',
+        'payment_status',
         'source',
         'created_by',
         'total_amount',
@@ -59,9 +62,14 @@ class Booking extends Model
         return $this->belongsTo(User::class, 'service_owner_id');
     }
 
+    public function timeSlot(): BelongsTo
+    {
+        return $this->belongsTo(TimeSlot::class, 'time_slot_id');
+    }
+
     public function slot(): BelongsTo
     {
-        return $this->belongsTo(Slot::class);
+        return $this->belongsTo(TimeSlot::class, 'time_slot_id');
     }
 
     public function createdBy(): BelongsTo
@@ -90,10 +98,11 @@ class Booking extends Model
     {
         $labels = [
             'draft' => 'Draft',
-            'waiting_confirmation' => 'Menunggu Konfirmasi',
+            'waiting_confirmation' => 'Menunggu',
             'confirmed' => 'Dikonfirmasi',
+            'in_progress' => 'Proses',
             'completed' => 'Selesai',
-            'cancelled' => 'Dibatalkan'
+            'cancelled' => 'Batal'
         ];
 
         return $labels[$this->status] ?? $this->status;
@@ -123,6 +132,17 @@ class Booking extends Model
         ];
 
         return $labels[$this->source] ?? $this->source;
+    }
+
+    public function getPaymentStatusLabelAttribute()
+    {
+        $labels = [
+            'unpaid' => 'Belum Bayar',
+            'paid' => 'Lunas',
+            'refunded' => 'Dikembalikan'
+        ];
+
+        return $labels[$this->payment_status] ?? 'Belum Bayar';
     }
 
     public function getFormattedAmountAttribute()
