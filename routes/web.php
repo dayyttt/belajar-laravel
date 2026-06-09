@@ -32,10 +32,6 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BookingController;
 
 
-
-
-
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/company/create', [HomeController::class, 'create']);
 Route::post('/company/store', [HomeController::class, 'store']);
@@ -92,6 +88,10 @@ Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/service', [ServiceController::class, 'index'])->name('service');
+Route::get('/layanan', [LayananController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/contact', [ContactController::class, 'index']);
+Route::get('/service', [ServiceController::class, 'index']);
 
 
 // Authentication Routes
@@ -147,6 +147,8 @@ Route::middleware('auth')->group(function () {
 
     // Service Packages - dipindahkan keluar dari admin/services
     Route::prefix('admin/pages/services/packages')->name('admin.pages.services.packages.')->middleware(['auth'])->group(function () {
+    // Service Packages
+    Route::prefix('admin/pages/services/packages')->name('admin.pages.services.packages.')->group(function () {
         Route::get('/', [ServicePackageController::class, 'index'])->name('index');
         Route::get('/create', [ServicePackageController::class, 'create'])->name('create');
         Route::post('/', [ServicePackageController::class, 'store'])->name('store');
@@ -155,9 +157,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/{servicePackage}', [ServicePackageController::class, 'update'])->name('update');
         Route::delete('/{servicePackage}', [ServicePackageController::class, 'destroy'])->name('destroy');
     });
-
-
-
+    });
     //majemen   
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('admin.pages.manajemen.artikel.index');
     Route::get('/artikel/create', [ArtikelController::class, 'create'])->name('admin.pages.manajemen.artikel.create');
@@ -266,11 +266,15 @@ Route::prefix('admin/pages/ketersediaan')->name('admin.pages.ketersediaan.')->mi
         'edit' => 'time-slots.edit',
         'update' => 'time-slots.update',
         'destroy' => 'time-slots.destroy',
+
         'confirm' => 'time-slots.confirm',
         'cancel' => 'time-slots.cancel',
     ]);
+
     // Other routes...
     Route::get('/availability/calendar', [ScheduleController::class, 'calendar'])->name('availability.calendar');
+    Route::get('/calendar', [ScheduleController::class, 'calendar'])->name('admin.pages.ketersediaan.calendar');
+
     Route::get('schedules/{schedule}/generate-slots', [ScheduleController::class, 'generateSlots'])
         ->name('admin.pages.ketersediaan.schedules.generate-slots.get');
     
