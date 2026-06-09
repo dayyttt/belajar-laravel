@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Landing Page TokiToki</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 50px 40px; text-align: center; }
+        header h1 { font-size: 2.8em; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        header p { font-size: 1.3em; opacity: 0.95; }
+        nav { background: #f8f9fa; padding: 20px; border-bottom: 3px solid #667eea; position: sticky; top: 0; z-index: 100; }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        nav a { color: #667eea; text-decoration: none; padding: 10px 18px; border-radius: 25px; transition: all 0.3s; font-weight: 600; }
+        nav a:hover { background: #667eea; color: white; transform: translateY(-2px); }
+        .content { padding: 50px; }
+        section { margin-bottom: 60px; scroll-margin-top: 100px; }
+        h2 { color: #667eea; font-size: 2.2em; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 4px solid #667eea; }
+        h3 { color: #764ba2; font-size: 1.6em; margin: 30px 0 20px 0; }
+        .page-box { background: #f8f9fa; padding: 30px; margin: 25px 0; border-radius: 12px; border-left: 6px solid #667eea; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin: 30px 0; }
+        .feature-card { background: white; border: 2px solid #e9ecef; padding: 25px; border-radius: 15px; transition: all 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); border-color: #667eea; }
+        .feature-card .icon { font-size: 3em; margin-bottom: 15px; }
+        .feature-card h4 { color: #667eea; margin-bottom: 10px; }
+        .info-box { background: #d1ecf1; border-left: 6px solid #17a2b8; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .tip-box { background: #e7e3fc; border-left: 6px solid #764ba2; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        ul.checklist { list-style: none; padding-left: 0; }
+        ul.checklist li { padding: 12px 12px 12px 45px; margin: 8px 0; background: #f8f9fa; border-radius: 8px; position: relative; }
+        ul.checklist li:before { content: "✓"; position: absolute; left: 15px; color: #28a745; font-weight: bold; font-size: 1.3em; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; }
+        th { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: left; font-weight: 600; }
+        td { padding: 15px; border-bottom: 1px solid #e9ecef; }
+        tr:hover { background: #f8f9fa; }
+        footer { background: #2d2d2d; color: white; text-align: center; padding: 40px; }
+        @media (max-width: 768px) { header h1 { font-size: 2em; } nav ul { flex-direction: column; } .content { padding: 25px; } .feature-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📱 Dokumentasi Landing Page</h1>
+            <p>Panduan Lengkap Halaman Landing TokiToki</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#product">Product</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#features">Features</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <section id="overview">
+                <h2>🎯 Overview Landing Page</h2>
+                <p style="font-size: 1.1em; margin-bottom: 30px;">
+                    Landing page TokiToki dirancang untuk memberikan pengalaman pengguna yang optimal dengan design modern, 
+                    responsif, dan informatif. Setiap halaman memiliki tujuan spesifik untuk memandu pengunjung.
+                </p>
+
+                <h3>🌟 Struktur Halaman</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">🏠</span>
+                        <h4>Home</h4>
+                        <p>Halaman utama dengan hero section, fitur unggulan, layanan, dan testimoni</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">ℹ️</span>
+                        <h4>About</h4>
+                        <p>Informasi tentang perusahaan, visi, misi, nilai, dan tim</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">📦</span>
+                        <h4>Product</h4>
+                        <p>Katalog layanan dan produk yang ditawarkan</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">📞</span>
+                        <h4>Contact</h4>
+                        <p>Form kontak, informasi lokasi, dan cara menghubungi</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="home">
+                <h2>🏠 Halaman Home</h2>
+                
+                <h3>1️⃣ Hero Section</h3>
+                <div class="page-box">
+                    <h4>Komponen Utama:</h4>
+                    <ul class="checklist">
+                        <li>Background slideshow dengan gambar menarik</li>
+                        <li>Headline besar: "Setiap kebutuhanmu, kini bisa terpenuhi lewat satu aplikasi"</li>
+                        <li>Subtitle deskriptif tentang layanan TokiToki</li>
+                        <li>2 CTA Button: "Lihat Fitur" dan "Mulai Gratis"</li>
+                        <li>Scroll indicator animasi</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Tips Design:</strong> Hero section menggunakan gradient overlay untuk meningkatkan readability text di atas gambar background.
+                </div>
+
+                <h3>2️⃣ Features Section</h3>
+                <div class="page-box">
+                    <h4>6 Fitur Unggulan:</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fitur</th>
+                                <th>Icon</th>
+                                <th>Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Super Cepat</td>
+                                <td>⚡</td>
+                                <td>Performa optimal dengan teknologi canggih</td>
+                            </tr>
+                            <tr>
+                                <td>Keamanan Perusahaan</td>
+                                <td>🔒</td>
+                                <td>Enkripsi end-to-end tingkat bank</td>
+                            </tr>
+                            <tr>
+                                <td>Waktu Aktif 99.9%</td>
+                                <td>❤️</td>
+                                <td>Layanan andal tanpa downtime</td>
+                            </tr>
+                            <tr>
+                                <td>Harga Terjangkau</td>
+                                <td>💰</td>
+                                <td>Paket fleksibel sesuai kebutuhan</td>
+                            </tr>
+                            <tr>
+                                <td>Dukungan 24/7</td>
+                                <td>👥</td>
+                                <td>Tim support siap membantu kapan saja</td>
+                            </tr>
+                            <tr>
+                                <td>Inovasi Terdepan</td>
+                                <td>🚀</td>
+                                <td>Teknologi terbaru dan fitur inovatif</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>3️⃣ Quick Stats</h3>
+                <div class="page-box">
+                    <h4>Statistik Menarik:</h4>
+                    <ul class="checklist">
+                        <li>100+ Layanan Tersedia</li>
+                        <li>500+ Mitra Profesional</li>
+                        <li>99.9% Sistem Aman & Aktif</li>
+                    </ul>
+                </div>
+
+                <h3>4️⃣ Services Section</h3>
+                <div class="page-box">
+                    <h4>8 Kategori Layanan:</h4>
+                    <ol style="padding-left: 20px; line-height: 2;">
+                        <li><strong>Lokasi Terdekat</strong> - Pencarian layanan terdekat</li>
+                        <li><strong>Rumah Tangga</strong> - Perawatan hunian</li>
+                        <li><strong>Elektronik</strong> - Gadget dan teknologi</li>
+                        <li><strong>Kendaraan</strong> - Perawatan dan rental</li>
+                        <li><strong>Kesehatan</strong> - Konsultasi dan obat</li>
+                        <li><strong>Pendidikan</strong> - Kursus dan sertifikasi</li>
+                        <li><strong>Bisnis & IT</strong> - Solusi teknologi</li>
+                        <li><strong>Lainnya</strong> - Layanan khusus</li>
+                    </ol>
+                </div>
+
+                <h3>5️⃣ Testimoni Section</h3>
+                <div class="page-box">
+                    <h4>Komponen:</h4>
+                    <ul class="checklist">
+                        <li>Card testimoni dengan avatar</li>
+                        <li>Rating bintang 5</li>
+                        <li>Nama dan quote pelanggan</li>
+                        <li>Layout grid responsif</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="about">
+                <h2>ℹ️ Halaman About</h2>
+                
+                <h3>1️⃣ Hero Header</h3>
+                <div class="page-box">
+                    <h4>Elemen Utama:</h4>
+                    <ul class="checklist">
+                        <li>Background gradient purple-pink</li>
+                        <li>Animated background circles</li>
+                        <li>Badge "Tentang Kami"</li>
+                        <li>Headline: "Membangun Masa Depan Bersama"</li>
+                        <li>Counter statistik (1000+ users, 50+ mitra, dll)</li>
+                        <li>CTA button "Pelajari Lebih Lanjut"</li>
+                    </ul>
+                </div>
+
+                <h3>2️⃣ Story Section</h3>
+                <div class="page-box">
+                    <h4>Konten:</h4>
+                    <ul class="checklist">
+                        <li>Deskripsi perusahaan</li>
+                        <li>Visual "Cerita Kami" dengan icon</li>
+                        <li>Visi: Menjadi platform terdepan</li>
+                        <li>Misi: 5 poin misi perusahaan</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <strong>ℹ️ Visi:</strong> Menjadi platform terdepan yang memberdayakan setiap tangan terampil Indonesia.
+                </div>
+
+                <h3>3️⃣ Values Section</h3>
+                <div class="page-box">
+                    <h4>4 Nilai Utama:</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nilai</th>
+                                <th>Icon</th>
+                                <th>Deskripsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Integritas</td>
+                                <td>✓</td>
+                                <td>Standar etika tertinggi dan transparansi</td>
+                            </tr>
+                            <tr>
+                                <td>Inovasi</td>
+                                <td>⚡</td>
+                                <td>Adopsi teknologi terdepan</td>
+                            </tr>
+                            <tr>
+                                <td>Keunggulan</td>
+                                <td>⭐</td>
+                                <td>Kualitas luar biasa di setiap proyek</td>
+                            </tr>
+                            <tr>
+                                <td>Fokus Pelanggan</td>
+                                <td>👥</td>
+                                <td>Pelanggan adalah inti dari semua</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>4️⃣ Team Section</h3>
+                <div class="page-box">
+                    <h4>Profil Tim:</h4>
+                    <ul class="checklist">
+                        <li>Avatar dengan inisial</li>
+                        <li>Nama dan posisi</li>
+                        <li>Deskripsi singkat</li>
+                        <li>Layout grid 4 kolom</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="product">
+                <h2>📦 Halaman Product</h2>
+                
+                <h3>1️⃣ Services Categories</h3>
+                <div class="page-box">
+                    <h4>8 Kategori Layanan dengan Detail:</h4>
+                    <p>Setiap kategori memiliki:</p>
+                    <ul class="checklist">
+                        <li>Gambar featured</li>
+                        <li>Badge status (Populer, Terpercaya, dll)</li>
+                        <li>Judul kategori</li>
+                        <li>Deskripsi singkat</li>
+                        <li>3 bullet points fitur</li>
+                        <li>Button "Lihat Detail" dengan gradient</li>
+                    </ul>
+                </div>
+
+                <h3>2️⃣ Why Choose Us</h3>
+                <div class="page-box">
+                    <h4>6 Alasan Memilih TokiToki:</h4>
+                    <ol style="padding-left: 20px; line-height: 2;">
+                        <li>Kualitas Terjamin - Seleksi mitra ketat</li>
+                        <li>Layanan Cepat - Respon dan penyelesaian efisien</li>
+                        <li>Harga Transparan - Tanpa biaya tersembunyi</li>
+                        <li>Support 24/7 - Customer service siap membantu</li>
+                        <li>Aman & Terpercaya - Keamanan berlapis</li>
+                        <li>Kepuasan Pelanggan - Rating tinggi</li>
+                    </ol>
+                </div>
+
+                <h3>3️⃣ CTA Section</h3>
+                <div class="page-box">
+                    <h4>Call to Action:</h4>
+                    <ul class="checklist">
+                        <li>Headline: "Siap Memulai dengan TokiToki?"</li>
+                        <li>Subtitle persuasif</li>
+                        <li>2 Button: "Mulai Sekarang" dan "Hubungi Kami"</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>📞 Halaman Contact</h2>
+                
+                <h3>1️⃣ Contact Information</h3>
+                <div class="page-box">
+                    <h4>4 Card Informasi:</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jenis</th>
+                                <th>Icon</th>
+                                <th>Informasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alamat</td>
+                                <td>📍</td>
+                                <td>Perumahan Grand Mutiara 2, Blok B1 No.1, Cileungsi, Bogor</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>✉️</td>
+                                <td>info@tokitoki.com</td>
+                            </tr>
+                            <tr>
+                                <td>WhatsApp</td>
+                                <td>💬</td>
+                                <td>+62 821-1623-7010 (Klik untuk chat)</td>
+                            </tr>
+                            <tr>
+                                <td>Jam Operasional</td>
+                                <td>⏰</td>
+                                <td>24 Jam Setiap Hari</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>2️⃣ Contact Form</h3>
+                <div class="page-box">
+                    <h4>Field Form:</h4>
+                    <ul class="checklist">
+                        <li>Nama Depan (required)</li>
+                        <li>Nama Belakang (required)</li>
+                        <li>Email (required)</li>
+                        <li>Subjek (required)</li>
+                        <li>Pesan (textarea, required)</li>
+                        <li>Button "Kirim Pesan"</li>
+                    </ul>
+                </div>
+
+                <h3>3️⃣ Social Media Links</h3>
+                <div class="page-box">
+                    <h4>Platform:</h4>
+                    <ul class="checklist">
+                        <li>TikTok - @tokitoki.tech</li>
+                        <li>Instagram</li>
+                        <li>WhatsApp</li>
+                        <li>Email</li>
+                    </ul>
+                </div>
+
+                <h3>4️⃣ Map Section</h3>
+                <div class="page-box">
+                    <h4>Google Maps Integration:</h4>
+                    <ul class="checklist">
+                        <li>Embedded Google Maps</li>
+                        <li>Overlay informasi lokasi</li>
+                        <li>Button "Buka di Maps"</li>
+                        <li>Button "Petunjuk Arah"</li>
+                        <li>3 Info card: Jam Operasional, Kontak, Parkir</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="features">
+                <h2>🎨 Fitur Design & Teknis</h2>
+                
+                <h3>1️⃣ Design System</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">🎨</span>
+                        <h4>Color Palette</h4>
+                        <p>Gradient purple-pink, green-teal, blue-indigo untuk berbagai section</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">📱</span>
+                        <h4>Responsive</h4>
+                        <p>Mobile-first design dengan breakpoints optimal</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">✨</span>
+                        <h4>Animations</h4>
+                        <p>Hover effects, transitions, dan scroll animations</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="icon">🔤</span>
+                        <h4>Typography</h4>
+                        <p>Hierarchy jelas dengan font Segoe UI</p>
+                    </div>
+                </div>
+
+                <h3>2️⃣ Komponen Reusable</h3>
+                <div class="page-box">
+                    <h4>Components:</h4>
+                    <ul class="checklist">
+                        <li>Navigation Bar - Sticky dengan dropdown language</li>
+                        <li>Footer - Informasi lengkap dan links</li>
+                        <li>Card Components - Untuk services, features, team</li>
+                        <li>Button Variants - Primary, secondary, outline</li>
+                        <li>Form Elements - Input, textarea dengan validation</li>
+                    </ul>
+                </div>
+
+                <h3>3️⃣ Interaktivitas</h3>
+                <div class="page-box">
+                    <h4>Interactive Elements:</h4>
+                    <ul class="checklist">
+                        <li>Smooth scroll navigation</li>
+                        <li>Hover animations pada cards</li>
+                        <li>Counter animation untuk statistik</li>
+                        <li>Mobile menu toggle</li>
+                        <li>Language switcher dropdown</li>
+                        <li>Form validation</li>
+                    </ul>
+                </div>
+
+                <h3>4️⃣ Performance</h3>
+                <div class="page-box">
+                    <h4>Optimasi:</h4>
+                    <ul class="checklist">
+                        <li>Lazy loading untuk gambar</li>
+                        <li>Optimized images dengan proper sizing</li>
+                        <li>Minimal JavaScript untuk fast load</li>
+                        <li>CSS animations hardware-accelerated</li>
+                        <li>Efficient gradient backgrounds</li>
+                    </ul>
+                </div>
+
+                <h3>5️⃣ SEO & Accessibility</h3>
+                <div class="page-box">
+                    <h4>Best Practices:</h4>
+                    <ul class="checklist">
+                        <li>Semantic HTML structure</li>
+                        <li>Alt text untuk semua gambar</li>
+                        <li>Meta descriptions</li>
+                        <li>Proper heading hierarchy</li>
+                        <li>Keyboard navigation support</li>
+                        <li>ARIA labels where needed</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Pro Tips:</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Gunakan gradient backgrounds untuk visual appeal</li>
+                        <li>Maintain consistent spacing (padding/margin)</li>
+                        <li>Test di berbagai device dan browser</li>
+                        <li>Optimize images sebelum upload</li>
+                        <li>Keep animations subtle dan purposeful</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <h3 style="margin-bottom: 20px;">🎉 Dokumentasi Landing Page Lengkap!</h3>
+            <p>Gunakan panduan ini sebagai referensi untuk memahami struktur dan fitur landing page TokiToki.</p>
+            <p style="margin-top: 20px;">Terakhir diupdate: Januari 2026</p>
+            <p style="margin-top: 10px;">Dibuat dengan ❤️ untuk tim TokiToki</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Highlight active nav
+        window.addEventListener('scroll', function() {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(a => {
+                a.style.background = '';
+                a.style.color = '';
+                if (a.getAttribute('href') === '#' + current) {
+                    a.style.background = '#667eea';
+                    a.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

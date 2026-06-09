@@ -27,7 +27,18 @@
                                 @forelse($banners as $banner)
                                 <tr>
                                     <td>
-                                        <img src="{{ Storage::url($banner->image) }}" alt="{{ $banner->title }}" style="max-width: 100px;">
+                                        @if($banner->image)
+                                            <img src="{{ asset('storage/' . $banner->image) }}" 
+                                                 alt="{{ $banner->title }}" 
+                                                 class="img-thumbnail" 
+                                                 style="max-width: 80px; max-height: 60px; object-fit: cover;"
+                                                 onerror="this.style.border='2px solid red'; this.alt='Error loading: {{ asset('storage/' . $banner->image) }}';">
+                                            <br><small class="text-muted">{{ asset('storage/' . $banner->image) }}</small>
+                                        @else
+                                            <div class="text-muted text-center" style="width: 80px; height: 60px; display: flex; align-items: center; justify-content: center; border: 1px dashed #ddd; border-radius: 4px;">
+                                                <i class="fas fa-image"></i>
+                                            </div>
+                                        @endif
                                     </td>
                                     <td>{{ $banner->title }}</td>
                                     <td>
@@ -37,19 +48,26 @@
                                     </td>
                                     <td>{{ $banner->order }}</td>
                                     <td>
-                                        <a href="{{ route('admin.content.banners.edit', $banner->id) }}" 
-                                           class="btn btn-sm btn-warning">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('admin.content.banners.destroy', $banner->id) }}" 
-                                              method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" 
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus banner ini?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        <div class="btn-group" role="group">
+                                            <a href="{{ route('admin.content.banners.show', $banner->id) }}" 
+                                               class="btn btn-sm btn-info" title="Lihat Detail">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('admin.content.banners.edit', $banner->id) }}" 
+                                               class="btn btn-sm btn-warning" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('admin.content.banners.destroy', $banner->id) }}" 
+                                                  method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" 
+                                                        title="Hapus"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus banner ini?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @empty

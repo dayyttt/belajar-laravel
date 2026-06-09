@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi TokiToki — Laravel 11</title>
+<style>
+  :root {
+    --green: #10b981; --green-dark: #059669; --green-light: #d1fae5;
+    --blue: #3b82f6; --blue-light: #dbeafe;
+    --purple: #8b5cf6; --purple-light: #ede9fe;
+    --orange: #f59e0b; --orange-light: #fef3c7;
+    --red: #ef4444; --red-light: #fee2e2;
+    --gray: #6b7280; --gray-light: #f3f4f6; --gray-dark: #1f2937;
+    --sidebar-w: 260px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background:#f8fafc; color:#1e293b; display:flex; min-height:100vh; }
+
+  /* SIDEBAR */
+  #sidebar {
+    width: var(--sidebar-w); background: var(--gray-dark); color:#e2e8f0;
+    position: fixed; top:0; left:0; height:100vh; overflow-y:auto;
+    display:flex; flex-direction:column; z-index:100;
+    transition: transform .3s;
+  }
+  #sidebar .logo { padding:20px 16px; border-bottom:1px solid #374151; }
+  #sidebar .logo h1 { font-size:1.2rem; color:#fff; font-weight:700; }
+  #sidebar .logo p { font-size:.7rem; color:#9ca3af; margin-top:2px; }
+  #sidebar nav { flex:1; padding:12px 0; }
+  #sidebar nav a {
+    display:flex; align-items:center; gap:10px; padding:9px 16px;
+    color:#d1d5db; text-decoration:none; font-size:.82rem; border-radius:0;
+    transition:background .15s, color .15s;
+  }
+  #sidebar nav a:hover, #sidebar nav a.active { background:#374151; color:#fff; }
+  #sidebar nav .section-label {
+    padding:14px 16px 4px; font-size:.65rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:.08em; color:#6b7280;
+  }
+  #sidebar nav .badge {
+    margin-left:auto; background:var(--green); color:#fff;
+    font-size:.6rem; padding:1px 6px; border-radius:999px; font-weight:700;
+  }
+
+  /* MAIN */
+  #main { margin-left: var(--sidebar-w); flex:1; padding:0; }
+  .hero {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+    color:#fff; padding:48px 40px 40px;
+  }
+  .hero h1 { font-size:2rem; font-weight:800; margin-bottom:8px; }
+  .hero p { color:#a7f3d0; font-size:1rem; max-width:600px; }
+  .hero .badges { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+  .hero .badge-item {
+    background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.2);
+    padding:4px 12px; border-radius:999px; font-size:.75rem; font-weight:600;
+  }
+
+  .content { padding:32px 40px; max-width:1100px; }
+  section { margin-bottom:48px; scroll-margin-top:20px; }
+  section h2 {
+    font-size:1.3rem; font-weight:700; color:var(--gray-dark);
+    border-left:4px solid var(--green); padding-left:12px; margin-bottom:20px;
+  }
+  section h3 { font-size:1rem; font-weight:700; color:var(--gray-dark); margin:20px 0 10px; }
+
+  /* CARDS */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; margin-bottom:20px; }
+  .card {
+    background:#fff; border:1px solid #e2e8f0; border-radius:10px;
+    padding:16px; transition:box-shadow .2s;
+  }
+  .card:hover { box-shadow:0 4px 12px rgba(0,0,0,.08); }
+  .card .card-icon { font-size:1.5rem; margin-bottom:8px; }
+  .card .card-title { font-size:.85rem; font-weight:700; color:var(--gray-dark); }
+  .card .card-sub { font-size:.75rem; color:var(--gray); margin-top:2px; }
+
+  /* TABLES */
+  .table-wrap { overflow-x:auto; border-radius:10px; border:1px solid #e2e8f0; margin-bottom:16px; }
+  table { width:100%; border-collapse:collapse; background:#fff; font-size:.82rem; }
+  thead tr { background:var(--gray-light); }
+  th { padding:10px 14px; text-align:left; font-weight:700; color:var(--gray-dark); font-size:.75rem; text-transform:uppercase; letter-spacing:.04em; }
+  td { padding:9px 14px; border-top:1px solid #f1f5f9; color:#374151; vertical-align:top; }
+  tr:hover td { background:#f8fafc; }
+  code { background:#f1f5f9; padding:2px 6px; border-radius:4px; font-size:.8rem; font-family:'Courier New',monospace; color:#0f172a; }
+  .method { display:inline-block; padding:2px 7px; border-radius:4px; font-size:.7rem; font-weight:700; }
+  .get { background:#dbeafe; color:#1d4ed8; }
+  .post { background:#dcfce7; color:#15803d; }
+  .put { background:#fef3c7; color:#b45309; }
+  .delete { background:#fee2e2; color:#b91c1c; }
+  .resource { background:#ede9fe; color:#6d28d9; }
+
+  /* TAGS */
+  .tag { display:inline-block; padding:2px 8px; border-radius:999px; font-size:.7rem; font-weight:600; margin:1px; }
+  .tag-green { background:var(--green-light); color:#065f46; }
+  .tag-blue { background:var(--blue-light); color:#1e40af; }
+  .tag-purple { background:var(--purple-light); color:#5b21b6; }
+  .tag-orange { background:var(--orange-light); color:#92400e; }
+  .tag-red { background:var(--red-light); color:#991b1b; }
+  .tag-gray { background:var(--gray-light); color:#374151; }
+
+  /* ACCORDION */
+  .accordion { border:1px solid #e2e8f0; border-radius:10px; overflow:hidden; margin-bottom:8px; }
+  .accordion-header {
+    background:#fff; padding:12px 16px; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center;
+    font-weight:600; font-size:.85rem; color:var(--gray-dark);
+    transition:background .15s;
+  }
+  .accordion-header:hover { background:var(--gray-light); }
+  .accordion-header .arrow { transition:transform .2s; font-size:.7rem; }
+  .accordion-body { display:none; padding:0 16px 16px; background:#fff; }
+  .accordion.open .accordion-header { background:var(--green-light); color:#065f46; }
+  .accordion.open .accordion-header .arrow { transform:rotate(180deg); }
+  .accordion.open .accordion-body { display:block; }
+
+  /* SCHEMA */
+  .schema-box {
+    background:#0f172a; color:#e2e8f0; border-radius:10px;
+    padding:16px; font-family:'Courier New',monospace; font-size:.78rem;
+    line-height:1.7; overflow-x:auto; margin-top:8px;
+  }
+  .schema-box .key { color:#93c5fd; }
+  .schema-box .type { color:#86efac; }
+  .schema-box .comment { color:#6b7280; }
+  .schema-box .fk { color:#fbbf24; }
+
+  /* FLOW */
+  .flow { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:12px 0; }
+  .flow-step {
+    background:#fff; border:1px solid #e2e8f0; border-radius:8px;
+    padding:8px 14px; font-size:.8rem; font-weight:600; color:var(--gray-dark);
+  }
+  .flow-arrow { color:var(--gray); font-size:1rem; }
+
+  /* SEARCH */
+  #search-box {
+    width:100%; padding:8px 12px; border:1px solid #374151;
+    background:#374151; color:#fff; border-radius:6px; font-size:.82rem;
+    margin:12px 0 4px; outline:none;
+  }
+  #search-box::placeholder { color:#9ca3af; }
+
+  .toc-count { font-size:.65rem; color:#9ca3af; margin-left:auto; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="logo">
+    <h1>🌿 TokiToki</h1>
+    <p>Dokumentasi Proyek Laravel 11</p>
+  </div>
+  <div style="padding:8px 12px;">
+    <input id="search-box" type="text" placeholder="🔍 Cari di dokumentasi..." oninput="searchDoc(this.value)">
+  </div>
+  <nav>
+    <div class="section-label">Overview</div>
+    <a href="#overview" onclick="setActive(this)">📋 Ringkasan Proyek</a>
+    <a href="#stack" onclick="setActive(this)">⚙️ Tech Stack</a>
+    <a href="#struktur" onclick="setActive(this)">📁 Struktur Folder</a>
+
+    <div class="section-label">Routing</div>
+    <a href="#routes-public" onclick="setActive(this)">🌐 Routes Publik <span class="badge">16</span></a>
+    <a href="#routes-admin" onclick="setActive(this)">🔒 Routes Admin <span class="badge">50+</span></a>
+
+    <div class="section-label">Backend</div>
+    <a href="#controllers" onclick="setActive(this)">🎮 Controllers <span class="badge">20</span></a>
+    <a href="#models" onclick="setActive(this)">🗄️ Models <span class="badge">22</span></a>
+    <a href="#database" onclick="setActive(this)">💾 Database Schema</a>
+
+    <div class="section-label">Frontend</div>
+    <a href="#views" onclick="setActive(this)">🖼️ Views / Blade</a>
+    <a href="#layanan-info" onclick="setActive(this)">📄 Layanan Info</a>
+
+    <div class="section-label">Fitur</div>
+    <a href="#booking-flow" onclick="setActive(this)">📅 Alur Booking</a>
+    <a href="#invoice-flow" onclick="setActive(this)">🧾 Alur Invoice</a>
+    <a href="#auth" onclick="setActive(this)">🔐 Autentikasi</a>
+  </nav>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div id="main">
+  <div class="hero">
+    <h1>📚 Dokumentasi TokiToki</h1>
+    <p>Platform marketplace jasa lokal berbasis Laravel 11. Dokumentasi lengkap routes, controllers, models, database schema, dan alur fitur.</p>
+    <div class="badges">
+      <span class="badge-item">Laravel 11.31</span>
+      <span class="badge-item">PHP 8.2</span>
+      <span class="badge-item">MySQL</span>
+      <span class="badge-item">Blade + Tailwind</span>
+      <span class="badge-item">20+ Controllers</span>
+      <span class="badge-item">22 Models</span>
+      <span class="badge-item">25+ Tabel DB</span>
+    </div>
+  </div>
+
+  <div class="content" id="doc-content">
+
+    <!-- OVERVIEW -->
+    <section id="overview">
+      <h2>📋 Ringkasan Proyek</h2>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🌿</div><div class="card-title">TokiToki</div><div class="card-sub">Platform marketplace jasa lokal</div></div>
+        <div class="card"><div class="card-icon">⚡</div><div class="card-title">Laravel 11.31</div><div class="card-sub">PHP ^8.2 · MIT License</div></div>
+        <div class="card"><div class="card-icon">🗄️</div><div class="card-title">MySQL</div><div class="card-sub">25+ tabel relasional</div></div>
+        <div class="card"><div class="card-icon">🎨</div><div class="card-title">Blade + Tailwind</div><div class="card-sub">Frontend templating</div></div>
+        <div class="card"><div class="card-icon">📅</div><div class="card-title">Booking System</div><div class="card-sub">Manual booking + time slot</div></div>
+        <div class="card"><div class="card-icon">🧾</div><div class="card-title">Invoice & Payment</div><div class="card-sub">DP, lunas, refund</div></div>
+        <div class="card"><div class="card-icon">👥</div><div class="card-title">Multi-role</div><div class="card-sub">Admin, Service Owner</div></div>
+        <div class="card"><div class="card-icon">📊</div><div class="card-title">Laporan</div><div class="card-sub">Revenue, payment summary</div></div>
+      </div>
+      <p style="color:var(--gray);font-size:.85rem;line-height:1.7;">
+        TokiToki adalah platform yang menghubungkan pelanggan dengan penyedia jasa lokal. Admin dapat mengelola booking, jadwal, invoice, pembayaran, dan laporan melalui panel admin. Frontend publik menampilkan informasi layanan, halaman tentang, dan kontak.
+      </p>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="stack">
+      <h2>⚙️ Tech Stack</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kategori</th><th>Teknologi</th><th>Versi</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td>Framework</td><td><code>laravel/framework</code></td><td>^11.31</td><td>Backend MVC</td></tr>
+            <tr><td>Runtime</td><td>PHP</td><td>^8.2</td><td>Server-side scripting</td></tr>
+            <tr><td>Database</td><td>MySQL</td><td>—</td><td>Relational database</td></tr>
+            <tr><td>Templating</td><td>Blade</td><td>Built-in</td><td>Laravel view engine</td></tr>
+            <tr><td>CSS</td><td>Tailwind CSS</td><td>CDN</td><td>Utility-first CSS</td></tr>
+            <tr><td>REPL</td><td><code>laravel/tinker</code></td><td>^2.9</td><td>Interactive shell</td></tr>
+            <tr><td>Dev Tools</td><td><code>laravel/pint</code></td><td>^1.13</td><td>Code style fixer</td></tr>
+            <tr><td>Testing</td><td><code>phpunit/phpunit</code></td><td>^11.0.1</td><td>Unit testing</td></tr>
+            <tr><td>Helper</td><td><code>app/Helpers/MoneyHelper.php</code></td><td>Custom</td><td>Format currency Rupiah</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- STRUKTUR FOLDER -->
+    <section id="struktur">
+      <h2>📁 Struktur Folder Utama</h2>
+      <div class="schema-box">
+<span class="key">C:\belajar-laravel\</span>
+├── <span class="key">app/</span>
+│   ├── <span class="type">Helpers/</span>          <span class="comment">MoneyHelper.php</span>
+│   ├── <span class="type">Http/</span>
+│   │   ├── <span class="type">Controllers/</span>   <span class="comment">20+ controllers</span>
+│   │   │   ├── <span class="type">Admin/</span>       <span class="comment">Service, Category, Package, Owner, Schedule, TimeSlot, Availability</span>
+│   │   │   └── <span class="type">Auth/</span>        <span class="comment">LoginController</span>
+│   │   └── <span class="type">Middleware/</span>    <span class="comment">SetLocale.php</span>
+│   ├── <span class="type">Models/</span>            <span class="comment">22 Eloquent models</span>
+│   └── <span class="type">Providers/</span>         <span class="comment">AppServiceProvider, AuthServiceProvider</span>
+├── <span class="key">database/</span>
+│   ├── <span class="type">migrations/</span>        <span class="comment">25+ migration files</span>
+│   └── <span class="type">seeders/</span>           <span class="comment">DatabaseSeeder, SiteSettingSeeder</span>
+├── <span class="key">resources/</span>
+│   └── <span class="type">views/</span>             <span class="comment">Blade templates</span>
+│       ├── <span class="type">layouts/</span>       <span class="comment">app, home, admin, header, footer</span>
+│       ├── <span class="type">layanan-info/</span>  <span class="comment">index, show</span>
+│       ├── <span class="type">landing/</span>       <span class="comment">features, plans, downloads, dll</span>
+│       └── <span class="type">admin/pages/</span>   <span class="comment">dashboard, booking, customers, services, dll</span>
+├── <span class="key">routes/</span>
+│   └── <span class="type">web.php</span>            <span class="comment">Semua route aplikasi</span>
+└── <span class="key">public/</span>
+    └── <span class="type">assets/</span>            <span class="comment">CSS, JS, images</span>
+      </div>
+    </section>
+
+    <!-- ROUTES PUBLIK -->
+    <section id="routes-public">
+      <h2>🌐 Routes Publik (Tanpa Auth)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>URL</th><th>Route Name</th><th>Handler</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method get">GET</span></td><td><code>/</code></td><td><code>home</code></td><td>HomeController@index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/about</code></td><td><code>about.index</code></td><td>AboutController@index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/contacts</code></td><td><code>contacts.index</code></td><td>view('contact')</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/layanan-info</code></td><td><code>layanan-info.index</code></td><td>LayananInfoController@index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/layanan-info/{slug}</code></td><td><code>layanan-info.show</code></td><td>LayananInfoController@show</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/features</code></td><td><code>features.index</code></td><td>view('landing.features.index')</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/plans</code></td><td><code>plans.index</code></td><td>view('landing.plans.index')</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/downloads</code></td><td><code>downloads.index</code></td><td>view('landing.downloads.index')</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/screenshots</code></td><td><code>screenshots.index</code></td><td>view('landing.screenshots.index')</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/testimoni</code></td><td><code>testimoni.index</code></td><td>view('landing.testimoni.index')</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/language/{locale}</code></td><td><code>language.switch</code></td><td>LanguageController@switch</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/login</code></td><td><code>login</code></td><td>LoginController@showLoginForm</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/login</code></td><td>—</td><td>LoginController@login</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/product</code></td><td>—</td><td>ProductController@index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/service</code></td><td>—</td><td>ServiceController@index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/layanan</code></td><td>—</td><td>LayananController@index</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ROUTES ADMIN -->
+    <section id="routes-admin">
+      <h2>🔒 Routes Admin (Middleware: auth)</h2>
+
+      <h3>Dashboard & Auth</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>URL</th><th>Route Name</th><th>Controller</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method get">GET</span></td><td><code>/dashboard</code></td><td><code>dashboard.index</code></td><td>DashboardController@index</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/logout</code></td><td><code>logout</code></td><td>LoginController@logout</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Booking Management</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>URL</th><th>Route Name</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/booking</code></td><td><code>admin.pages.booking.index</code></td><td>index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/booking/create</code></td><td><code>admin.pages.booking.create</code></td><td>create</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/admin/pages/booking</code></td><td><code>admin.pages.booking.store</code></td><td>store</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/booking/{id}</code></td><td><code>admin.pages.booking.show</code></td><td>show</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/booking/{id}/edit</code></td><td><code>admin.pages.booking.edit</code></td><td>edit</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><code>/admin/pages/booking/{id}</code></td><td><code>admin.pages.booking.update</code></td><td>update</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/admin/pages/booking/{id}/status</code></td><td><code>admin.pages.booking.update.status</code></td><td>updateStatus</td></tr>
+            <tr><td><span class="method delete">DELETE</span></td><td><code>/admin/pages/booking/{id}</code></td><td><code>admin.pages.booking.destroy</code></td><td>destroy</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/booking/api/slots</code></td><td><code>admin.pages.booking.api.slots</code></td><td>getAvailableSlots</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/booking/api/services/{ownerId}</code></td><td><code>admin.pages.booking.api.services</code></td><td>getServicesByOwner</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Transaksi (Invoice & Payment) — middleware: auth + admin</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>URL</th><th>Route Name</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method resource">CRUD</span></td><td><code>/admin/pages/transaksi/invoices</code></td><td><code>admin.pages.transaksi.invoices.*</code></td><td>InvoiceController</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/admin/pages/transaksi/invoices/{id}/send</code></td><td><code>admin.pages.transaksi.invoices.send</code></td><td>sendInvoice</td></tr>
+            <tr><td><span class="method resource">CRUD</span></td><td><code>/admin/pages/transaksi/payments</code></td><td><code>admin.pages.transaksi.payments.*</code></td><td>PaymentController</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/admin/pages/transaksi/payments/{id}/verify</code></td><td><code>admin.pages.transaksi.payments.verify</code></td><td>verify</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/admin/pages/transaksi/payments/{id}/reject</code></td><td><code>admin.pages.transaksi.payments.reject</code></td><td>reject</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Ketersediaan (Jadwal & Time Slot)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Resource</th><th>Base URL</th><th>Controller</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/pages/ketersediaan/availability</code></td><td>AvailabilityController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/pages/ketersediaan/schedules</code></td><td>ScheduleController</td></tr>
+            <tr><td><span class="method post">POST</span></td><td><code>/admin/pages/ketersediaan/schedules/{id}/generate-slots</code></td><td>ScheduleController@generateSlots</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/pages/ketersediaan/time-slots</code></td><td>TimeSlotController</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Manajemen Konten & Produk</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Resource</th><th>Base URL</th><th>Controller</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/content/banners</code></td><td>BannerController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/content/pages</code></td><td>StaticPageController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/content/highlights</code></td><td>ServiceHighlightController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/customers</code></td><td>CustomerController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/service-categories</code></td><td>ServiceCategoryController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/service-owners</code></td><td>ServiceOwnerController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/pages/produk/layanan</code></td><td>LayananController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/admin/pages/produk/kategori</code></td><td>KategoriController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/artikel</code></td><td>ArtikelController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/halaman</code></td><td>HalamanController</td></tr>
+            <tr><td><span class="method resource">Resource</span></td><td><code>/media</code></td><td>MediaController</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Laporan — middleware: auth + admin</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>URL</th><th>Route Name</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/laporan</code></td><td><code>admin.pages.laporan.index</code></td><td>ReportController@index</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/laporan/owner-revenue</code></td><td><code>admin.pages.laporan.owner-revenue</code></td><td>ownerRevenue</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/admin/pages/laporan/payment-summary</code></td><td><code>admin.pages.laporan.payment-summary</code></td><td>paymentSummary</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CONTROLLERS -->
+    <section id="controllers">
+      <h2>🎮 Controllers</h2>
+
+      <div class="accordion open">
+        <div class="accordion-header" onclick="toggleAcc(this)">Controllers Utama (app/Http/Controllers/) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Controller</th><th>Methods</th><th>Keterangan</th></tr></thead>
+              <tbody>
+                <tr><td><code>HomeController</code></td><td><span class="tag tag-green">index</span><span class="tag tag-blue">create</span><span class="tag tag-blue">store</span></td><td>Halaman utama, data company dari DB</td></tr>
+                <tr><td><code>AboutController</code></td><td><span class="tag tag-green">index</span></td><td>Halaman tentang kami</td></tr>
+                <tr><td><code>DashboardController</code></td><td><span class="tag tag-green">index</span></td><td>Statistik booking, revenue, chart 7 hari</td></tr>
+                <tr><td><code>BookingController</code></td><td><span class="tag tag-green">index</span><span class="tag tag-blue">create</span><span class="tag tag-blue">store</span><span class="tag tag-green">show</span><span class="tag tag-orange">edit</span><span class="tag tag-orange">update</span><span class="tag tag-orange">updateStatus</span><span class="tag tag-red">destroy</span></td><td>CRUD booking + update status + API slots</td></tr>
+                <tr><td><code>InvoiceController</code></td><td><span class="tag tag-green">index</span><span class="tag tag-blue">create</span><span class="tag tag-blue">store</span><span class="tag tag-green">show</span><span class="tag tag-orange">edit</span><span class="tag tag-orange">update</span><span class="tag tag-red">destroy</span><span class="tag tag-purple">sendInvoice</span></td><td>CRUD invoice + kirim invoice</td></tr>
+                <tr><td><code>PaymentController</code></td><td><span class="tag tag-green">index</span><span class="tag tag-blue">store</span><span class="tag tag-orange">update</span><span class="tag tag-red">destroy</span><span class="tag tag-purple">verify</span><span class="tag tag-red">reject</span></td><td>CRUD payment + verifikasi/tolak</td></tr>
+                <tr><td><code>CustomerController</code></td><td>Resource CRUD + show</td><td>Manajemen pelanggan</td></tr>
+                <tr><td><code>ReportController</code></td><td><span class="tag tag-green">index</span><span class="tag tag-green">ownerRevenue</span><span class="tag tag-green">paymentSummary</span></td><td>Laporan revenue dan pembayaran</td></tr>
+                <tr><td><code>LayananInfoController</code></td><td><span class="tag tag-green">index</span><span class="tag tag-green">show</span></td><td>8 kategori layanan statis (data di controller)</td></tr>
+                <tr><td><code>ArtikelController</code></td><td>CRUD + bulkDestroy</td><td>Manajemen artikel/blog</td></tr>
+                <tr><td><code>HalamanController</code></td><td>CRUD + toggleStatus</td><td>Manajemen halaman statis</td></tr>
+                <tr><td><code>MediaController</code></td><td>CRUD + bulkDestroy</td><td>Manajemen file media</td></tr>
+                <tr><td><code>BannerController</code></td><td>Resource CRUD</td><td>Manajemen banner homepage</td></tr>
+                <tr><td><code>SiteSettingController</code></td><td><span class="tag tag-orange">edit</span><span class="tag tag-orange">update</span></td><td>Pengaturan global situs</td></tr>
+                <tr><td><code>KategoriController</code></td><td>CRUD</td><td>Kategori produk/layanan</td></tr>
+                <tr><td><code>LayananController</code></td><td>Resource + toggleStatus</td><td>Layanan produk</td></tr>
+                <tr><td><code>LanguageController</code></td><td><span class="tag tag-green">switch</span></td><td>Ganti bahasa (locale)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">Controllers Admin (app/Http/Controllers/Admin/) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Controller</th><th>Methods</th><th>Keterangan</th></tr></thead>
+              <tbody>
+                <tr><td><code>Admin\ServiceController</code></td><td>Resource CRUD</td><td>Manajemen layanan (admin)</td></tr>
+                <tr><td><code>Admin\ServiceCategoryController</code></td><td>CRUD + reorder</td><td>Kategori layanan + urutan</td></tr>
+                <tr><td><code>Admin\ServicePackageController</code></td><td>CRUD + getService</td><td>Paket layanan bundling</td></tr>
+                <tr><td><code>Admin\ServiceOwnerController</code></td><td>CRUD</td><td>Manajemen mitra/penyedia jasa</td></tr>
+                <tr><td><code>Admin\ScheduleController</code></td><td>CRUD + calendar + generateSlots</td><td>Jadwal layanan + generate time slot</td></tr>
+                <tr><td><code>Admin\TimeSlotController</code></td><td>index, edit, update, destroy, confirm, cancel</td><td>Slot waktu booking</td></tr>
+                <tr><td><code>Admin\AvailabilityController</code></td><td>CRUD + calendar</td><td>Pengaturan ketersediaan per hari</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODELS -->
+    <section id="models">
+      <h2>🗄️ Models & Relasi</h2>
+
+      <div class="accordion open">
+        <div class="accordion-header" onclick="toggleAcc(this)">Core Models (Booking, Invoice, Payment) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Model</th><th>Tabel</th><th>Relasi</th><th>Fitur Khusus</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>Booking</code></td><td><code>bookings</code></td>
+                  <td>
+                    <span class="tag tag-blue">hasOne Payment</span>
+                    <span class="tag tag-blue">hasOne Invoice</span>
+                    <span class="tag tag-green">belongsTo Customer</span>
+                    <span class="tag tag-green">belongsTo Service</span>
+                    <span class="tag tag-green">belongsTo TimeSlot</span>
+                  </td>
+                  <td>Scopes: byStatus, bySource, byDate<br>Accessors: statusLabel, statusColor, formattedAmount</td>
+                </tr>
+                <tr>
+                  <td><code>Invoice</code></td><td><code>invoices</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo Booking</span>
+                    <span class="tag tag-green">belongsTo Customer</span>
+                    <span class="tag tag-blue">hasMany Payment</span>
+                  </td>
+                  <td>generateInvoiceNumber(), updatePaymentStatus()<br>Accessors: paidAmount, remainingAmount</td>
+                </tr>
+                <tr>
+                  <td><code>Payment</code></td><td><code>payments</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo Invoice</span>
+                    <span class="tag tag-green">belongsTo Booking</span>
+                  </td>
+                  <td>Scopes: byMethod, completed<br>Status: pending/completed/failed/refunded</td>
+                </tr>
+                <tr>
+                  <td><code>Customer</code></td><td><code>customers</code></td>
+                  <td><span class="tag tag-blue">hasMany Booking</span></td>
+                  <td>SoftDeletes, preferences (JSON)</td>
+                </tr>
+                <tr>
+                  <td><code>BookingActivity</code></td><td><code>booking_activities</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo Booking</span>
+                    <span class="tag tag-green">belongsTo User</span>
+                  </td>
+                  <td>Audit trail: old_values, new_values (JSON)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">Service Models (Service, Owner, Schedule, TimeSlot) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Model</th><th>Tabel</th><th>Relasi</th><th>Fitur Khusus</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>Service</code></td><td><code>services</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo Kategori</span>
+                    <span class="tag tag-green">belongsTo ServiceOwner</span>
+                    <span class="tag tag-blue">hasMany Booking</span>
+                  </td>
+                  <td>Scopes: active, byCategory, byOwner<br>price_unit: session/hour/day</td>
+                </tr>
+                <tr>
+                  <td><code>ServiceOwner</code></td><td><code>service_owners</code></td>
+                  <td>
+                    <span class="tag tag-blue">hasMany Service</span>
+                    <span class="tag tag-green">belongsTo Kategori</span>
+                  </td>
+                  <td>Scopes: active, verified, pending<br>commission_rate, rating, total_revenue</td>
+                </tr>
+                <tr>
+                  <td><code>ServiceCategory</code></td><td><code>service_categories</code></td>
+                  <td><span class="tag tag-blue">hasMany Service</span></td>
+                  <td>SoftDeletes, display_order</td>
+                </tr>
+                <tr>
+                  <td><code>ServicePackage</code></td><td><code>service_packages</code></td>
+                  <td><span class="tag tag-purple">belongsToMany Service</span> (pivot: package_service)</td>
+                  <td>Pivot: quantity, discount_amount<br>SoftDeletes, valid_until</td>
+                </tr>
+                <tr>
+                  <td><code>Schedule</code></td><td><code>schedules</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo Service</span>
+                    <span class="tag tag-green">belongsTo ServiceOwner</span>
+                    <span class="tag tag-blue">hasMany TimeSlot</span>
+                  </td>
+                  <td>generateTimeSlots(), is_recurring, recurring_pattern (JSON)</td>
+                </tr>
+                <tr>
+                  <td><code>TimeSlot</code></td><td><code>time_slots</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo Schedule</span>
+                    <span class="tag tag-green">belongsTo User (bookedBy)</span>
+                  </td>
+                  <td>Scopes: available, booked, forDate<br>Status: available/booked/confirmed/cancelled/blocked</td>
+                </tr>
+                <tr>
+                  <td><code>AvailabilitySetting</code></td><td><code>availability_settings</code></td>
+                  <td>
+                    <span class="tag tag-green">belongsTo ServiceOwner</span>
+                    <span class="tag tag-green">belongsTo Service</span>
+                  </td>
+                  <td>getDaysOfWeek() static, slot_duration_minutes, break_duration_minutes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">Content Models (Artikel, Halaman, Media, Banner, dll) <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Model</th><th>Tabel</th><th>Fitur</th></tr></thead>
+              <tbody>
+                <tr><td><code>Artikel</code></td><td><code>artikel</code></td><td>Auto-slug, Scopes: published/draft/recent, belongsTo User</td></tr>
+                <tr><td><code>Halaman</code></td><td><code>halaman</code></td><td>Route key: slug, Scopes: published/draft, belongsTo User</td></tr>
+                <tr><td><code>Media</code></td><td><code>media</code></td><td>isImage/isVideo/isAudio/isDocument, belongsTo User</td></tr>
+                <tr><td><code>Banner</code></td><td><code>banners</code></td><td>title, image, order, is_active, button_text, button_url</td></tr>
+                <tr><td><code>StaticPage</code></td><td><code>static_pages</code></td><td>Halaman statis CMS</td></tr>
+                <tr><td><code>SiteSetting</code></td><td><code>site_settings</code></td><td>Pengaturan global: nama, logo, warna, kontak, sosmed</td></tr>
+                <tr><td><code>ServiceHighlight</code></td><td><code>service_highlights</code></td><td>Highlight layanan di homepage</td></tr>
+                <tr><td><code>Layanan</code></td><td><code>layanan</code></td><td>features (JSON), belongsTo Kategori</td></tr>
+                <tr><td><code>Kategori</code></td><td><code>kategori</code></td><td>Scope: active, icon, hasMany Service</td></tr>
+                <tr><td><code>User</code></td><td><code>users</code></td><td>Authenticatable, Notifiable</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DATABASE -->
+    <section id="database">
+      <h2>💾 Database Schema</h2>
+
+      <div class="accordion open">
+        <div class="accordion-header" onclick="toggleAcc(this)">Tabel: bookings <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="schema-box">
+<span class="key">bookings</span> {
+  <span class="key">id</span>               <span class="type">bigint</span> PK
+  <span class="key">booking_number</span>   <span class="type">string</span>
+  <span class="fk">customer_id</span>      <span class="type">FK → customers.id</span>
+  <span class="key">customer_name</span>    <span class="type">string</span>
+  <span class="key">customer_email</span>   <span class="type">string</span>
+  <span class="key">customer_phone</span>   <span class="type">string</span>
+  <span class="fk">service_id</span>       <span class="type">FK → services.id</span>
+  <span class="fk">service_owner_id</span> <span class="type">FK → users.id</span>
+  <span class="fk">time_slot_id</span>     <span class="type">FK → time_slots.id</span>
+  <span class="key">booking_date</span>     <span class="type">date</span>
+  <span class="key">start_time</span>       <span class="type">time</span>
+  <span class="key">end_time</span>         <span class="type">time</span>
+  <span class="key">duration</span>         <span class="type">integer</span>
+  <span class="key">status</span>           <span class="type">enum</span> <span class="comment">draft|waiting_confirmation|confirmed|in_progress|completed|cancelled</span>
+  <span class="key">payment_status</span>   <span class="type">enum</span> <span class="comment">unpaid|paid|refunded</span>
+  <span class="key">source</span>           <span class="type">enum</span> <span class="comment">manual|whatsapp|phone|app|website</span>
+  <span class="key">total_amount</span>     <span class="type">decimal(10,2)</span>
+  <span class="key">notes</span>            <span class="type">text</span>
+  <span class="key">customer_notes</span>   <span class="type">text</span>
+  <span class="key">internal_notes</span>   <span class="type">text</span>
+  <span class="fk">created_by</span>       <span class="type">FK → users.id</span>
+  <span class="key">timestamps</span>
+}
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">Tabel: invoices <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="schema-box">
+<span class="key">invoices</span> {
+  <span class="key">id</span>                <span class="type">bigint</span> PK
+  <span class="key">invoice_number</span>    <span class="type">string</span> UNIQUE
+  <span class="fk">booking_id</span>        <span class="type">FK → bookings.id</span> nullable
+  <span class="fk">customer_id</span>       <span class="type">FK → customers.id</span> nullable
+  <span class="key">customer_name</span>     <span class="type">string</span>
+  <span class="key">subtotal</span>          <span class="type">decimal(12,2)</span>
+  <span class="key">additional_fee</span>    <span class="type">decimal(12,2)</span>
+  <span class="key">discount</span>          <span class="type">decimal(12,2)</span>
+  <span class="key">tax</span>               <span class="type">decimal(12,2)</span>
+  <span class="key">total_amount</span>      <span class="type">decimal(12,2)</span>
+  <span class="key">status</span>            <span class="type">enum</span> <span class="comment">draft|sent|partial|paid|overdue|cancelled</span>
+  <span class="key">payment_status</span>    <span class="type">enum</span> <span class="comment">unpaid|dp|paid</span>
+  <span class="key">invoice_date</span>      <span class="type">date</span>
+  <span class="key">due_date</span>          <span class="type">date</span>
+  <span class="key">notes</span>             <span class="type">text</span>
+  <span class="key">terms_conditions</span>  <span class="type">text</span>
+  <span class="fk">created_by</span>        <span class="type">FK → users.id</span>
+  <span class="key">timestamps</span>
+}
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">Tabel: services & service_owners <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="schema-box">
+<span class="key">services</span> {
+  <span class="key">id</span>             <span class="type">bigint</span> PK
+  <span class="key">name</span>           <span class="type">string</span>
+  <span class="fk">category_id</span>    <span class="type">FK → service_categories.id</span>
+  <span class="key">description</span>    <span class="type">text</span>
+  <span class="key">duration</span>       <span class="type">integer</span> <span class="comment">in minutes</span>
+  <span class="key">base_price</span>     <span class="type">decimal(12,2)</span>
+  <span class="key">price_unit</span>     <span class="type">enum</span> <span class="comment">session|hour|day</span>
+  <span class="key">is_active</span>      <span class="type">boolean</span>
+  <span class="fk">owner_id</span>       <span class="type">FK → users.id</span>
+  <span class="key">image_path</span>     <span class="type">string</span>
+  <span class="key">deleted_at</span>     <span class="comment">SoftDeletes</span>
+  <span class="key">timestamps</span>
+}
+
+<span class="key">service_owners</span> {
+  <span class="key">id</span>              <span class="type">bigint</span> PK
+  <span class="key">brand_name</span>      <span class="type">string</span>
+  <span class="key">pic_name</span>        <span class="type">string</span>
+  <span class="key">email</span>           <span class="type">string</span> UNIQUE
+  <span class="key">phone</span>           <span class="type">string</span>
+  <span class="key">address</span>         <span class="type">text</span>
+  <span class="key">service_area</span>    <span class="type">string</span>
+  <span class="key">commission_rate</span> <span class="type">decimal(5,2)</span>
+  <span class="key">is_active</span>       <span class="type">boolean</span>
+  <span class="key">join_date</span>       <span class="type">date</span>
+  <span class="key">timestamps</span>
+}
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAcc(this)">Tabel: schedules & time_slots & availability_settings <span class="arrow">▼</span></div>
+        <div class="accordion-body">
+          <div class="schema-box">
+<span class="key">schedules</span> {
+  <span class="key">id</span>                  <span class="type">bigint</span> PK
+  <span class="fk">service_id</span>          <span class="type">FK → services.id</span>
+  <span class="fk">service_owner_id</span>    <span class="type">FK → service_owners.id</span>
+  <span class="key">title</span>               <span class="type">string</span>
+  <span class="key">date</span>                <span class="type">date</span>
+  <span class="key">start_time</span>          <span class="type">time</span>
+  <span class="key">end_time</span>            <span class="type">time</span>
+  <span class="key">duration_minutes</span>    <span class="type">integer</span>
+  <span class="key">max_bookings</span>        <span class="type">integer</span>
+  <span class="key">status</span>              <span class="type">enum</span> <span class="comment">active|inactive|cancelled</span>
+  <span class="key">is_recurring</span>        <span class="type">boolean</span>
+  <span class="key">recurring_pattern</span>   <span class="type">JSON</span>
+}
+
+<span class="key">time_slots</span> {
+  <span class="key">id</span>                  <span class="type">bigint</span> PK
+  <span class="fk">schedule_id</span>         <span class="type">FK → schedules.id</span>
+  <span class="key">start_datetime</span>      <span class="type">datetime</span>
+  <span class="key">end_datetime</span>        <span class="type">datetime</span>
+  <span class="key">duration_minutes</span>    <span class="type">integer</span>
+  <span class="key">status</span>              <span class="type">enum</span> <span class="comment">available|booked|confirmed|cancelled|blocked</span>
+  <span class="fk">booked_by</span>           <span class="type">FK → users.id</span>
+  <span class="key">booking_reference</span>   <span class="type">string</span>
+  <span class="key">price</span>               <span class="type">decimal</span>
+}
+
+<span class="key">availability_settings</span> {
+  <span class="key">id</span>                    <span class="type">bigint</span> PK
+  <span class="fk">service_owner_id</span>      <span class="type">FK → service_owners.id</span>
+  <span class="fk">service_id</span>            <span class="type">FK → services.id</span>
+  <span class="key">day_of_week</span>           <span class="type">integer</span> <span class="comment">0=Minggu, 6=Sabtu</span>
+  <span class="key">opening_time</span>          <span class="type">time</span>
+  <span class="key">closing_time</span>          <span class="type">time</span>
+  <span class="key">slot_duration_minutes</span> <span class="type">integer</span>
+  <span class="key">break_duration_minutes</span><span class="type">integer</span>
+  <span class="key">break_start_time</span>      <span class="type">time</span>
+  <span class="key">is_available</span>          <span class="type">boolean</span>
+}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEWS -->
+    <section id="views">
+      <h2>🖼️ Views / Blade Templates</h2>
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+        <div class="card">
+          <div class="card-title">🌐 Frontend Publik</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            home.blade.php<br>about.blade.php<br>contact.blade.php<br>product.blade.php<br>service.blade.php<br>jasa-layanan.blade.php<br>layanan-info/index.blade.php<br>layanan-info/show.blade.php
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🏗️ Layouts</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            layouts/app.blade.php<br>layouts/home.blade.php<br>layouts/admin.blade.php<br>layouts/Headers.blade.php<br>layouts/footer.blade.php<br>layouts/navigation.blade.php<br>layouts/css.blade.php<br>layouts/scripts.blade.php
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📅 Admin Booking</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            admin/pages/booking/index<br>admin/pages/booking/create<br>admin/pages/booking/edit<br>admin/pages/booking/show<br>admin/pages/customers/*<br>admin/pages/service-owners/*
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🧾 Admin Transaksi</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            admin/pages/transaksi/invoices/*<br>admin/pages/transaksi/payments/*<br>admin/pages/laporan/*<br>admin/pages/dashboard/index
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚙️ Admin Layanan</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            admin/pages/services/categories/*<br>admin/pages/services/packages/*<br>admin/pages/services/services/*<br>admin/pages/produk/layanan/*<br>admin/pages/produk/kategori/*
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📅 Admin Ketersediaan</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            admin/pages/ketersediaan/availability/*<br>admin/pages/ketersediaan/schedules/*<br>admin/pages/ketersediaan/time-slots/*
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📝 Admin Konten</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            admin/pages/manajemen/artikel/*<br>admin/pages/manajemen/halaman/*<br>admin/pages/manajemen/media/*<br>admin/content/banners/*<br>admin/content/highlights/*<br>admin/content/settings/*
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">🔐 Auth</div>
+          <div style="margin-top:8px;font-size:.78rem;color:var(--gray);line-height:1.8;">
+            admin/auth/login/index<br>admin/auth/login/login-layout<br>admin/auth/logout/index
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYANAN INFO -->
+    <section id="layanan-info">
+      <h2>📄 Layanan Info — 8 Kategori Statis</h2>
+      <p style="color:var(--gray);font-size:.85rem;margin-bottom:16px;">Data layanan disimpan langsung di <code>LayananInfoController::getAllLayanan()</code> sebagai array PHP. Tidak memerlukan database.</p>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">📍</div><div class="card-title">Lokasi Terdekat</div><div class="card-sub"><code>/layanan-info/lokasi-terdekat</code></div></div>
+        <div class="card"><div class="card-icon">🏠</div><div class="card-title">Rumah Tangga</div><div class="card-sub"><code>/layanan-info/rumah-tangga</code></div></div>
+        <div class="card"><div class="card-icon">📱</div><div class="card-title">Elektronik</div><div class="card-sub"><code>/layanan-info/elektronik</code></div></div>
+        <div class="card"><div class="card-icon">🚗</div><div class="card-title">Kendaraan</div><div class="card-sub"><code>/layanan-info/kendaraan</code></div></div>
+        <div class="card"><div class="card-icon">🏥</div><div class="card-title">Kesehatan</div><div class="card-sub"><code>/layanan-info/kesehatan</code></div></div>
+        <div class="card"><div class="card-icon">📚</div><div class="card-title">Pendidikan</div><div class="card-sub"><code>/layanan-info/pendidikan</code></div></div>
+        <div class="card"><div class="card-icon">💼</div><div class="card-title">Bisnis & IT</div><div class="card-sub"><code>/layanan-info/bisnis-it</code></div></div>
+        <div class="card"><div class="card-icon">✨</div><div class="card-title">Lainnya</div><div class="card-sub"><code>/layanan-info/lainnya</code></div></div>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray);margin-top:8px;">Setiap layanan memiliki: slug, title, color, badge, short_desc, intro, highlight, stats (3 angka), testimonials (2), detail_sections (2), benefits (4), how_it_works (4 step), faqs (3).</p>
+    </section>
+
+    <!-- BOOKING FLOW -->
+    <section id="booking-flow">
+      <h2>📅 Alur Booking</h2>
+      <div class="flow">
+        <div class="flow-step">1. Admin buka /admin/pages/booking/create</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">2. Isi form (customer, service, tanggal, waktu)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">3. BookingController@store</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">4. Booking dibuat (status: draft)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">5. BookingActivity log dibuat</div>
+      </div>
+      <div class="flow" style="margin-top:8px;">
+        <div class="flow-step">6. Update status → waiting_confirmation</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">7. confirmed</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">8. in_progress</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">9. completed</div>
+      </div>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>Status</th><th>Label</th><th>Warna</th></tr></thead>
+          <tbody>
+            <tr><td><code>draft</code></td><td>Draft</td><td><span class="tag tag-gray">secondary</span></td></tr>
+            <tr><td><code>waiting_confirmation</code></td><td>Menunggu</td><td><span class="tag tag-orange">warning</span></td></tr>
+            <tr><td><code>confirmed</code></td><td>Dikonfirmasi</td><td><span class="tag tag-blue">info</span></td></tr>
+            <tr><td><code>in_progress</code></td><td>Proses</td><td><span class="tag tag-purple">purple</span></td></tr>
+            <tr><td><code>completed</code></td><td>Selesai</td><td><span class="tag tag-green">success</span></td></tr>
+            <tr><td><code>cancelled</code></td><td>Batal</td><td><span class="tag tag-red">danger</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- INVOICE FLOW -->
+    <section id="invoice-flow">
+      <h2>🧾 Alur Invoice & Payment</h2>
+      <div class="flow">
+        <div class="flow-step">1. Booking selesai</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">2. Buat Invoice (status: draft)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">3. Kirim ke customer (status: sent)</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">4. Customer bayar DP → status: partial</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">5. Lunas → status: paid</div>
+      </div>
+      <div class="table-wrap" style="margin-top:16px;">
+        <table>
+          <thead><tr><th>Payment Status</th><th>Invoice Status</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td><code>unpaid</code></td><td><code>draft / sent</code></td><td>Belum ada pembayaran</td></tr>
+            <tr><td><code>dp</code></td><td><code>partial</code></td><td>Bayar sebagian (DP)</td></tr>
+            <tr><td><code>paid</code></td><td><code>paid</code></td><td>Lunas</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray);margin-top:8px;">Invoice dihitung: <code>total = subtotal + additional_fee - discount + tax</code>. Method <code>updatePaymentStatus()</code> otomatis update status berdasarkan total pembayaran yang masuk.</p>
+    </section>
+
+    <!-- AUTH -->
+    <section id="auth">
+      <h2>🔐 Autentikasi</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Middleware</th><th>Berlaku untuk</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td><code>guest</code></td><td>GET/POST /login</td><td>Hanya untuk yang belum login</td></tr>
+            <tr><td><code>auth</code></td><td>Semua route /dashboard, /admin/*</td><td>Wajib login</td></tr>
+            <tr><td><code>auth + admin</code></td><td>/admin/pages/transaksi/*, /admin/pages/laporan/*</td><td>Wajib login + role admin</td></tr>
+            <tr><td><code>SetLocale</code></td><td>Global (semua request)</td><td>Set bahasa dari session</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="flow" style="margin-top:12px;">
+        <div class="flow-step">GET /login → showLoginForm</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">POST /login → login()</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Redirect → /dashboard</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">POST /logout → logout()</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Redirect → /login</div>
+      </div>
+    </section>
+
+  </div><!-- end .content -->
+</div><!-- end #main -->
+
+<script>
+function toggleAcc(header) {
+  const acc = header.parentElement;
+  acc.classList.toggle('open');
+}
+function setActive(link) {
+  document.querySelectorAll('#sidebar nav a').forEach(a => a.classList.remove('active'));
+  link.classList.add('active');
+}
+function searchDoc(q) {
+  const content = document.getElementById('doc-content');
+  if (!q) { content.querySelectorAll('*').forEach(el => el.style.outline = ''); return; }
+  // Simple highlight: scroll to first match
+  const sections = content.querySelectorAll('section');
+  sections.forEach(s => {
+    if (s.textContent.toLowerCase().includes(q.toLowerCase())) {
+      s.style.outline = '2px solid #10b981';
+    } else {
+      s.style.outline = '';
+    }
+  });
+}
+// Set active on scroll
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 60) current = s.id;
+  });
+  document.querySelectorAll('#sidebar nav a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>

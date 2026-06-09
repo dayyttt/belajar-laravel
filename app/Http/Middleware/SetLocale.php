@@ -28,7 +28,7 @@ class SetLocale
         $path = $request->path();
         if (preg_match('/^language\/([a-z]{2,})$/', $path, $matches)) {
             $locale = $matches[1];
-            $supportedLanguages = ['id', 'en', 'jv', 'su', 'ko', 'ar', 'mlx', 'mak', 'mej', 'mad', 'nlu'];
+            $supportedLanguages = ['id', 'en'];
 
             if (in_array($locale, $supportedLanguages)) {
                 App::setLocale($locale);
@@ -42,7 +42,7 @@ class SetLocale
         // Handle query parameter language switching (?lang=locale)
         if ($request->has('lang')) {
             $locale = $request->get('lang');
-            if (in_array($locale, ['en', 'id', 'jv', 'su', 'ko', 'ar', 'mlx', 'mak', 'mej', 'mad', 'nlu'])) {
+            if (in_array($locale, ['en', 'id'])) {
                 App::setLocale($locale);
                 Session::put('locale', $locale);
             }

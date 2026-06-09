@@ -10,7 +10,7 @@ class LanguageController extends Controller
 {
     public function switch(Request $request, $lang)
     {
-        $supportedLanguages = ['id', 'en', 'jv', 'su', 'ko', 'ar', 'mlx', 'mak', 'mej', 'mad', 'nlu'];
+        $supportedLanguages = ['id', 'en'];
 
         if (in_array($lang, $supportedLanguages)) {
             Session::put('locale', $lang);

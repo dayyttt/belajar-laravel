@@ -41,5 +41,59 @@ class BannerController extends Controller
             ->with('success', 'Banner created successfully');
     }
 
-    // Add edit, update, and destroy methods as needed
+    public function show(Banner $banner)
+    {
+        return view('admin.pages.content.banners.show', compact('banner'));
+    }
+
+    public function edit(Banner $banner)
+    {
+        return view('admin.pages.content.banners.edit', compact('banner'));
+    }
+
+    public function update(Request $request, Banner $banner)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
+            'order' => 'nullable|integer',
+            'is_active' => 'boolean',
+            'button_text' => 'nullable|string|max:50',
+            'button_url' => 'nullable|url',
+        ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($banner->image && Storage::disk('public')->exists($banner->image)) {
+                Storage::disk('public')->delete($banner->image);
+            }
+            
+            $validated['image'] = $request->file('image')->store('banners', 'public');
+        }
+
+        $banner->update($validated);
+
+        return redirect()->route('admin.content.banners.index')
+            ->with('success', 'Banner updated successfully');
+    }
+
+    public function destroy(Banner $banner)
+    {
+        try {
+            // Delete image file if exists
+            if ($banner->image && Storage::disk('public')->exists($banner->image)) {
+                Storage::disk('public')->delete($banner->image);
+            }
+
+            $banner->delete();
+
+            return redirect()->route('admin.content.banners.index')
+                ->with('success', 'Banner deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.content.banners.index')
+                ->with('error', 'Failed to delete banner: ' . $e->getMessage());
+        }
+    }
 }

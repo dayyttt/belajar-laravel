@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Payment;
+use App\Models\Service;
+use App\Models\Customer;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -25,6 +27,22 @@ class DashboardController extends Controller
         $todayRevenue = Payment::whereDate('payment_date', $today)->sum('amount');
         $weekRevenue = Payment::whereBetween('payment_date', [$startOfWeek, $endOfWeek])->sum('amount');
         $monthRevenue = Payment::whereBetween('payment_date', [$startOfMonth, $endOfMonth])->sum('amount');
+
+        // Get last 7 days data for charts
+        $last7DaysBookings = [];
+        $last7DaysRevenue = [];
+        $last7DaysLabels = [];
+        
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i);
+            $last7DaysLabels[] = $date->format('D, j');
+            
+            $dayBookings = Booking::whereDate('booking_date', $date)->count();
+            $dayRevenue = Payment::whereDate('payment_date', $date)->sum('amount');
+            
+            $last7DaysBookings[] = $dayBookings;
+            $last7DaysRevenue[] = $dayRevenue;
+        }
 
         // Get schedule status for today
         $timeSlots = [
@@ -49,9 +67,10 @@ class DashboardController extends Controller
         }
 
         // Get notifications
-        $newBookings = Booking::where('status', 'pending')->count();
+        $newBookings = Booking::where('status', 'waiting_confirmation')->count();
         $pendingPayments = Payment::where('status', 'pending')->count();
-        $unconfirmedBookings = Booking::where('status', 'waiting_confirmation')->count();
+        $totalServices = Service::where('is_active', true)->count();
+        $totalCustomers = Customer::count();
 
         return view('admin.pages.dashboard.index', compact(
             'todayBookings',
@@ -63,7 +82,11 @@ class DashboardController extends Controller
             'scheduleStatus',
             'newBookings',
             'pendingPayments',
-            'unconfirmedBookings'
+            'totalServices',
+            'totalCustomers',
+            'last7DaysBookings',
+            'last7DaysRevenue',
+            'last7DaysLabels'
         ));
     }
 }

@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Penggunaan Web - Sistem Booking & Manajemen Layanan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 3px solid #667eea;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 50px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.6em;
+            margin: 30px 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px solid #667eea;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            border-color: #764ba2;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .step-container {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 12px;
+            border-left: 6px solid #667eea;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .screenshot {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px dashed #667eea;
+        }
+
+        .screenshot p {
+            color: #666;
+            font-style: italic;
+        }
+
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border-left: 6px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 6px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-box {
+            background: #e7e3fc;
+            border-left: 6px solid #764ba2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        ul.checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.checklist li {
+            padding: 12px 12px 12px 45px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        ul.checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 15px;
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        ul.feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.feature-list li {
+            padding: 10px 10px 10px 40px;
+            margin: 8px 0;
+            position: relative;
+        }
+
+        ul.feature-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 15px;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .role-admin {
+            background: #667eea;
+            color: white;
+        }
+
+        .role-user {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-pending {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .status-completed {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .status-cancelled {
+            background: #dc3545;
+            color: white;
+        }
+
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        .workflow-diagram {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .workflow-step {
+            display: inline-block;
+            background: #f8f9fa;
+            padding: 20px 30px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            position: relative;
+        }
+
+        .workflow-arrow {
+            display: inline-block;
+            color: #667eea;
+            font-size: 2em;
+            margin: 0 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-step {
+                display: block;
+                margin: 20px 0;
+            }
+
+            .workflow-arrow {
+                display: block;
+                transform: rotate(90deg);
+            }
+        }
+
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .accordion-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        .quick-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        .quick-link:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Panduan Penggunaan Lengkap</h1>
+            <p>Sistem Booking & Manajemen Layanan</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#customers">Customers</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Booking</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#transaction">Transaksi</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="#reports">Reports</a></li>
+                <li><a href="#tips">Tips</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- OVERVIEW SECTION -->
+            <section id="overview">
+                <h2>🎯 Overview Sistem</h2>
+                
+                <p style="font-size: 1.1em; margin-bottom: 30px;">
+                    Sistem ini adalah platform manajemen booking dan layanan yang komprehensif, dirancang untuk mengelola 
+                    berbagai aspek bisnis layanan mulai dari customer management, booking, scheduling, hingga transaksi dan pelaporan.
+                </p>
+
+                <h3>🌟 Fitur Utama</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">👥</span>
+                        <h4>Customer Management</h4>
+                        <p>Kelola data pelanggan dengan lengkap termasuk informasi kontak, riwayat booking, dan preferensi layanan.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">📅</span>
+                        <h4>Booking System</h4>
+                        <p>Sistem booking yang fleksibel dengan manajemen slot waktu, konfirmasi otomatis, dan tracking status.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="icon">🛠️</span>
+                        <h4>Service Management</h4>
+                        <p>Kelola berbagai layanan, kategori, paket, dan penyedia layanan dengan mudah.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">⏰</span>
+                        <h4>Schedule & Availability</h4>
+                        <p>Atur jadwal ketersediaan, time slots, dan kalender untuk setiap layanan.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">💰</span>
+                        <h4>Transaction Management</h4>
+                        <p>Kelola invoice, pembayaran, dan tracking transaksi secara real-time.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">📊</span>
+                        <h4>Reports & Analytics</h4>
+                        <p>Laporan lengkap tentang revenue, pembayaran, dan performa bisnis.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">🎨</span>
+                        <h4>Content Management</h4>
+                        <p>Kelola konten website termasuk banner, halaman statis, artikel, dan media.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">⚙️</span>
+                        <h4>Site Settings</h4>
+                        <p>Konfigurasi pengaturan website, highlight layanan, dan preferensi sistem.</p>
+                    </div>
+                </div>
+
+                <h3>👤 User Roles</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Akses</th>
+                            <th>Fungsi Utama</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="role-badge role-admin">Admin</span></td>
+                            <td>Full Access</td>
+                            <td>Mengelola semua aspek sistem, user management, reports, settings</td>
+                        </tr>
+                        <tr>
+                            <td><span class="role-badge role-user">Service Owner</span></td>
+                            <td>Limited Access</td>
+                            <td>Mengelola layanan sendiri, booking, dan schedule</td>
+                        </tr>
+                        <tr>
+                            <td><span class="role-badge role-user">Customer</span></td>
+                            <td>Public Access</td>
+                            <td>Melihat layanan, melakukan booking (frontend)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- LOGIN SECTION -->
+            <section id="login">
+                <h2>🔐 Login & Authentication</h2>
+                
+                <h3>Cara Login ke Sistem</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Halaman Login</strong>
+                    <p>Buka browser dan akses URL:</p>
+                    <code>http://localhost:8000/login</code>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Masukkan Kredensial</strong>
+                    <ul class="feature-list">
+                        <li>Email: Masukkan email yang terdaftar</li>
+                        <li>Password: Masukkan password Anda</li>
+                        <li>Klik tombol "Login"</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">3</span>
+                    <strong>Redirect ke Dashboard</strong>
+                    <p>Setelah login berhasil, Anda akan diarahkan ke dashboard admin.</p>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Keamanan:</strong>
+                    <ul class="feature-list">
+                        <li>Jangan share kredensial login Anda</li>
+                        <li>Gunakan password yang kuat (minimal 8 karakter)</li>
+                        <li>Logout setelah selesai menggunakan sistem</li>
+                        <li>Ganti password secara berkala</li>
+                    </ul>
+                </div>
+
+                <h3>Logout dari Sistem</h3>
+                <div class="step-container">
+                    <p>Untuk logout, klik menu user di pojok kanan atas, lalu pilih "Logout".</p>
+                </div>
+            </section>
+
+            <!-- DASHBOARD SECTION -->
+            <section id="dashboard">
+                <h2>📊 Dashboard</h2>
+                
+                <p>Dashboard adalah halaman utama setelah login yang menampilkan ringkasan informasi penting.</p>
+
+                <h3>Informasi di Dashboard</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">📈</span>
+                        <h4>Statistik Booking</h4>
+                        <p>Total booking hari ini, minggu ini, dan bulan ini</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">💵</span>
+                        <h4>Revenue Summary</h4>
+                        <p>Total pendapatan dan transaksi terbaru</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">👥</span>
+                        <h4>Customer Stats</h4>
+                        <p>Jumlah customer baru dan total customer</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">⏰</span>
+                        <h4>Upcoming Bookings</h4>
+                        <p>Daftar booking yang akan datang</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 Tips:</strong> Dashboard diupdate secara real-time. Refresh halaman untuk melihat data terbaru.
+                </div>
+            </section>
+
+            <!-- CUSTOMERS SECTION -->
+            <section id="customers">
+                <h2>👥 Customer Management</h2>
+                
+                <p>Kelola data pelanggan Anda dengan fitur lengkap untuk menambah, edit, dan melihat riwayat customer.</p>
+
+                <h3>📋 Melihat Daftar Customer</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Customers</strong>
+                    <p>Dari sidebar, klik menu <code>Customers</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Fitur yang Tersedia</strong>
+                    <ul class="checklist">
+                        <li>Lihat daftar semua customer</li>
+                        <li>Search customer berdasarkan nama/email</li>
+                        <li>Filter customer berdasarkan status</li>
+                        <li>Sort berdasarkan tanggal registrasi</li>
+                    </ul>
+                </div>
+
+                <h3>➕ Menambah Customer Baru</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Klik Tombol "Add Customer"</strong>
+                    <p>Di halaman daftar customer, klik tombol "Add New Customer"</p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Isi Form Customer</strong>
+                    <ul class="feature-list">
+                        <li><strong>Nama Lengkap:</strong> Nama customer (required)</li>
+                        <li><strong>Email:</strong> Email valid dan unik (required)</li>
+                        <li><strong>No. Telepon:</strong> Nomor telepon customer</li>
+                        <li><strong>Alamat:</strong> Alamat lengkap customer</li>
+                        <li><strong>Catatan:</strong> Informasi tambahan (optional)</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">3</span>
+                    <strong>Simpan Data</strong>
+                    <p>Klik tombol "Save" untuk menyimpan data customer baru.</p>
+                </div>
+
+                <div class="success-box">
+                    <strong>✅ Berhasil!</strong> Customer baru telah ditambahkan ke sistem.
+                </div>
+
+                <h3>✏️ Edit Data Customer</h3>
+                <div class="step-container">
+                    <p>Dari daftar customer, klik icon <strong>Edit</strong> pada customer yang ingin diubah, lalu update informasi yang diperlukan.</p>
+                </div>
+
+                <h3>👁️ Melihat Detail Customer</h3>
+                <div class="step-container">
+                    <p>Klik nama customer atau icon <strong>View</strong> untuk melihat:</p>
+                    <ul class="checklist">
+                        <li>Informasi lengkap customer</li>
+                        <li>Riwayat booking</li>
+                        <li>Total transaksi</li>
+                        <li>Status pembayaran</li>
+                    </ul>
+                </div>
+
+                <h3>🗑️ Hapus Customer</h3>
+                <div class="step-container">
+                    <p>Klik icon <strong>Delete</strong>, lalu konfirmasi penghapusan.</p>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Perhatian:</strong> Menghapus customer akan menghapus semua data terkait termasuk riwayat booking. Pastikan Anda yakin sebelum menghapus.
+                </div>
+            </section>
+
+            <!-- SERVICES SECTION -->
+            <section id="services">
+                <h2>🛠️ Service Management</h2>
+                
+                <p>Kelola semua layanan yang ditawarkan, termasuk kategori, paket, dan penyedia layanan.</p>
+
+                <h3>📂 Kategori Layanan</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Service Categories</strong>
+                    <p>Sidebar → <code>Services</code> → <code>Categories</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Tambah Kategori Baru</strong>
+                    <ul class="feature-list">
+                        <li>Klik "Add Category"</li>
+                        <li>Isi nama kategori</li>
+                        <li>Isi deskripsi (optional)</li>
+                        <li>Upload icon/gambar kategori</li>
+                        <li>Atur urutan tampilan</li>
+                        <li>Klik "Save"</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Tips:</strong> Gunakan nama kategori yang jelas dan mudah dipahami customer. Contoh: "Cleaning Service", "Repair Service", "Consultation".
+                </div>
+
+                <h3>🎯 Mengelola Layanan</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Services</strong>
+                    <p>Sidebar → <code>Services</code> → <code>All Services</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Tambah Layanan Baru</strong>
+                    <ul class="feature-list">
+                        <li><strong>Nama Layanan:</strong> Nama yang jelas dan deskriptif</li>
+                        <li><strong>Kategori:</strong> Pilih kategori yang sesuai</li>
+                        <li><strong>Deskripsi:</strong> Detail lengkap tentang layanan</li>
+                        <li><strong>Harga:</strong> Harga dasar layanan</li>
+                        <li><strong>Durasi:</strong> Estimasi waktu pengerjaan</li>
+                        <li><strong>Service Owner:</strong> Pilih penyedia layanan</li>
+                        <li><strong>Status:</strong> Active/Inactive</li>
+                        <li><strong>Gambar:</strong> Upload foto layanan</li>
+                    </ul>
+                </div>
+
+                <h3>📦 Paket Layanan</h3>
+                <div class="step-container">
+                    <p>Buat paket bundling untuk beberapa layanan dengan harga spesial.</p>
+                    <p>Akses: <code>Services</code> → <code>Packages</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Buat Paket Baru</strong>
+                    <ul class="feature-list">
+                        <li>Nama paket (contoh: "Basic Package", "Premium Package")</li>
+                        <li>Pilih layanan yang termasuk dalam paket</li>
+                        <li>Set harga paket (biasanya lebih murah dari harga satuan)</li>
+                        <li>Deskripsi benefit paket</li>
+                        <li>Durasi validitas paket</li>
+                    </ul>
+                </div>
+
+                <h3>👨‍💼 Service Owners</h3>
+                <div class="step-container">
+                    <p>Kelola penyedia layanan yang akan mengerjakan booking.</p>
+                    <p>Akses: <code>Services</code> → <code>Service Owners</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Tambah Service Owner</strong>
+                    <ul class="feature-list">
+                        <li>Nama lengkap</li>
+                        <li>Email dan nomor telepon</li>
+                        <li>Spesialisasi/keahlian</li>
+                        <li>Layanan yang bisa dikerjakan</li>
+                        <li>Status ketersediaan</li>
+                        <li>Foto profil</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <strong>ℹ️ Info:</strong> Service Owner akan menerima notifikasi untuk setiap booking yang ditugaskan kepada mereka.
+                </div>
+            </section>
+
+            <!-- BOOKING SECTION -->
+            <section id="booking">
+                <h2>📅 Booking Management</h2>
+                
+                <p>Kelola semua booking dari customer, baik yang dibuat manual maupun dari frontend.</p>
+
+                <h3>📋 Melihat Daftar Booking</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Booking</strong>
+                    <p>Sidebar → <code>Booking</code> → <code>All Bookings</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Filter & Search</strong>
+                    <ul class="checklist">
+                        <li>Filter berdasarkan status (Pending, Confirmed, Completed, Cancelled)</li>
+                        <li>Filter berdasarkan tanggal</li>
+                        <li>Search berdasarkan nama customer atau booking ID</li>
+                        <li>Filter berdasarkan service owner</li>
+                    </ul>
+                </div>
+
+                <h3>➕ Membuat Booking Manual</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Klik "Create Booking"</strong>
+                    <p>Di halaman booking, klik tombol "Create New Booking"</p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Pilih Customer</strong>
+                    <ul class="feature-list">
+                        <li>Pilih customer dari dropdown</li>
+                        <li>Atau klik "Add New Customer" untuk customer baru</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">3</span>
+                    <strong>Pilih Layanan</strong>
+                    <ul class="feature-list">
+                        <li>Pilih service owner terlebih dahulu</li>
+                        <li>Sistem akan menampilkan layanan yang tersedia</li>
+                        <li>Pilih layanan atau paket yang diinginkan</li>
+                        <li>Harga akan otomatis terisi</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">4</span>
+                    <strong>Pilih Tanggal & Waktu</strong>
+                    <ul class="feature-list">
+                        <li>Pilih tanggal booking dari kalender</li>
+                        <li>Sistem akan menampilkan slot waktu yang tersedia</li>
+                        <li>Pilih slot waktu yang sesuai</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">5</span>
+                    <strong>Isi Detail Tambahan</strong>
+                    <ul class="feature-list">
+                        <li>Catatan khusus dari customer</li>
+                        <li>Alamat lokasi (jika diperlukan)</li>
+                        <li>Kontak darurat</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">6</span>
+                    <strong>Konfirmasi & Simpan</strong>
+                    <p>Review semua informasi, lalu klik "Create Booking"</p>
+                </div>
+
+                <div class="success-box">
+                    <strong>✅ Booking Berhasil!</strong> Sistem akan otomatis:
+                    <ul class="checklist">
+                        <li>Generate booking ID unik</li>
+                        <li>Kirim notifikasi ke customer</li>
+                        <li>Kirim notifikasi ke service owner</li>
+                        <li>Update kalender ketersediaan</li>
+                    </ul>
+                </div>
+
+                <h3>🔄 Update Status Booking</h3>
+                <div class="workflow-diagram">
+                    <div class="workflow-step">
+                        <strong>Pending</strong><br>
+                        <small>Booking baru dibuat</small>
+                    </div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step">
+                        <strong>Confirmed</strong><br>
+                        <small>Booking dikonfirmasi</small>
+                    </div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step">
+                        <strong>In Progress</strong><br>
+                        <small>Layanan sedang dikerjakan</small>
+                    </div>
+                    <span class="workflow-arrow">→</span>
+                    <div class="workflow-step">
+                        <strong>Completed</strong><br>
+                        <small>Layanan selesai</small>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <p><strong>Cara Update Status:</strong></p>
+                    <ul class="feature-list">
+                        <li>Buka detail booking</li>
+                        <li>Klik dropdown "Change Status"</li>
+                        <li>Pilih status baru</li>
+                        <li>Tambahkan catatan (optional)</li>
+                        <li>Klik "Update"</li>
+                    </ul>
+                </div>
+
+                <h3>❌ Membatalkan Booking</h3>
+                <div class="step-container">
+                    <ul class="feature-list">
+                        <li>Buka detail booking</li>
+                        <li>Klik tombol "Cancel Booking"</li>
+                        <li>Isi alasan pembatalan</li>
+                        <li>Konfirmasi pembatalan</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Perhatian:</strong> Pembatalan booking akan membebaskan slot waktu dan mengirim notifikasi ke customer dan service owner.
+                </div>
+            </section>
+
+            <!-- SCHEDULE SECTION -->
+            <section id="schedule">
+                <h2>⏰ Schedule & Availability Management</h2>
+                
+                <p>Kelola jadwal ketersediaan layanan dan time slots untuk setiap service owner.</p>
+
+                <h3>📅 Mengatur Jadwal</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Schedule</strong>
+                    <p>Sidebar → <code>Ketersediaan</code> → <code>Schedules</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Buat Jadwal Baru</strong>
+                    <ul class="feature-list">
+                        <li><strong>Service Owner:</strong> Pilih penyedia layanan</li>
+                        <li><strong>Tanggal Mulai:</strong> Kapan jadwal dimulai</li>
+                        <li><strong>Tanggal Selesai:</strong> Kapan jadwal berakhir</li>
+                        <li><strong>Hari Kerja:</strong> Pilih hari-hari yang tersedia (Senin-Minggu)</li>
+                        <li><strong>Jam Kerja:</strong> Set jam mulai dan jam selesai</li>
+                        <li><strong>Break Time:</strong> Atur waktu istirahat (optional)</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">3</span>
+                    <strong>Generate Time Slots</strong>
+                    <p>Setelah jadwal dibuat, klik "Generate Slots" untuk membuat slot waktu otomatis berdasarkan:</p>
+                    <ul class="feature-list">
+                        <li>Durasi per slot (contoh: 30 menit, 1 jam)</li>
+                        <li>Jam kerja yang sudah diset</li>
+                        <li>Break time yang sudah ditentukan</li>
+                    </ul>
+                </div>
+
+                <h3>🕐 Mengelola Time Slots</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Ketersediaan</code> → <code>Time Slots</code></p>
+                </div>
+
+                <div class="step-container">
+                    <strong>Fitur Time Slots:</strong>
+                    <ul class="checklist">
+                        <li>Lihat semua slot waktu yang tersedia</li>
+                        <li>Filter berdasarkan tanggal dan service owner</li>
+                        <li>Lihat status slot (Available, Booked, Blocked)</li>
+                        <li>Block slot untuk maintenance atau keperluan lain</li>
+                        <li>Unblock slot yang sudah diblock</li>
+                    </ul>
+                </div>
+
+                <h3>📆 Kalender Ketersediaan</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Ketersediaan</code> → <code>Calendar</code></p>
+                    <p>Tampilan kalender visual yang menampilkan:</p>
+                    <ul class="checklist">
+                        <li>Semua booking dalam bentuk kalender</li>
+                        <li>Slot yang tersedia dan yang sudah terisi</li>
+                        <li>Warna berbeda untuk setiap status</li>
+                        <li>Klik tanggal untuk melihat detail atau membuat booking</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Tips:</strong> Gunakan fitur "Recurring Schedule" untuk membuat jadwal berulang setiap minggu tanpa perlu input manual.
+                </div>
+            </section>
+
+            <!-- TRANSACTION SECTION -->
+            <section id="transaction">
+                <h2>💰 Transaction Management</h2>
+                
+                <p>Kelola invoice dan pembayaran untuk setiap booking yang dilakukan customer.</p>
+
+                <h3>🧾 Invoice Management</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Invoice</strong>
+                    <p>Sidebar → <code>Transaksi</code> → <code>Invoices</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Buat Invoice Baru</strong>
+                    <ul class="feature-list">
+                        <li>Pilih booking yang akan dibuatkan invoice</li>
+                        <li>Sistem otomatis mengisi detail layanan dan harga</li>
+                        <li>Tambahkan item tambahan jika ada (optional)</li>
+                        <li>Set due date pembayaran</li>
+                        <li>Tambahkan catatan atau terms & conditions</li>
+                        <li>Klik "Generate Invoice"</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">3</span>
+                    <strong>Kirim Invoice ke Customer</strong>
+                    <ul class="feature-list">
+                        <li>Buka detail invoice</li>
+                        <li>Klik "Send Invoice"</li>
+                        <li>Invoice akan dikirim via email ke customer</li>
+                        <li>Customer dapat download PDF invoice</li>
+                    </ul>
+                </div>
+
+                <h3>💳 Payment Management</h3>
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Akses Menu Payments</strong>
+                    <p>Sidebar → <code>Transaksi</code> → <code>Payments</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Record Pembayaran Manual</strong>
+                    <ul class="feature-list">
+                        <li>Klik "Add Payment"</li>
+                        <li>Pilih invoice yang dibayar</li>
+                        <li>Pilih metode pembayaran (Cash, Transfer, Credit Card, dll)</li>
+                        <li>Masukkan jumlah pembayaran</li>
+                        <li>Upload bukti pembayaran (jika ada)</li>
+                        <li>Tambahkan catatan</li>
+                        <li>Klik "Save Payment"</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">3</span>
+                    <strong>Verifikasi Pembayaran</strong>
+                    <p>Untuk pembayaran yang perlu verifikasi:</p>
+                    <ul class="feature-list">
+                        <li>Buka detail payment</li>
+                        <li>Review bukti pembayaran</li>
+                        <li>Klik "Verify" jika valid</li>
+                        <li>Atau klik "Reject" jika tidak valid dengan alasan</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <strong>ℹ️ Status Pembayaran:</strong>
+                    <ul class="feature-list">
+                        <li><span class="status-badge status-pending">Pending</span> - Menunggu pembayaran</li>
+                        <li><span class="status-badge status-active">Verified</span> - Pembayaran terverifikasi</li>
+                        <li><span class="status-badge status-completed">Completed</span> - Pembayaran selesai</li>
+                        <li><span class="status-badge status-cancelled">Rejected</span> - Pembayaran ditolak</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- CONTENT SECTION -->
+            <section id="content">
+                <h2>🎨 Content Management</h2>
+                
+                <p>Kelola konten website termasuk banner, halaman statis, artikel, dan media.</p>
+
+                <h3>🖼️ Banner Management</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Content</code> → <code>Banners</code></p>
+                    <ul class="feature-list">
+                        <li>Upload gambar banner untuk homepage</li>
+                        <li>Set judul dan deskripsi banner</li>
+                        <li>Tambahkan link/CTA button</li>
+                        <li>Atur urutan tampilan</li>
+                        <li>Set status active/inactive</li>
+                    </ul>
+                </div>
+
+                <h3>📄 Static Pages</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Content</code> → <code>Pages</code></p>
+                    <p>Kelola halaman statis seperti:</p>
+                    <ul class="checklist">
+                        <li>About Us</li>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                        <li>FAQ</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <strong>Membuat/Edit Halaman:</strong>
+                    <ul class="feature-list">
+                        <li>Judul halaman</li>
+                        <li>Slug URL (auto-generate dari judul)</li>
+                        <li>Konten (menggunakan rich text editor)</li>
+                        <li>Meta description untuk SEO</li>
+                        <li>Status publish/draft</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Artikel Management</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Manajemen</code> → <code>Artikel</code></p>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">1</span>
+                    <strong>Buat Artikel Baru</strong>
+                    <ul class="feature-list">
+                        <li>Judul artikel</li>
+                        <li>Kategori artikel</li>
+                        <li>Konten lengkap dengan formatting</li>
+                        <li>Featured image</li>
+                        <li>Tags untuk SEO</li>
+                        <li>Tanggal publish</li>
+                        <li>Status (Draft/Published)</li>
+                    </ul>
+                </div>
+
+                <div class="step-container">
+                    <span class="step-number">2</span>
+                    <strong>Bulk Actions</strong>
+                    <ul class="feature-list">
+                        <li>Select multiple artikel</li>
+                        <li>Bulk delete</li>
+                        <li>Bulk change status</li>
+                        <li>Bulk change category</li>
+                    </ul>
+                </div>
+
+                <h3>🖼️ Media Library</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Manajemen</code> → <code>Media</code></p>
+                </div>
+
+                <div class="step-container">
+                    <strong>Upload & Kelola Media:</strong>
+                    <ul class="checklist">
+                        <li>Upload gambar, video, atau dokumen</li>
+                        <li>Organize dalam folder</li>
+                        <li>Edit metadata (title, alt text, description)</li>
+                        <li>View file details (size, dimensions, type)</li>
+                        <li>Copy URL untuk digunakan</li>
+                        <li>Bulk delete media</li>
+                    </ul>
+                </div>
+
+                <h3>⭐ Service Highlights</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Content</code> → <code>Highlights</code></p>
+                    <p>Tampilkan layanan unggulan di homepage:</p>
+                    <ul class="feature-list">
+                        <li>Pilih layanan yang ingin di-highlight</li>
+                        <li>Upload icon/gambar khusus</li>
+                        <li>Tulis tagline menarik</li>
+                        <li>Atur urutan tampilan</li>
+                    </ul>
+                </div>
+
+                <h3>⚙️ Site Settings</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Content</code> → <code>Settings</code></p>
+                    <p>Konfigurasi pengaturan website:</p>
+                    <ul class="checklist">
+                        <li>Site name & tagline</li>
+                        <li>Logo & favicon</li>
+                        <li>Contact information</li>
+                        <li>Social media links</li>
+                        <li>Email settings</li>
+                        <li>Timezone & language</li>
+                        <li>Maintenance mode</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- REPORTS SECTION -->
+            <section id="reports">
+                <h2>📊 Reports & Analytics</h2>
+                
+                <p>Lihat laporan lengkap tentang performa bisnis dan transaksi.</p>
+
+                <h3>📈 Dashboard Reports</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Laporan</code> → <code>Dashboard</code></p>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="icon">📊</span>
+                        <h4>Booking Statistics</h4>
+                        <ul class="feature-list">
+                            <li>Total booking per periode</li>
+                            <li>Booking by status</li>
+                            <li>Booking by service</li>
+                            <li>Growth rate</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">💵</span>
+                        <h4>Revenue Reports</h4>
+                        <ul class="feature-list">
+                            <li>Total revenue</li>
+                            <li>Revenue by service</li>
+                            <li>Revenue by owner</li>
+                            <li>Monthly comparison</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">👥</span>
+                        <h4>Customer Analytics</h4>
+                        <ul class="feature-list">
+                            <li>New customers</li>
+                            <li>Returning customers</li>
+                            <li>Customer lifetime value</li>
+                            <li>Top customers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="icon">⭐</span>
+                        <h4>Service Performance</h4>
+                        <ul class="feature-list">
+                            <li>Most booked services</li>
+                            <li>Service ratings</li>
+                            <li>Completion rate</li>
+                            <li>Cancellation rate</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>💰 Owner Revenue Report</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Laporan</code> → <code>Owner Revenue</code></p>
+                    <p>Laporan pendapatan untuk setiap service owner:</p>
+                    <ul class="checklist">
+                        <li>Total pendapatan per owner</li>
+                        <li>Jumlah booking yang dikerjakan</li>
+                        <li>Average revenue per booking</li>
+                        <li>Komisi yang harus dibayarkan</li>
+                        <li>Filter berdasarkan periode</li>
+                        <li>Export ke Excel/PDF</li>
+                    </ul>
+                </div>
+
+                <h3>💳 Payment Summary</h3>
+                <div class="step-container">
+                    <p>Akses: <code>Laporan</code> → <code>Payment Summary</code></p>
+                    <p>Ringkasan pembayaran:</p>
+                    <ul class="checklist">
+                        <li>Total pembayaran diterima</li>
+                        <li>Pembayaran pending</li>
+                        <li>Pembayaran by method</li>
+                        <li>Outstanding invoices</li>
+                        <li>Payment trends</li>
+                    </ul>
+                </div>
+
+                <h3>📥 Export Reports</h3>
+                <div class="step-container">
+                    <p>Semua laporan dapat di-export dalam format:</p>
+                    <ul class="feature-list">
+                        <li><strong>PDF:</strong> Untuk printing atau sharing</li>
+                        <li><strong>Excel:</strong> Untuk analisis lebih lanjut</li>
+                        <li><strong>CSV:</strong> Untuk import ke sistem lain</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- TIPS SECTION -->
+            <section id="tips">
+                <h2>💡 Tips & Best Practices</h2>
+
+                <h3>🎯 Tips Umum</h3>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>📱 Gunakan Sistem Secara Konsisten</span>
+                            <span>+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul class="checklist">
+                                <li>Update status booking secara real-time</li>
+                                <li>Selalu verifikasi pembayaran yang masuk</li>
+                                <li>Backup data secara berkala</li>
+                                <li>Review laporan minimal seminggu sekali</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>⚡ Optimasi Performa</span>
+                            <span>+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul class="checklist">
+                                <li>Compress gambar sebelum upload</li>
+                                <li>Hapus data yang tidak diperlukan secara berkala</li>
+                                <li>Gunakan filter dan search untuk menemukan data cepat</li>
+                                <li>Clear browser cache jika sistem terasa lambat</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>🔒 Keamanan Data</span>
+                            <span>+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul class="checklist">
+                                <li>Jangan share kredensial login</li>
+                                <li>Logout setelah selesai menggunakan</li>
+                                <li>Ganti password secara berkala</li>
+                                <li>Verifikasi pembayaran dengan teliti</li>
+                                <li>Backup data customer secara rutin</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>🚀 Workflow Rekomendasi</h3>
+                
+                <h4>Workflow Harian:</h4>
+                <div class="step-container">
+                    <ul class="checklist">
+                        <li>Cek dashboard untuk overview hari ini</li>
+                        <li>Review booking baru yang masuk</li>
+                        <li>Konfirmasi booking yang pending</li>
+                        <li>Verifikasi pembayaran yang masuk</li>
+                        <li>Update status booking yang sedang berjalan</li>
+                        <li>Respond ke customer inquiries</li>
+                    </ul>
+                </div>
+
+                <h4>Workflow Mingguan:</h4>
+                <div class="step-container">
+                    <ul class="checklist">
+                        <li>Review laporan revenue minggu ini</li>
+                        <li>Cek ketersediaan schedule minggu depan</li>
+                        <li>Follow up outstanding invoices</li>
+                        <li>Update konten website jika diperlukan</li>
+                        <li>Review performa service owners</li>
+                    </ul>
+                </div>
+
+                <h4>Workflow Bulanan:</h4>
+                <div class="step-container">
+                    <ul class="checklist">
+                        <li>Generate monthly reports</li>
+                        <li>Analisis performa layanan</li>
+                        <li>Review dan update pricing jika perlu</li>
+                        <li>Backup database</li>
+                        <li>Update terms & conditions jika ada perubahan</li>
+                        <li>Planning promosi bulan depan</li>
+                    </ul>
+                </div>
+
+                <h3>❓ Troubleshooting Umum</h3>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Tidak bisa login</span>
+                            <span>+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><strong>Solusi:</strong></p>
+                            <ul class="feature-list">
+                                <li>Pastikan email dan password benar</li>
+                                <li>Cek caps lock tidak aktif</li>
+                                <li>Clear browser cache dan cookies</li>
+                                <li>Coba browser lain</li>
+                                <li>Hubungi admin untuk reset password</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Slot waktu tidak muncul</span>
+                            <span>+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><strong>Solusi:</strong></p>
+                            <ul class="feature-list">
+                                <li>Pastikan schedule sudah dibuat untuk tanggal tersebut</li>
+                                <li>Cek apakah time slots sudah di-generate</li>
+                                <li>Pastikan service owner dipilih dengan benar</li>
+                                <li>Refresh halaman</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Upload gambar gagal</span>
+                            <span>+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><strong>Solusi:</strong></p>
+                            <ul class="feature-list">
+                                <li>Pastikan ukuran file tidak terlalu besar (max 2MB)</li>
+                                <li>Gunakan format yang didukung (JPG, PNG, GIF)</li>
+                                <li>Compress gambar terlebih dahulu</li>
+                                <li>Cek koneksi internet</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>📞 Bantuan & Support</h3>
+                <div class="info-box">
+                    <p><strong>Jika mengalami masalah atau butuh bantuan:</strong></p>
+                    <ul class="feature-list">
+                        <li>Cek dokumentasi ini terlebih dahulu</li>
+                        <li>Hubungi administrator sistem</li>
+                        <li>Kirim email ke support team</li>
+                        <li>Buat ticket di sistem support</li>
+                    </ul>
+                </div>
+
+                <h3>🔄 Update & Maintenance</h3>
+                <div class="warning-box">
+                    <p><strong>Sistem akan di-maintenance secara berkala:</strong></p>
+                    <ul class="feature-list">
+                        <li>Notifikasi akan dikirim sebelum maintenance</li>
+                        <li>Backup data Anda sebelum maintenance</li>
+                        <li>Maintenance biasanya dilakukan di luar jam kerja</li>
+                        <li>Sistem akan kembali normal setelah maintenance selesai</li>
+                    </ul>
+                </div>
+
+                <h3>📚 Resources Tambahan</h3>
+                <div class="step-container">
+                    <p><strong>Link Berguna:</strong></p>
+                    <a href="#overview" class="quick-link">Overview Sistem</a>
+                    <a href="#login" class="quick-link">Panduan Login</a>
+                    <a href="#booking" class="quick-link">Cara Booking</a>
+                    <a href="#transaction" class="quick-link">Kelola Transaksi</a>
+                    <a href="#reports" class="quick-link">Lihat Reports</a>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <h3 style="margin-bottom: 20px;">🎉 Selamat Menggunakan Sistem!</h3>
+            <p>Dokumentasi ini akan terus diupdate seiring perkembangan sistem.</p>
+            <p>Terakhir diupdate: Januari 2026</p>
+            <p style="margin-top: 20px;">Dibuat dengan ❤️ untuk kemudahan pengguna</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling untuk navigasi
+        document.querySelectorAll('nav a, .quick-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('span:last-child');
+                
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    if (c !== content) {
+                        c.classList.remove('active');
+                    }
+                });
+                
+                document.querySelectorAll('.accordion-header span:last-child').forEach(i => {
+                    if (i !== icon) {
+                        i.textContent = '+';
+                    }
+                });
+                
+                // Toggle current accordion
+                content.classList.toggle('active');
+                icon.textContent = content.classList.contains('active') ? '−' : '+';
+            });
+        });
+
+        // Highlight active nav item on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(a => {
+                a.style.background = '';
+                a.style.color = '';
+                if (a.getAttribute('href') === '#' + current) {
+                    a.style.background = '#667eea';
+                    a.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
